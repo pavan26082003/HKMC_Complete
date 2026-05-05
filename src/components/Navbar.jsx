@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiPhone } from 'react-icons/fi'
 import { PHONE_CALL } from '../data/content'
@@ -13,18 +13,45 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ]
 
-export default function Navbar() {
+// Memoized nav link component
+const NavLink = memo(({ link, scrolled, onClick }) => (
+  <a
+    href={link.href}
+    onClick={onClick}
+    className={`text-sm font-medium transition-colors hover:text-accent ${
+      scrolled ? 'text-dark' : 'text-white'
+    }`}
+  >
+    {link.label}
+  </a>
+))
+
+NavLink.displayName = 'NavLink'
+
+export default memo(function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', onScroll)
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50)
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+    
+    // Passive listener for better scroll performance
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const toggleMenu = useCallback(() => setMenuOpen(prev => !prev), [])
+  const closeMenu = useCallback(() => setMenuOpen(false), [])
 
-  
   return (
     <motion.nav
       initial={{ y: -80 }}
@@ -45,15 +72,7 @@ export default function Navbar() {
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-accent ${
-                  scrolled ? 'text-dark' : 'text-white'
-                }`}
-              >
-                {link.label}
-              </a>
+              <NavLink key={link.href} link={link} scrolled={scrolled} />
             ))}
           </div>
 
@@ -67,7 +86,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={toggleMenu}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             className={`md:hidden p-2 rounded-lg ${scrolled ? 'text-primary' : 'text-white'}`}
@@ -93,7 +112,7 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={closeMenu}
                   className="text-dark font-medium py-2 border-b border-gray-100 hover:text-primary transition-colors"
                 >
                   {link.label}
@@ -109,4 +128,4 @@ export default function Navbar() {
       </AnimatePresence>
     </motion.nav>
   )
-}
+})

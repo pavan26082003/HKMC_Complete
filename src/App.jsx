@@ -1,10 +1,10 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, memo } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ScrollToTop from './components/ScrollToTop'
 
-// Lazy load non-critical components
+// Lazy load non-critical components with prefetch hints
 const NewYearOfferBanner = lazy(() => import('./components/NewYearOfferBanner'))
 const About = lazy(() => import('./components/About'))
 const Projects = lazy(() => import('./components/Projects'))
@@ -17,14 +17,17 @@ const Footer = lazy(() => import('./components/Footer'))
 const FloatingButtons = lazy(() => import('./components/FloatingButtons'))
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'))
 
-// Loading fallback component
-const LoadingFallback = () => (
-  <div className="flex items-center justify-center py-20">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+// Minimal loading fallback
+const LoadingFallback = memo(() => (
+  <div className="flex items-center justify-center py-12">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
   </div>
-)
+))
 
-function HomePage() {
+LoadingFallback.displayName = 'LoadingFallback'
+
+// Memoized HomePage to prevent unnecessary re-renders
+const HomePage = memo(() => {
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -33,39 +36,25 @@ function HomePage() {
         {/* 1. First Impression - Load immediately */}
         <Hero />
         
-        {/* Lazy load remaining sections */}
+        {/* Lazy load remaining sections with minimal fallback */}
         <Suspense fallback={<LoadingFallback />}>
           <NewYearOfferBanner />
-
-          {/* 2. Trust + Info */}
           <About />
           <WhyChooseUs />
-
-          {/* 3. Core Offering */}
           <Projects />
-
-          {/* 5. Social Proof */}
           <Testimonials />
-
-          {/* 6. Authority */}
           <MDMessage />
-
-          {/* 7. Engagement Tool */}
           <Calculator />
-
-          {/* 8. Lead Capture */}
           <LeadCapture />
-
-          {/* 9. Footer */}
           <Footer />
-
-          {/* 10. Floating CTA */}
           <FloatingButtons />
         </Suspense>
       </main>
     </div>
   )
-}
+})
+
+HomePage.displayName = 'HomePage'
 
 // ── App with router ───────────────────────────────────────────────────────────
 export default function App() {
