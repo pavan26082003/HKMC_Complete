@@ -31,13 +31,13 @@ export default function NewYearOfferBanner() {
 
           {/* Floating sparkles */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {[...Array(25)].map((_, i) => (
+            {[...Array(15)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute"
                 style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
+                  top: `${10 + Math.random() * 80}%`,
+                  left: `${10 + Math.random() * 80}%`,
                 }}
                 animate={{
                   y: [0, -20, 0],
@@ -57,8 +57,8 @@ export default function NewYearOfferBanner() {
           </div>
 
           {/* Glowing orbs */}
-          <div className="absolute top-0 left-1/4 w-32 h-32 bg-accent/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-blue-400/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-1/4 w-24 h-24 sm:w-32 sm:h-32 bg-accent/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-32 h-32 sm:w-40 sm:h-40 bg-blue-400/10 rounded-full blur-3xl" />
 
           <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-3 sm:py-4 relative">
             <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4">

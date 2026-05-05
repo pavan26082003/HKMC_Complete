@@ -26,12 +26,12 @@ export default function Hero() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          className="absolute -top-40 -right-40 w-96 h-96 border border-accent/20 rounded-full"
+          className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-64 h-64 sm:w-96 sm:h-96 border border-accent/20 rounded-full"
         />
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] border border-white/10 rounded-full"
+          className="absolute -bottom-20 -left-20 sm:-bottom-40 sm:-left-40 w-80 h-80 sm:w-[500px] sm:h-[500px] border border-white/10 rounded-full"
         />
       </div>
       

@@ -29,10 +29,10 @@ LoadingFallback.displayName = 'LoadingFallback'
 // Memoized HomePage to prevent unnecessary re-renders
 const HomePage = memo(() => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Navbar />
 
-      <main>
+      <main className="w-full overflow-x-hidden">
         {/* 1. First Impression - Load immediately */}
         <Hero />
         
