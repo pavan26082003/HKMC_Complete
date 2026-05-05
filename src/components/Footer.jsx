@@ -1,13 +1,6 @@
 import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi'
-import { RiWhatsappLine, RiFacebookFill, RiInstagramLine, RiYoutubeFill, RiLinkedinFill } from 'react-icons/ri'
+import { RiWhatsappLine } from 'react-icons/ri'
 import { PHONE_CALL, PHONE_WHATSAPP, EMAIL } from '../data/content'
-
-const socialLinks = [
-  { Icon: RiFacebookFill, label: 'Facebook', href: '#' },
-  { Icon: RiInstagramLine, label: 'Instagram', href: '#' },
-  { Icon: RiYoutubeFill,   label: 'YouTube',   href: '#' },
-  { Icon: RiLinkedinFill,  label: 'LinkedIn',  href: '#' },
-]
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -31,17 +24,9 @@ export default function Footer() {
                 <div className="text-white/60 text-xs">Builders &amp; Developers</div>
               </div>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed mb-4">
+            <p className="text-white/60 text-sm leading-relaxed">
               Premium open plots in Hyderabad's fastest-growing corridors. HMDA & DTCP approved. Trusted by 500+ investors.
             </p>
-            <div className="flex gap-3">
-              {socialLinks.map(({ Icon, label, href }) => (
-                <a key={label} href={href} aria-label={label}
-                  className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-primary transition-colors">
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -112,7 +97,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I want to know more about your plots.`}
+            <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I found your contact details in the footer. I want to know more about your plots and available projects.`}
               target="_blank" rel="noopener noreferrer"
               className="mt-5 inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm px-4 py-2.5 rounded-lg font-medium transition-colors">
               <RiWhatsappLine className="w-4 h-4" /> Chat on WhatsApp

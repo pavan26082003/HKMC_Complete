@@ -1,6 +1,15 @@
 export const PHONE_CALL = '7801052288'
 export const PHONE_WHATSAPP = '7801052299'
-export const EMAIL = 'hmcbuilderanddevelopers@gmail.com'
+export const EMAIL = 'hkmcbuilderanddevelopers@gmail.com'
+
+
+
+
+
+
+
+
+
 
 export const projects = [
   {

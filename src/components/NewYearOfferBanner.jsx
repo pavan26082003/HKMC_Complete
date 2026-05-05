@@ -157,7 +157,7 @@ export default function NewYearOfferBanner() {
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in the New Year 2026 Mega Offer (₹2,000/sq.yd + Free Gift). Please share details.`}
+                  href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hey, I want this New Year 2026 Mega Offer! Please share details about the ₹2,000/sq.yd plots and the surprise gift worth ₹10,000.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-sm font-black px-4 py-2.5 rounded-xl transition-all shadow-lg shadow-green-500/30 whitespace-nowrap"

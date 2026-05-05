@@ -23,7 +23,7 @@ export default function FloatingButtons() {
   return (
     <>
       {/* WhatsApp Floating Button */}
-      <div className="fixed bottom-24 md:bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
         <AnimatePresence>
           {showTooltip && (
             <motion.div
@@ -38,7 +38,7 @@ export default function FloatingButtons() {
         </AnimatePresence>
 
         <motion.a
-          href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in your plots. Please share details.`}
+          href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in your plots. I'd like to know more about available projects and pricing.`}
           target="_blank"
           rel="noopener noreferrer"
           initial={{ scale: 0 }}
@@ -61,42 +61,13 @@ export default function FloatingButtons() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-40 md:bottom-24 right-6 z-50 w-10 h-10 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-900 transition-colors"
+            className="fixed bottom-24 right-6 z-50 w-10 h-10 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-900 transition-colors"
             aria-label="Scroll to top"
           >
             <FiArrowUp className="w-4 h-4" />
           </motion.button>
         )}
       </AnimatePresence>
-
-      {/* Mobile Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white border-t border-gray-200 shadow-2xl px-4 py-3">
-        <div className="flex gap-3">
-          <a
-            href={`tel:${PHONE_CALL}`}
-            className="flex-1 bg-primary text-white text-center py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-1.5"
-          >
-            <FiPhone className="w-4 h-4" />
-            Call Now
-          </a>
-          <a
-            href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in your plots.`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 bg-green-500 text-white text-center py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-1.5"
-          >
-            <RiWhatsappLine className="w-4 h-4" />
-            WhatsApp
-          </a>
-          <a
-            href="#contact"
-            className="flex-1 bg-accent text-dark text-center py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-1.5"
-          >
-            <FiFileText className="w-4 h-4" />
-            Enquire
-          </a>
-        </div>
-      </div>
     </>
   )
 }

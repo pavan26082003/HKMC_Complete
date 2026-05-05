@@ -13,51 +13,91 @@ import Footer from './components/Footer'
 import FloatingButtons from './components/FloatingButtons'
 import ProjectDetails from './pages/ProjectDetails'
 import ScrollToTop from './components/ScrollToTop'
-import LocationAdvantages from './components/LocationAdvantages'
 
 
 
-// ── Home page (all sections) ──────────────────────────────────────────────────
+// ── Home page (all sections) ───────────────────────────────────────
+// function HomePage() {
+//   return (
+//     <div className="min-h-screen">
+//       <Navbar />
+//       <main>
+//         <Hero />
+//         <NewYearOfferBanner />
+//         <About />
+//         <Projects />
+//         <WhyChooseUs />
+
+
+//         {/* reviews */}
+//         <Testimonials />
+
+
+//         <MDMessage /> 
+
+//         <Calculator />
+
+
+//         {/* location advantage ,,  */}
+//         {/* replace this section with video and images.  */}
+
+
+//         {/* "Virtual Site Tour Booking" (Video + Calendar Integration) Embedded video walkthrough of each project with a "Book Live Virtual Tour" button. Visitors pick a date/time slot, enter phone/email. Perfect for NRI and out-of-city buyers. High intent leads. */}
+//         {/* <LocationAdvantages /> */}
+
+
+
+//         {/* get in touch section */}
+//         {/* <LeadCapture />    */}
+
+//       </main>
+
+
+//       {/* <Footer /> */}
+//       {/* <FloatingButtons /> */}
+//     </div>
+//   )
+// }
+
+
 function HomePage() {
   return (
     <div className="min-h-screen">
       <Navbar />
+
       <main>
+        {/* 1. First Impression */}
         <Hero />
         <NewYearOfferBanner />
+
+        {/* 2. Trust + Info */}
         <About />
-        <Projects />
         <WhyChooseUs />
 
+        {/* 3. Core Offering */}
+        <Projects />
 
-        {/* reviews */}
-        <Testimonials />
-
-
-        {/* <MDMessage /> */}
-
-        {/* <Calculator /> */}
-
-
-
-
-
-        {/* location advantage ,,  */}
-        {/* replace this section with video and images.  */}
-
-
-        {/* "Virtual Site Tour Booking" (Video + Calendar Integration) Embedded video walkthrough of each project with a "Book Live Virtual Tour" button. Visitors pick a date/time slot, enter phone/email. Perfect for NRI and out-of-city buyers. High intent leads. */}
+        {/* 4. Location Advantage (IMPORTANT for real estate) */}
         {/* <LocationAdvantages /> */}
 
+        {/* 5. Social Proof */}
+        <Testimonials />
 
+        {/* 6. Authority */}
+        <MDMessage />
 
-        {/* get in touch section */}
-        {/* <LeadCapture />    */}
+        {/* 7. Engagement Tool */}
+        <Calculator />
 
+        {/* 8. Lead Capture (VERY IMPORTANT) */}
+        <LeadCapture />
       </main>
 
-      {/* <Footer /> */}
-      {/* <FloatingButtons /> */}
+      {/* 9. Footer */}
+      <Footer />
+
+      {/* 10. Floating CTA */}
+      <FloatingButtons />
     </div>
   )
 }
@@ -75,5 +115,7 @@ export default function App() {
   )
 
 }
+
+
 
 

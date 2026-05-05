@@ -52,12 +52,14 @@ export default function LeadCapture() {
     setLoading(true)
     const formData = new FormData(e.target)
     try {
-      await fetch('https://formsubmit.co/hmcbuilderanddevelopers@gmail.com', { method: 'POST', body: formData })
+      // await fetch('https://formsubmit.co/hkmcbuilderanddevelopers@gmail.com', { method: 'POST', body: formData })
+      // await fetch('https://formsubmit.co/pavankiran26082003@gmail.com', { method: 'POST', body: formData })
+      await fetch('https://formsubmit.co/hkmc.developer@gmail.com', { method: 'POST', body: formData })
       setLoading(false)
       setSubmitted(true)
-    } catch {
+    } catch (error) {
       setLoading(false)
-      setSubmitted(true)
+      setErrors({ ...errors, submit: 'Failed to submit. Please try calling us directly.' })
     }
   }
 
@@ -107,7 +109,7 @@ export default function LeadCapture() {
                 </div>
               </a>
 
-              <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in your plots. Please share details.`}
+              <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in your plots. I'd like to schedule a site visit and get complete project details.`}
                 target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-3 p-3.5 bg-green-500 hover:bg-green-600 rounded-xl text-white transition-colors mb-3">
                 <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center shrink-0">
@@ -169,7 +171,7 @@ export default function LeadCapture() {
                     <a href={`tel:${PHONE_CALL}`} className="btn-primary flex items-center justify-center gap-2">
                       <FiPhone className="w-4 h-4" /> Call Us Now
                     </a>
-                    <a href={`https://wa.me/91${PHONE_WHATSAPP}`} target="_blank" rel="noopener noreferrer"
+                    <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I just submitted my details through the lead form. I'm interested in your plots and would like to discuss further.`} target="_blank" rel="noopener noreferrer"
                       className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center justify-center gap-2">
                       <RiWhatsappLine className="w-4 h-4" /> WhatsApp
                     </a>
@@ -233,6 +235,13 @@ export default function LeadCapture() {
                         placeholder="Any specific requirements or questions..."
                         className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none" />
                     </div>
+
+                    {errors.submit && (
+                      <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 flex items-start gap-2">
+                        <FiAlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                        <p className="text-red-700 text-sm">{errors.submit}</p>
+                      </div>
+                    )}
 
                     <button type="submit" disabled={loading}
                       className="btn-primary w-full py-3 text-sm disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2">

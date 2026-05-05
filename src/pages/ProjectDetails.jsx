@@ -76,34 +76,6 @@ function InfoCard({ iconKey, title, desc }) {
   )
 }
 
-// ── Talking point icons ───────────────────────────────────────────────────────
-const talkingPointIcons = [
-  HiOutlineTrendingUp,
-  HiOutlineDocumentText,
-  HiOutlineTrendingUp,
-  MdOutlineFactory,
-  HiOutlineHome,
-  HiOutlineUserGroup,
-]
-
-function TalkingPoint({ text, index }) {
-  const Icon = talkingPointIcons[index % talkingPointIcons.length]
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.07 }}
-      className="flex items-start gap-3 bg-white border border-gray-100 rounded-xl px-4 py-3.5 shadow-sm"
-    >
-      <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-        <Icon className="w-4 h-4 text-primary" />
-      </div>
-      <span className="text-gray-700 text-sm leading-relaxed">{text}</span>
-    </motion.div>
-  )
-}
-
 // ── Layout Zoom/Pan Viewer ────────────────────────────────────────────────────
 function LayoutViewer({ project, PHONE_CALL }) {
   const [scale, setScale] = useState(1)
@@ -404,7 +376,7 @@ export default function ProjectDetails() {
     const formData = new FormData(form)
     
     try {
-      await fetch('https://formsubmit.co/hkmc.developer@gmail.com', {
+      await fetch('https://formsubmit.co/hkmcbuilderanddevelopers@gmail.com', {
         method: 'POST',
         body: formData,
       })
@@ -413,7 +385,7 @@ export default function ProjectDetails() {
     } catch (error) {
       console.error('Form submission error:', error)
       setLoading(false)
-      setSubmitted(true) // Still show success message
+      setErrors({ ...errors, submit: 'Failed to submit. Please try calling us directly.' })
     }
   }
 
@@ -711,6 +683,13 @@ export default function ProjectDetails() {
                       ))}
                     </select>
 
+                    {errors.submit && (
+                      <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 flex items-start gap-2">
+                        <FiAlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                        <p className="text-red-700 text-sm">{errors.submit}</p>
+                      </div>
+                    )}
+
                     <button 
                       type="submit"
                       disabled={loading}
@@ -738,7 +717,7 @@ export default function ProjectDetails() {
                     className="flex items-center justify-center gap-2 bg-primary/10 hover:bg-primary hover:text-white text-primary font-semibold py-2.5 rounded-xl transition-all text-sm">
                     <FiPhone className="w-4 h-4" /> Call: {PHONE_CALL}
                   </a>
-                  <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in ${project.name}. Please share details.`}
+                  <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm viewing the ${project.name} project details page. I'm interested in booking a site visit and learning more about plot availability and pricing.`}
                     target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-2.5 rounded-xl transition-colors text-sm">
                     <RiWhatsappLine className="w-4 h-4" /> WhatsApp Us

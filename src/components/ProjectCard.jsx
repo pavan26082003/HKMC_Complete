@@ -115,7 +115,7 @@ export default function ProjectCard({ project, index = 0 }) {
             Know More →
           </button>
           <a
-            href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in ${project.name}. Please share details.`}
+            href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in ${project.name} project at ${project.location}. Please share complete details about plot sizes, pricing, and availability.`}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
