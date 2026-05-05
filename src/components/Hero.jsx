@@ -8,18 +8,20 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background */}
+      {/* Background with lazy loading */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80"
+          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80&auto=format"
           alt="Premium open plots in Hyderabad by HKMC Builders and Developers - HMDA DTCP approved investment land"
           className="w-full h-full object-cover"
+          loading="eager"
           fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/75 to-blue-900/80" />
       </div>
 
-      {/* Animated background shapes */}
+      {/* Animated background shapes - reduced complexity */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{ rotate: 360 }}
@@ -31,8 +33,6 @@ export default function Hero() {
           transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
           className="absolute -bottom-40 -left-40 w-[500px] h-[500px] border border-white/10 rounded-full"
         />
-        <div className="absolute top-1/4 right-1/4 w-2 h-2 bg-accent rounded-full animate-pulse" />
-        <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
       
 
