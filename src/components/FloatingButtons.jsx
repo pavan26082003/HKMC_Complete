@@ -23,14 +23,14 @@ export default function FloatingButtons() {
   return (
     <>
       {/* WhatsApp Floating Button */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-2 sm:gap-3">
         <AnimatePresence>
           {showTooltip && (
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
-              className="bg-white text-dark text-sm px-4 py-2 rounded-xl shadow-xl border border-gray-100 whitespace-nowrap"
+              className="bg-white text-dark text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl shadow-xl border border-gray-100 whitespace-nowrap"
             >
               Chat with us on WhatsApp!
             </motion.div>
@@ -46,10 +46,10 @@ export default function FloatingButtons() {
           transition={{ type: 'spring', delay: 1 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center transition-colors"
+          className="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center transition-colors"
           aria-label="Chat on WhatsApp"
         >
-          <RiWhatsappLine className="w-7 h-7" />
+          <RiWhatsappLine className="w-6 h-6 sm:w-7 sm:h-7" />
         </motion.a>
       </div>
 
@@ -61,7 +61,7 @@ export default function FloatingButtons() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-24 right-6 z-50 w-10 h-10 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-900 transition-colors"
+            className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 z-50 w-9 h-9 sm:w-10 sm:h-10 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-900 transition-colors"
             aria-label="Scroll to top"
           >
             <FiArrowUp className="w-4 h-4" />

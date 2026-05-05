@@ -54,7 +54,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+          className="font-serif text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 sm:mb-6 px-2"
         >
           Premium Open Plots
           <br />
@@ -66,7 +66,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-white/85 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-white/85 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
         >
           HKMC Builders & Developers — Trusted by 500+ investors across Telangana.
           Secure your future with HMDA/DTCP approved plots in Hyderabad's fastest-growing corridors.
@@ -77,7 +77,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10"
+          className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4 sm:gap-6 md:gap-10 mb-8 sm:mb-10 max-w-lg sm:max-w-none mx-auto"
         >
           {[
             { value: '15+', label: 'Years Experience' },
@@ -86,8 +86,8 @@ export default function Hero() {
             { value: '100%', label: 'Legal Clarity' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-accent font-bold text-2xl md:text-3xl font-serif">{stat.value}</div>
-              <div className="text-white/70 text-sm">{stat.label}</div>
+              <div className="text-accent font-bold text-xl sm:text-2xl md:text-3xl font-serif">{stat.value}</div>
+              <div className="text-white/70 text-xs sm:text-sm">{stat.label}</div>
             </div>
           ))}
         </motion.div>
@@ -97,21 +97,21 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center px-4 max-w-2xl mx-auto"
         >
-          <a href="#contact" className="btn-accent text-base px-8 py-4 w-full sm:w-auto flex items-center justify-center gap-2">
-            <FiCalendar className="w-5 h-5" />
+          <a href="#contact" className="btn-accent text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto flex items-center justify-center gap-2">
+            <FiCalendar className="w-4 sm:w-5 h-4 sm:h-5" />
             Book Site Visit
           </a>
-          <a href="#projects" className="btn-outline text-base px-8 py-4 w-full sm:w-auto flex items-center justify-center gap-2">
-            <FiFileText className="w-5 h-5" />
+          <a href="#projects" className="btn-outline text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto flex items-center justify-center gap-2">
+            <FiFileText className="w-4 sm:w-5 h-4 sm:h-5" />
             View Projects
           </a>
           <a
             href={`tel:${PHONE_CALL}`}
-            className="flex items-center gap-2 text-white border border-white/30 rounded-lg px-8 py-4 hover:bg-white/10 transition-all w-full sm:w-auto justify-center"
+            className="flex items-center gap-2 text-white border border-white/30 rounded-lg px-6 sm:px-8 py-3 sm:py-4 hover:bg-white/10 transition-all w-full sm:w-auto justify-center text-sm sm:text-base"
           >
-            <FiPhone className="w-5 h-5" />
+            <FiPhone className="w-4 sm:w-5 h-4 sm:h-5" />
             Call Now
           </a>
         </motion.div>

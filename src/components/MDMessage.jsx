@@ -27,7 +27,7 @@ const STATS = [
   const containerRef = useRef(null)
 
   return (
-    <section ref={containerRef} className="relative py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-white">
+    <section ref={containerRef} className="relative py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 overflow-hidden bg-white">
 
       {/* Decorative floating dots — right side only */}
       <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none overflow-hidden hidden lg:block">
@@ -44,7 +44,7 @@ const STATS = [
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="relative flex flex-col min-h-[400px] sm:min-h-[480px] lg:min-h-[520px] overflow-hidden rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none"
+            className="relative flex flex-col min-h-[350px] sm:min-h-[400px] md:min-h-[480px] lg:min-h-[520px] overflow-hidden rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none"
           >
             {/* Full portrait image — fills the entire left panel */}
             <img
@@ -77,9 +77,9 @@ const STATS = [
 
 
             {/* Name + title pinned to bottom */}
-            <div className="relative mt-auto p-4 sm:p-6 lg:p-8 xl:p-10 text-white">
+            <div className="relative mt-auto p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 text-white">
               {/* Verified badge row */}
-              <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
                 <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center">
                   <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -88,13 +88,13 @@ const STATS = [
                 <span className="text-green-400 text-xs font-semibold tracking-wide">Verified Director</span>
               </div>
 
-              <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-1">
+              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight mb-1">
                 Mirza Afzal Yaseen
               </h3>
               <p className="text-accent font-semibold text-xs sm:text-sm tracking-widest uppercase mb-1">
                 Managing Director
               </p>
-              <p className="text-white/60 text-xs sm:text-sm mb-4 sm:mb-6">
+              <p className="text-white/60 text-xs sm:text-sm mb-3 sm:mb-4 md:mb-6">
                 HKMC Builders & Developers Pvt. Ltd.
               </p>
 
@@ -123,39 +123,39 @@ const STATS = [
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
-            className="bg-white py-8 px-4 sm:py-12 sm:px-6 lg:py-16 lg:px-10 xl:px-14 flex flex-col justify-center relative rounded-b-2xl lg:rounded-r-2xl lg:rounded-bl-none"
+            className="bg-white py-6 px-4 sm:py-8 sm:px-5 md:py-12 md:px-8 lg:py-16 lg:px-10 xl:px-14 flex flex-col justify-center relative rounded-b-2xl lg:rounded-r-2xl lg:rounded-bl-none"
           >
             {/* Section label */}
-            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-              <div className="w-6 sm:w-8 h-0.5 bg-accent rounded-full" />
+            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 md:mb-6">
+              <div className="w-5 sm:w-6 md:w-8 h-0.5 bg-accent rounded-full" />
               <span className="text-accent text-[10px] sm:text-xs font-bold tracking-widest uppercase">
                 Message from the MD
               </span>
             </div>
 
             {/* Headline */}
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight mb-6 sm:mb-8">
+            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary leading-tight mb-4 sm:mb-6 md:mb-8">
               Building Trust,<br />
               <span className="text-accent">One Dream at a Time</span>
             </h2>
 
             {/* Opening quote */}
-            <div className="relative mb-6 sm:mb-8">
-              <FiMessageSquare className="absolute -top-2 sm:-top-3 -left-1 sm:-left-2 w-8 h-8 sm:w-10 sm:h-10 text-accent/20 rotate-180" />
-              <p className="font-serif text-base sm:text-lg lg:text-xl text-primary font-semibold italic leading-relaxed pl-4 sm:pl-6 border-l-2 sm:border-l-4 border-accent">
+            <div className="relative mb-4 sm:mb-6 md:mb-8">
+              <FiMessageSquare className="absolute -top-2 sm:-top-3 -left-1 sm:-left-2 w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-accent/20 rotate-180" />
+              <p className="font-serif text-sm sm:text-base md:text-lg lg:text-xl text-primary font-semibold italic leading-relaxed pl-4 sm:pl-6 border-l-2 sm:border-l-4 border-accent">
                 "Our vision is to create not just structures, but lasting landmarks that enrich lives and stand the test of time."
               </p>
             </div>
 
             {/* Body paragraphs */}
-            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+            <div className="space-y-2.5 sm:space-y-3 md:space-y-4 mb-4 sm:mb-6 md:mb-8">
               {MESSAGE_PARAGRAPHS.map((para, i) => (
                 <motion.p
                   key={i}
                   initial={{ opacity: 0, y: 15 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.15, duration: 0.6 }}
-                  className="text-gray-600 leading-relaxed text-sm sm:text-base"
+                  className="text-gray-600 leading-relaxed text-xs sm:text-sm md:text-base"
                 >
                   {para}
                 </motion.p>
@@ -167,17 +167,17 @@ const STATS = [
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ delay: 0.8 }}
-              className="text-primary font-semibold text-sm sm:text-base italic mb-6 sm:mb-8"
+              className="text-primary font-semibold text-xs sm:text-sm md:text-base italic mb-4 sm:mb-6 md:mb-8"
             >
               {CLOSING}
             </motion.p>
 
             {/* Signature */}
-            <div className="flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-100">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-4 pt-3 sm:pt-4 md:pt-6 border-t border-gray-100">
               <div className="flex-1 min-w-0">
                 {/* Stylised signature text */}
                 <p
-                  className="text-primary font-bold text-lg sm:text-xl leading-none mb-1 truncate"
+                  className="text-primary font-bold text-base sm:text-lg md:text-xl leading-none mb-1 truncate"
                   style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic' }}
                 >
                   Mirza Afzal Yaseen
@@ -185,8 +185,8 @@ const STATS = [
                 <p className="text-gray-400 text-[10px] sm:text-xs tracking-wide">Managing Director, HKMC Builders</p>
               </div>
               {/* Gold seal */}
-              <div className="ml-auto w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-accent flex items-center justify-center shrink-0">
-                <span className="font-serif text-accent font-black text-base sm:text-lg">MD</span>
+              <div className="ml-auto w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-2 border-accent flex items-center justify-center shrink-0">
+                <span className="font-serif text-accent font-black text-sm sm:text-base md:text-lg">MD</span>
               </div>
             </div>
           </motion.div>

@@ -89,13 +89,13 @@ export default function Calculator() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="bg-white rounded-3xl p-6 md:p-10 shadow-2xl"
+          className="bg-white rounded-3xl p-4 sm:p-6 md:p-10 shadow-2xl"
         >
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
             {/* Inputs */}
-            <div className="space-y-6">
-              <div className="flex items-start justify-between">
-                <h3 className="font-semibold text-dark text-xl">Configure Your Investment</h3>
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex items-start justify-between flex-wrap gap-2">
+                <h3 className="font-semibold text-dark text-lg sm:text-xl">Configure Your Investment</h3>
                 <div className="flex items-center gap-1 text-green-600 text-xs bg-green-50 px-2 py-1 rounded-full">
                   <CheckCircle className="w-3 h-3" />
                   <span>Live Data</span>
@@ -141,12 +141,12 @@ export default function Calculator() {
               {/* Plot Size */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-3">Choose Plot Size</label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   {plotSizeOptions[selectedProject.name].map((size) => (
                     <button
                       key={size}
                       onClick={() => setPlotSize(size)}
-                      className={`py-3 px-4 rounded-xl border-2 text-sm font-semibold transition-all ${
+                      className={`py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl border-2 text-xs sm:text-sm font-semibold transition-all ${
                         plotSize === size
                           ? 'border-accent bg-accent text-dark shadow-md'
                           : 'border-gray-200 text-gray-600 hover:border-accent/40 hover:shadow-sm'
@@ -191,9 +191,9 @@ export default function Calculator() {
             </div>
 
             {/* Results */}
-            <div className="space-y-5">
-              <div className="flex items-start justify-between">
-                <h3 className="font-semibold text-dark text-xl">Your Potential Returns</h3>
+            <div className="space-y-4 sm:space-y-5">
+              <div className="flex items-start justify-between flex-wrap gap-2">
+                <h3 className="font-semibold text-dark text-lg sm:text-xl">Your Potential Returns</h3>
                 <div className="flex items-center gap-1 text-xs text-gray-500">
                   <TrendingUp className="w-3 h-3" />
                   <span>Projected</span>
@@ -201,27 +201,27 @@ export default function Calculator() {
               </div>
 
               {/* Main Result Card */}
-              <div className="bg-gradient-to-br from-primary via-blue-800 to-primary rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full -ml-12 -mb-12"></div>
+              <div className="bg-gradient-to-br from-primary via-blue-800 to-primary rounded-2xl p-4 sm:p-6 text-white shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-white/5 rounded-full -mr-12 sm:-mr-16 -mt-12 sm:-mt-16"></div>
+                <div className="absolute bottom-0 left-0 w-20 sm:w-24 h-20 sm:h-24 bg-white/5 rounded-full -ml-10 sm:-ml-12 -mb-10 sm:-mb-12"></div>
                 
                 <div className="relative z-10">
-                  <div className="text-center mb-4">
-                    <div className="text-white/80 text-sm mb-2">Your Investment Today</div>
-                    <div className="text-3xl md:text-4xl font-bold font-serif">{formatINR(result.investedAmount)}</div>
+                  <div className="text-center mb-3 sm:mb-4">
+                    <div className="text-white/80 text-xs sm:text-sm mb-2">Your Investment Today</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif">{formatINR(result.investedAmount)}</div>
                   </div>
                   
-                  <div className="flex items-center justify-center my-4">
-                    <div className="h-px w-12 bg-accent"></div>
-                    <TrendingUp className="w-6 h-6 text-accent mx-2" />
-                    <div className="h-px w-12 bg-accent"></div>
+                  <div className="flex items-center justify-center my-3 sm:my-4">
+                    <div className="h-px w-8 sm:w-12 bg-accent"></div>
+                    <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 text-accent mx-2" />
+                    <div className="h-px w-8 sm:w-12 bg-accent"></div>
                   </div>
                   
                   <div className="text-center">
-                    <div className="text-white/80 text-sm mb-2">Estimated Value in {years} Year{years > 1 ? 's' : ''}</div>
-                    <div className="text-4xl md:text-5xl font-bold font-serif text-accent mb-2">{formatINR(result.futureValue)}</div>
-                    <div className="inline-flex items-center gap-2 bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm font-semibold">
-                      <TrendingUp className="w-4 h-4" />
+                    <div className="text-white/80 text-xs sm:text-sm mb-2">Estimated Value in {years} Year{years > 1 ? 's' : ''}</div>
+                    <div className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-accent mb-2">{formatINR(result.futureValue)}</div>
+                    <div className="inline-flex items-center gap-2 bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
+                      <TrendingUp className="w-3 sm:w-4 h-3 sm:h-4" />
                       <span>+{result.roi}% Total ROI</span>
                     </div>
                   </div>
@@ -229,14 +229,14 @@ export default function Calculator() {
               </div>
 
               {/* Stats Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 border border-green-200">
-                  <div className="text-green-700 font-bold text-2xl mb-1">{formatINR(result.profit)}</div>
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-3 sm:p-4 border border-green-200">
+                  <div className="text-green-700 font-bold text-xl sm:text-2xl mb-1">{formatINR(result.profit)}</div>
                   <div className="text-gray-600 text-xs font-medium">Potential Profit</div>
                   <div className="text-green-600 text-xs mt-1">Tax benefits applicable*</div>
                 </div>
-                <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-4 border border-amber-200">
-                  <div className="text-amber-700 font-bold text-2xl mb-1">{((selectedProject.annualGrowth) * 100).toFixed(1)}%</div>
+                <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-3 sm:p-4 border border-amber-200">
+                  <div className="text-amber-700 font-bold text-xl sm:text-2xl mb-1">{((selectedProject.annualGrowth) * 100).toFixed(1)}%</div>
                   <div className="text-gray-600 text-xs font-medium">Annual Growth Rate</div>
                   <div className="text-amber-600 text-xs mt-1">Based on market trends</div>
                 </div>

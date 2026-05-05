@@ -60,11 +60,11 @@ export default function NewYearOfferBanner() {
           <div className="absolute top-0 left-1/4 w-32 h-32 bg-accent/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-blue-400/10 rounded-full blur-3xl" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 relative">
-            <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-3 sm:py-4 relative">
+            <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4">
 
               {/* Left: Main offer content */}
-              <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-wrap flex-1 min-w-0">
                 {/* Mega animated gift box */}
                 <motion.div
                   animate={{ 
@@ -78,8 +78,8 @@ export default function NewYearOfferBanner() {
                   }}
                   className="relative shrink-0"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-accent via-yellow-400 to-accent rounded-2xl flex items-center justify-center shadow-2xl shadow-accent/50 border-2 border-yellow-300">
-                    <HiOutlineGift className="w-7 h-7 text-dark" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-accent via-yellow-400 to-accent rounded-2xl flex items-center justify-center shadow-2xl shadow-accent/50 border-2 border-yellow-300">
+                    <HiOutlineGift className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-dark" />
                   </div>
                   {/* Pulsing ring */}
                   <motion.div
@@ -89,13 +89,13 @@ export default function NewYearOfferBanner() {
                   />
                 </motion.div>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5 sm:gap-2 flex-1 min-w-0">
                   {/* Top row: badge + headline */}
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                     <motion.span
                       animate={{ scale: [1, 1.05, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
-                      className="bg-gradient-to-r from-accent via-yellow-300 to-accent text-dark text-xs font-black px-3 py-1 rounded-full tracking-wide uppercase shadow-lg border border-yellow-300"
+                      className="bg-gradient-to-r from-accent via-yellow-300 to-accent text-dark text-[10px] sm:text-xs font-black px-2 sm:px-3 py-0.5 sm:py-1 rounded-full tracking-wide uppercase shadow-lg border border-yellow-300"
                     >
                       🎊 MEGA NEW YEAR 2026 OFFER
                     </motion.span>
@@ -103,14 +103,14 @@ export default function NewYearOfferBanner() {
                   </div>
 
                   {/* Bottom row: offer details */}
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <span className="text-white font-semibold text-sm sm:text-base">
+                  <div className="flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-1">
+                    <span className="text-white font-semibold text-xs sm:text-sm md:text-base">
                       Book your plot at
                     </span>
 
                     {/* Price with strikethrough */}
-                    <div className="flex items-center gap-2">
-                      <span className="text-white/50 line-through text-sm">₹3,500</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className="text-white/50 line-through text-xs sm:text-sm">₹3,500</span>
                       <motion.span
                         animate={{ 
                           scale: [1, 1.08, 1],
@@ -121,38 +121,39 @@ export default function NewYearOfferBanner() {
                           ],
                         }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="font-serif text-accent font-black text-xl sm:text-2xl leading-none"
+                        className="font-serif text-accent font-black text-lg sm:text-xl md:text-2xl leading-none"
                       >
                         ₹2,000/sq.yd
                       </motion.span>
-                      <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                      <span className="bg-green-500 text-white text-[10px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 rounded-full">
                         SAVE 43%
                       </span>
                     </div>
 
-                    <span className="hidden sm:inline text-white/30 text-lg">•</span>
+                    <span className="hidden sm:inline text-white/30 text-base sm:text-lg">•</span>
 
                     <motion.span
                       animate={{ x: [0, 3, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
-                      className="flex items-center gap-1.5 text-accent font-semibold text-sm"
+                      className="flex items-center gap-1 sm:gap-1.5 text-accent font-semibold text-xs sm:text-sm"
                     >
-                      <HiOutlineGift className="w-4 h-4 shrink-0" />
-                      <span>+ Surprise Gift Worth ₹10,000</span>
+                      <HiOutlineGift className="w-3 h-3 sm:w-4 sm:h-4 shrink-0" />
+                      <span className="hidden xs:inline">+ Surprise Gift Worth ₹10,000</span>
+                      <span className="xs:hidden">+ Gift ₹10K</span>
                     </motion.span>
                   </div>
                 </div>
               </div>
 
               {/* Right: CTAs + close */}
-              <div className="flex items-center gap-2 ml-auto">
+              <div className="flex items-center gap-1.5 sm:gap-2 ml-auto shrink-0">
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href={`tel:${PHONE_CALL}`}
-                  className="flex items-center gap-2 bg-gradient-to-r from-accent via-yellow-400 to-accent hover:from-yellow-400 hover:to-accent text-dark text-sm font-black px-4 py-2.5 rounded-xl transition-all shadow-lg shadow-accent/30 whitespace-nowrap border border-yellow-300"
+                  className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-accent via-yellow-400 to-accent hover:from-yellow-400 hover:to-accent text-dark text-xs sm:text-sm font-black px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl transition-all shadow-lg shadow-accent/30 whitespace-nowrap border border-yellow-300"
                 >
-                  <FiPhone className="w-4 h-4" /> Call Now
+                  <FiPhone className="w-3 sm:w-4 h-3 sm:h-4" /> <span className="hidden xs:inline">Call Now</span><span className="xs:hidden">Call</span>
                 </motion.a>
                 <motion.a
                   whileHover={{ scale: 1.05 }}
@@ -160,16 +161,16 @@ export default function NewYearOfferBanner() {
                   href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hey, I want this New Year 2026 Mega Offer! Please share details about the ₹2,000/sq.yd plots and the surprise gift worth ₹10,000.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-sm font-black px-4 py-2.5 rounded-xl transition-all shadow-lg shadow-green-500/30 whitespace-nowrap"
+                  className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-xs sm:text-sm font-black px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl transition-all shadow-lg shadow-green-500/30 whitespace-nowrap"
                 >
-                  <RiWhatsappLine className="w-4 h-4" /> WhatsApp
+                  <RiWhatsappLine className="w-3 sm:w-4 h-3 sm:h-4" /> <span className="hidden sm:inline">WhatsApp</span><span className="sm:hidden">Chat</span>
                 </motion.a>
                 <button
                   onClick={() => setDismissed(true)}
-                  className="ml-1 text-white/40 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-white/10"
+                  className="ml-0.5 sm:ml-1 text-white/40 hover:text-white transition-colors p-1 sm:p-1.5 rounded-lg hover:bg-white/10"
                   aria-label="Dismiss banner"
                 >
-                  <HiX className="w-5 h-5" />
+                  <HiX className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
 

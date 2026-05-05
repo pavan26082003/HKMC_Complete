@@ -43,21 +43,21 @@ export default function About() {
             initial={{ opacity: 0, x: -60 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="relative flex justify-center"
+            className="relative flex justify-center mb-8 lg:mb-0"
           >
             {/* Glow blob behind image */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-80 h-80 bg-primary/20 rounded-full blur-3xl" />
+              <div className="w-64 sm:w-80 h-64 sm:h-80 bg-primary/20 rounded-full blur-3xl" />
             </div>
 
             {/* Card */}
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-sm sm:max-w-md">
               {/* Decorative corner accent */}
-              <div className="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-accent rounded-tl-2xl z-10" />
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-accent rounded-br-2xl z-10" />
+              <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-16 sm:w-24 h-16 sm:h-24 border-t-4 border-l-4 border-accent rounded-tl-2xl z-10" />
+              <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-16 sm:w-24 h-16 sm:h-24 border-b-4 border-r-4 border-accent rounded-br-2xl z-10" />
 
               {/* Image wrapper */}
-              <div className="group relative bg-gradient-to-br from-primary/5 to-blue-50 rounded-3xl p-6 shadow-xl overflow-hidden border border-gray-100">
+              <div className="group relative bg-gradient-to-br from-primary/5 to-blue-50 rounded-3xl p-4 sm:p-6 shadow-xl overflow-hidden border border-gray-100">
                 {/* Subtle inner gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 rounded-3xl" />
 
@@ -66,7 +66,7 @@ export default function About() {
                   alt="HKMC Builders and Developers Pvt Ltd - trusted real estate developer in Hyderabad Telangana"
                   className="relative z-10 w-full object-contain rounded-2xl transition-all duration-500
                              group-hover:scale-105 group-hover:drop-shadow-2xl"
-                  style={{ maxHeight: '340px' }}
+                  style={{ maxHeight: '280px', height: 'auto' }}
                   whileHover={{ scale: 1.04 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                 />
@@ -76,19 +76,19 @@ export default function About() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-5 -right-5 bg-accent text-dark rounded-2xl px-4 py-3 shadow-xl z-20"
+                className="absolute -top-4 -right-4 sm:-top-5 sm:-right-5 bg-accent text-dark rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-xl z-20"
               >
-                <div className="text-2xl font-bold font-serif leading-none">15+</div>
-                <div className="text-xs font-semibold mt-0.5">Years of Trust</div>
+                <div className="text-xl sm:text-2xl font-bold font-serif leading-none">15+</div>
+                <div className="text-[10px] sm:text-xs font-semibold mt-0.5">Years of Trust</div>
               </motion.div>
 
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute -bottom-5 -left-5 bg-primary text-white rounded-2xl px-4 py-3 shadow-xl z-20"
+                className="absolute -bottom-4 -left-4 sm:-bottom-5 sm:-left-5 bg-primary text-white rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-xl z-20"
               >
-                <div className="text-2xl font-bold font-serif leading-none">600+</div>
-                <div className="text-xs font-semibold mt-0.5 text-white/80">Happy Investors</div>
+                <div className="text-xl sm:text-2xl font-bold font-serif leading-none">600+</div>
+                <div className="text-[10px] sm:text-xs font-semibold mt-0.5 text-white/80">Happy Investors</div>
               </motion.div>
             </div>
           </motion.div>
@@ -122,7 +122,7 @@ export default function About() {
             </p>
 
             {/* Highlight grid */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {highlights.map(({ Icon, label, sub }, i) => (
                 <motion.div
                   key={label}
@@ -134,7 +134,7 @@ export default function About() {
                   <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
                     <Icon className="w-4 h-4 text-primary" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <div className="font-semibold text-dark text-sm leading-tight">{label}</div>
                     <div className="text-gray-400 text-xs mt-0.5">{sub}</div>
                   </div>

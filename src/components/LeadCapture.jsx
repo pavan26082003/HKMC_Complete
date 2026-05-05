@@ -71,7 +71,7 @@ export default function LeadCapture() {
 
 
 
-  
+
   return (
     <section id="contact" className="py-20 bg-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,48 +94,48 @@ export default function LeadCapture() {
         </motion.div>
 
         {/* ── 3-column grid: contact | form | map ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 items-start">
 
           {/* ── Col 1: Contact details + Why Act Now ── */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-4 sm:gap-5"
           >
             {/* Contact buttons */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 className="font-semibold text-dark text-base mb-4">Contact Us Directly</h3>
+            <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm">
+              <h3 className="font-semibold text-dark text-sm sm:text-base mb-3 sm:mb-4">Contact Us Directly</h3>
 
               <a href={`tel:${PHONE_CALL}`}
-                className="flex items-center gap-3 p-3.5 bg-primary hover:bg-blue-900 rounded-xl text-white transition-colors mb-3">
-                <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center shrink-0">
-                  <FiPhone className="w-4 h-4" />
+                className="flex items-center gap-2 sm:gap-3 p-3 sm:p-3.5 bg-primary hover:bg-blue-900 rounded-xl text-white transition-colors mb-3">
+                <div className="w-8 sm:w-9 h-8 sm:h-9 bg-white/20 rounded-lg flex items-center justify-center shrink-0">
+                  <FiPhone className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="text-xs text-white/70">Call Us Now</div>
-                  <div className="font-bold text-sm">{PHONE_CALL}</div>
+                  <div className="font-bold text-xs sm:text-sm truncate">{PHONE_CALL}</div>
                 </div>
               </a>
 
               <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in your plots. I'd like to schedule a site visit and get complete project details.`}
                 target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3.5 bg-green-500 hover:bg-green-600 rounded-xl text-white transition-colors mb-3">
-                <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center shrink-0">
-                  <RiWhatsappLine className="w-4 h-4" />
+                className="flex items-center gap-2 sm:gap-3 p-3 sm:p-3.5 bg-green-500 hover:bg-green-600 rounded-xl text-white transition-colors mb-3">
+                <div className="w-8 sm:w-9 h-8 sm:h-9 bg-white/20 rounded-lg flex items-center justify-center shrink-0">
+                  <RiWhatsappLine className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="text-xs text-white/70">WhatsApp Us</div>
-                  <div className="font-bold text-sm">{PHONE_WHATSAPP}</div>
+                  <div className="font-bold text-xs sm:text-sm truncate">{PHONE_WHATSAPP}</div>
                 </div>
               </a>
 
               <a href={`mailto:${EMAIL}`}
-                className="flex items-center gap-3 p-3.5 bg-light hover:bg-gray-200 rounded-xl text-dark transition-colors">
-                <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                  <FiMail className="w-4 h-4 text-primary" />
+                className="flex items-center gap-2 sm:gap-3 p-3 sm:p-3.5 bg-light hover:bg-gray-200 rounded-xl text-dark transition-colors">
+                <div className="w-8 sm:w-9 h-8 sm:h-9 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                  <FiMail className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-primary" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="text-xs text-gray-500">Email Us</div>
                   <div className="font-medium text-xs truncate">{EMAIL}</div>
                 </div>
@@ -143,13 +143,13 @@ export default function LeadCapture() {
             </div>
 
             {/* Why Act Now */}
-            <div className="bg-gradient-to-br from-primary to-blue-800 rounded-2xl p-6 text-white">
-              <h4 className="font-semibold text-sm mb-4 uppercase tracking-wide">Why Act Now?</h4>
-              <div className="space-y-3">
+            <div className="bg-gradient-to-br from-primary to-blue-800 rounded-2xl p-4 sm:p-6 text-white">
+              <h4 className="font-semibold text-xs sm:text-sm mb-3 sm:mb-4 uppercase tracking-wide">Why Act Now?</h4>
+              <div className="space-y-2 sm:space-y-3">
                 {whyActNow.map(({ Icon, text }) => (
-                  <div key={text} className="flex items-center gap-3 text-sm text-white/90">
-                    <Icon className="w-4 h-4 text-accent shrink-0" />
-                    {text}
+                  <div key={text} className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-white/90">
+                    <Icon className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-accent shrink-0" />
+                    <span>{text}</span>
                   </div>
                 ))}
               </div>
@@ -162,34 +162,34 @@ export default function LeadCapture() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <div className="bg-white rounded-2xl p-6 shadow-sm h-full">
+            <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm h-full">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-12"
+                  className="text-center py-8 sm:py-12"
                 >
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <FiCheckCircle className="w-8 h-8 text-green-500" />
+                  <div className="w-14 sm:w-16 h-14 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <FiCheckCircle className="w-7 sm:w-8 h-7 sm:h-8 text-green-500" />
                   </div>
-                  <h3 className="font-serif text-2xl font-bold text-primary mb-2">Thank You!</h3>
-                  <p className="text-gray-600 mb-6 text-sm">
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">Thank You!</h3>
+                  <p className="text-gray-600 mb-4 sm:mb-6 text-sm">
                     We've received your enquiry. Our team will contact you within 2 hours.
                   </p>
                   <div className="flex flex-col gap-3">
-                    <a href={`tel:${PHONE_CALL}`} className="btn-primary flex items-center justify-center gap-2">
+                    <a href={`tel:${PHONE_CALL}`} className="btn-primary flex items-center justify-center gap-2 text-sm sm:text-base">
                       <FiPhone className="w-4 h-4" /> Call Us Now
                     </a>
                     <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I just submitted my details through the lead form. I'm interested in your plots and would like to discuss further.`} target="_blank" rel="noopener noreferrer"
-                      className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center justify-center gap-2">
+                      className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base">
                       <RiWhatsappLine className="w-4 h-4" /> WhatsApp
                     </a>
                   </div>
                 </motion.div>
               ) : (
                 <>
-                  <h3 className="font-semibold text-dark text-base mb-5">Send Enquiry</h3>
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <h3 className="font-semibold text-dark text-sm sm:text-base mb-4 sm:mb-5">Send Enquiry</h3>
+                  <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                     <input type="hidden" name="_subject" value="New Lead - HKMC Builders Website" />
                     <input type="hidden" name="_template" value="table" />
                     <input type="hidden" name="_captcha" value="false" />

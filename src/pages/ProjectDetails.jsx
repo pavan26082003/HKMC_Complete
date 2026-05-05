@@ -424,7 +424,7 @@ export default function ProjectDetails() {
       </div>
 
       {/* ── Hero banner ── */}
-      <div className="relative h-[55vh] min-h-[340px] overflow-hidden">
+      <div className="relative h-[50vh] sm:h-[55vh] min-h-[300px] sm:min-h-[340px] overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.img
             key={activeImg}
@@ -439,28 +439,28 @@ export default function ProjectDetails() {
         </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent" />
 
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-10">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <span className={`inline-block ${project.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full mb-3`}>
+              <span className={`inline-block ${project.badgeColor} text-white text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full mb-2 sm:mb-3`}>
                 {project.badge}
               </span>
-              <h1 className="font-serif text-3xl md:text-5xl font-bold text-white mb-2">{project.name}</h1>
-              <p className="text-accent font-semibold text-lg mb-3">{project.tagline}</p>
-              <div className="flex flex-wrap items-center gap-5 text-white/80 text-sm">
-                <span className="flex items-center gap-1.5"><FiMapPin className="w-4 h-4" />{project.location}</span>
-                <span className="flex items-center gap-1.5"><HiOutlineHome className="w-4 h-4" />₹{project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd</span>
-                <span className="flex items-center gap-1.5"><HiOutlineTrendingUp className="w-4 h-4" />ROI: {project.roi}</span>
+              <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">{project.name}</h1>
+              <p className="text-accent font-semibold text-base sm:text-lg mb-2 sm:mb-3">{project.tagline}</p>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-5 text-white/80 text-xs sm:text-sm">
+                <span className="flex items-center gap-1 sm:gap-1.5"><FiMapPin className="w-3.5 sm:w-4 h-3.5 sm:h-4" />{project.location}</span>
+                <span className="flex items-center gap-1 sm:gap-1.5"><HiOutlineHome className="w-3.5 sm:w-4 h-3.5 sm:h-4" />₹{project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd</span>
+                <span className="flex items-center gap-1 sm:gap-1.5"><HiOutlineTrendingUp className="w-3.5 sm:w-4 h-3.5 sm:h-4" />ROI: {project.roi}</span>
               </div>
             </motion.div>
           </div>
         </div>
 
         {/* Thumbnail strip */}
-        <div className="absolute bottom-4 right-4 md:right-10 flex gap-2">
+        <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 md:right-10 flex gap-1.5 sm:gap-2">
           {project.gallery.map((img, i) => (
             <button key={i} onClick={() => setActiveImg(i)}
-              className={`w-14 h-10 rounded-lg overflow-hidden border-2 transition-all ${
+              className={`w-10 sm:w-12 md:w-14 h-7 sm:h-8 md:h-10 rounded-lg overflow-hidden border-2 transition-all ${
                 i === activeImg ? 'border-accent scale-110' : 'border-white/40 opacity-70'
               }`}>
               <img src={img} alt={`${project.name} open plot - ${project.location} by HKMC Builders`} className="w-full h-full object-cover" />
