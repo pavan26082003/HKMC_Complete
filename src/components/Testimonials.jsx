@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import { HiStar } from 'react-icons/hi'
 import {
   HiOutlineOfficeBuilding,
@@ -7,7 +7,6 @@ import {
   HiOutlineShieldCheck,
   HiOutlineUserGroup,
 } from 'react-icons/hi'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { testimonials } from '../data/content'
 import { useInView } from '../hooks/useInView'
 
@@ -29,12 +28,30 @@ function StarRating({ rating }) {
   )
 }
 
+function TestimonialCard({ testimonial }) {
+  return (
+    <div className="bg-light rounded-2xl p-6 hover:shadow-lg transition-shadow flex-shrink-0 w-[280px] sm:w-[320px]">
+      <StarRating rating={testimonial.rating} />
+      <p className="text-gray-600 text-sm leading-relaxed mt-3 mb-4">"{testimonial.text}"</p>
+      <div className="flex items-center gap-3 mt-auto">
+        <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm">
+          {testimonial.avatar}
+        </div>
+        <div>
+          <div className="font-semibold text-dark text-sm">{testimonial.name}</div>
+          <div className="text-gray-400 text-xs">{testimonial.location} · {testimonial.project}</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Testimonials() {
   const [ref, inView] = useInView()
-  const [current, setCurrent] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
-  const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length)
-  const next = () => setCurrent((c) => (c + 1) % testimonials.length)
+  // Duplicate testimonials for seamless loop
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials]
 
   return (
     <section id="testimonials" className="py-20 bg-white">
@@ -55,76 +72,31 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {testimonials.map((t, i) => (
+        {/* Continuous Scrolling Carousel */}
+        <div className="relative overflow-hidden">
+          <div 
+            className="flex gap-6"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-light rounded-2xl p-6 hover:shadow-lg transition-shadow"
+              className="flex gap-6"
+              animate={{
+                x: isPaused ? undefined : [0, -((280 + 24) * testimonials.length)],
+              }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: testimonials.length * 5,
+                  ease: "linear",
+                },
+              }}
             >
-              <StarRating rating={t.rating} />
-              <p className="text-gray-600 text-sm leading-relaxed mt-3 mb-4">"{t.text}"</p>
-              <div className="flex items-center gap-3 mt-auto">
-                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm">
-                  {t.avatar}
-                </div>
-                <div>
-                  <div className="font-semibold text-dark text-sm">{t.name}</div>
-                  <div className="text-gray-400 text-xs">{t.location} · {t.project}</div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Mobile Carousel */}
-        <div className="md:hidden">
-          <div className="relative overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, x: 60 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -60 }}
-                transition={{ duration: 0.35 }}
-                className="bg-light rounded-2xl p-6"
-              >
-                <StarRating rating={testimonials[current].rating} />
-                <p className="text-gray-600 text-sm leading-relaxed mt-3 mb-4">
-                  "{testimonials[current].text}"
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    {testimonials[current].avatar}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-dark text-sm">{testimonials[current].name}</div>
-                    <div className="text-gray-400 text-xs">{testimonials[current].location} · {testimonials[current].project}</div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="flex justify-center items-center gap-4 mt-6">
-            <button onClick={prev} className="w-10 h-10 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors flex items-center justify-center">
-              <FiChevronLeft className="w-5 h-5" />
-            </button>
-            <div className="flex gap-2">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  className={`w-2 h-2 rounded-full transition-all ${i === current ? 'bg-primary w-6' : 'bg-gray-300'}`}
-                />
+              {duplicatedTestimonials.map((testimonial, index) => (
+                <TestimonialCard key={`${testimonial.name}-${index}`} testimonial={testimonial} />
               ))}
-            </div>
-            <button onClick={next} className="w-10 h-10 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors flex items-center justify-center">
-              <FiChevronRight className="w-5 h-5" />
-            </button>
+            </motion.div>
           </div>
         </div>
 
