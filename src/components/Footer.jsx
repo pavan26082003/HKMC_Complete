@@ -56,7 +56,7 @@ export default function Footer() {
             <div className="space-y-3 sm:space-y-4">
               <div>
                 <div className="text-accent font-medium text-xs sm:text-sm mb-1">Eden Farms</div>
-                <div className="text-white/60 text-xs">Near Konadal · ₹2000/sq.yd</div>
+                <div className="text-white/60 text-xs">Near Kodangal · ₹2000/sq.yd</div>
                 <div className="text-white/60 text-xs">100–800 sq. yards</div>
               </div>
               <div>

@@ -20,7 +20,7 @@ HKMC Builders and Developers is a premium real estate company specializing in op
 ## 🚀 Projects
 
 ### Eden Farms
-- **Location**: Near Konadal
+- **Location**: Near Kodangal
 - **Plot Sizes**: 100, 200, 400, 800 sq yards
 - **Pricing**: ₹2,000 per sq yard
 - **Highlights**: Affordable investment with high growth potential

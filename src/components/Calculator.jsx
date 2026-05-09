@@ -4,12 +4,12 @@ import { useInView } from '../hooks/useInView'
 import { TrendingUp, Shield, CheckCircle, Users, Award, Phone } from 'lucide-react'
 
 const projectOptions = [
-  { name: 'Eden Farms (Konadal)', pricePerSqYd: 2000, annualGrowth: 0.20, investors: '500+' },
+  { name: 'Eden Farms (Kodangal)', pricePerSqYd: 2000, annualGrowth: 0.20, investors: '500+' },
   { name: 'Deccan Heights (Shadnagar)', pricePerSqYd: 8500, annualGrowth: 0.28, investors: '300+' },
 ]
 
 const plotSizeOptions = {
-  'Eden Farms (Konadal)': [100, 200, 400, 800],
+  'Eden Farms (Kodangal)': [100, 200, 400, 800],
   'Deccan Heights (Shadnagar)': [121, 242],
 }
 

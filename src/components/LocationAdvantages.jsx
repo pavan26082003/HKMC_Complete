@@ -25,7 +25,7 @@ const ICON_MAP = {
 }
 
 const locationData = {
-  'Eden Farms (Konadal)': [
+  'Eden Farms (Kodangal)': [
     { iconKey: 'highway',  text: 'NH-44 Highway — 5 mins' },
     { iconKey: 'school',   text: 'Schools & Colleges — 10 mins' },
     { iconKey: 'hospital', text: 'Hospitals — 15 mins' },
@@ -91,7 +91,7 @@ export default function LocationAdvantages() {
             className="relative rounded-2xl overflow-hidden shadow-xl h-80 md:h-96"
           >
             <img
-              src={active.includes('Konadal')
+              src={active.includes('Kodangal')
                 ? 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80'
                 : 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80'}
               alt={`${active} - open plot location near Hyderabad by HKMC Builders`}
@@ -101,7 +101,7 @@ export default function LocationAdvantages() {
             <div className="absolute bottom-6 left-6">
               <div className="text-white font-serif text-xl font-bold">{active}</div>
               <div className="text-white/70 text-sm mt-1">
-                {active.includes('Konadal') ? 'Near NH-44, Konadal' : 'Shadnagar, Hyderabad'}
+                {active.includes('Kodangal') ? 'Near NH-44, Kodangal' : 'Shadnagar, Hyderabad'}
               </div>
             </div>
             {/* Animated pin */}
@@ -149,8 +149,8 @@ export default function LocationAdvantages() {
                 <FiTrendingUp className="w-4 h-4" /> Upcoming Developments
               </h4>
               <p className="text-gray-600 text-sm">
-                {active.includes('Konadal')
-                  ? 'New industrial zone, proposed metro connectivity, and upcoming IT park are set to boost property values significantly in the Konadal corridor.'
+                {active.includes('Kodangal')
+                  ? 'New industrial zone, proposed metro connectivity, and upcoming IT park are set to boost property values significantly in the Kodangal corridor.'
                   : 'Shadnagar is earmarked for major infrastructure upgrades including a new township, expanded ORR access, and upcoming commercial hubs near the airport.'}
               </p>
             </div>

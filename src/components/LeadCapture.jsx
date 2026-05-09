@@ -9,7 +9,7 @@ import { HiOutlineHome } from 'react-icons/hi'
 import { useInView } from '../hooks/useInView'
 import { PHONE_CALL, PHONE_WHATSAPP, EMAIL } from '../data/content'
 
-const projectOptions = ['Eden Farms (Konadal)', 'Deccan Heights (Shadnagar)', 'Both Projects']
+const projectOptions = ['Eden Farms (Kodangal)', 'Deccan Heights (Shadnagar)', 'Both Projects']
 const plotSizeOptions = ['100 sq.yd', '121 sq.yd', '200 sq.yd', '242 sq.yd', '400 sq.yd', '800 sq.yd', 'Other']
 
 const whyActNow = [
