@@ -16,9 +16,9 @@ export const projects = [
     id: 'eden-farms',
     name: 'Eden Farms',
     tagline: 'Nature Meets Investment',
-    location: 'Near Konadal, Hyderabad',
-    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.3!3d17.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKonadal%2C+Hyderabad!5e0!3m2!1sen!2sin!4v1234567890',
-    mapDirectionsUrl: 'https://maps.google.com/?q=Konadal,Hyderabad,Telangana',
+    location: 'Near Kodangal, Hyderabad',
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.3!3d17.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKodangal%2C+Hyderabad!5e0!3m2!1sen!2sin!4v1234567890',
+    mapDirectionsUrl: 'https://maps.google.com/?q=Kodangal,Hyderabad,Telangana',
     layoutImage: '/Layout/Eden Layout.webp',
     badge: 'Affordable',
     badgeColor: 'bg-green-500',
@@ -34,7 +34,7 @@ export const projects = [
       'High Growth Corridor',
     ],
     description:
-      'Eden Farms offers affordable open plots in the rapidly developing Konadal corridor. With excellent connectivity and serene surroundings, this is the perfect entry-level investment with massive appreciation potential.',
+      'Eden Farms offers affordable open plots in the rapidly developing Kodangal corridor. With excellent connectivity and serene surroundings, this is the perfect entry-level investment with massive appreciation potential.',
     image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
@@ -49,13 +49,13 @@ export const projects = [
       { iconKey: 'school',   title: 'Schools & Colleges', desc: 'Reputed institutions within 10 km radius.' },
       { iconKey: 'hospital', title: 'Hospitals',          desc: 'Multi-specialty hospitals accessible within 15 mins.' },
       { iconKey: 'shopping', title: 'Shopping Centers',   desc: 'Daily essentials and retail hubs within 10 mins.' },
-      { iconKey: 'train',    title: 'Railway Station',    desc: 'Konadal railway station just 20 minutes away.' },
+      { iconKey: 'train',    title: 'Railway Station',    desc: 'Kodangal railway station just 20 minutes away.' },
       { iconKey: 'industry', title: 'Industrial Zone',    desc: 'Upcoming industrial corridor driving employment & demand.' },
     ],
     surroundingDevelopments: [
       { iconKey: 'construct', title: 'New Industrial Corridor',  desc: 'A major industrial zone is being developed within 15 km, expected to bring thousands of jobs and drive residential demand.' },
       { iconKey: 'road',      title: 'Road Widening Project',    desc: 'NH-44 expansion and new service roads are under construction, cutting travel time to Hyderabad city by 30%.' },
-      { iconKey: 'homes',     title: 'Residential Townships',   desc: "Multiple gated communities and townships are coming up in the Konadal belt, validating the area's growth trajectory." },
+      { iconKey: 'homes',     title: 'Residential Townships',   desc: "Multiple gated communities and townships are coming up in the Kodangal belt, validating the area's growth trajectory." },
       { iconKey: 'retail',    title: 'Commercial Hubs',         desc: "Retail parks and commercial complexes are planned near the highway junction, boosting the area's livability." },
     ],
     infrastructureDevelopments: [
@@ -67,7 +67,7 @@ export const projects = [
       { iconKey: 'drain',    title: 'Drainage System',         desc: 'Proper stormwater drainage to prevent waterlogging.' },
     ],
     futureGrowth: {
-      summary: "The Konadal–NH44 corridor is one of Telangana's most watched investment zones. With industrial, residential, and infrastructure projects converging, early investors stand to gain the most.",
+      summary: "The Kodangal–NH44 corridor is one of Telangana's most watched investment zones. With industrial, residential, and infrastructure projects converging, early investors stand to gain the most.",
       points: [
         'Land prices in this corridor have grown 40–60% in the last 3 years alone.',
         'Proposed metro extension toward this belt will multiply connectivity.',

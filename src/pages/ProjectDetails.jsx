@@ -376,7 +376,7 @@ export default function ProjectDetails() {
     const formData = new FormData(form)
     
     try {
-      await fetch('https://formsubmit.co/hkmcbuilderanddevelopers@gmail.com', {
+      await fetch('https://formsubmit.co/hkmc.developer@gmail.com', {
         method: 'POST',
         body: formData,
       })
