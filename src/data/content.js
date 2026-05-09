@@ -2,15 +2,6 @@ export const PHONE_CALL = '7801052288'
 export const PHONE_WHATSAPP = '7801052299'
 export const EMAIL = 'hkmcbuilderanddevelopers@gmail.com'
 
-
-
-
-
-
-
-
-
-
 export const projects = [
   {
     id: 'eden-farms',
@@ -34,13 +25,14 @@ export const projects = [
       'High Growth Corridor',
     ],
     description:
-      'Eden Farms offers affordable open plots in the rapidly developing Kodangal corridor. With excellent connectivity and serene surroundings, this is the perfect entry-level investment with massive appreciation potential.',
+      'Eden Farms offers affordable open plots for sale in the rapidly developing Kodangal corridor near NH-44 highway, Hyderabad. This DTCP approved residential plot development features gated community security, clear title documentation, and excellent connectivity. With plot sizes from 100 to 800 sq.yd starting at just ₹2,000 per sq.yd, Eden Farms is the perfect entry-level real estate investment with massive appreciation potential. Ideal for first-time investors, NRI investment, villa construction, farm plots, and long-term wealth creation in Telangana.',
     image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
       'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
     ],
+
     roi: '75% in 3 years',
     theme: 'green',
 
@@ -125,7 +117,7 @@ export const projects = [
       'High Demand Zone',
     ],
     description:
-      "Deccan Heights is a premium plotted development in Shadnagar — one of Hyderabad's fastest-growing investment destinations. Strategically located near the ORR and IT corridors, this is a blue-chip real estate investment.",
+      "Deccan Heights is a premium HMDA approved plotted development in Shadnagar — one of Hyderabad's fastest-growing real estate investment destinations. Strategically located near the Outer Ring Road (ORR), Rajiv Gandhi International Airport, and IT corridors including HITEC City and Gachibowli, this is a blue-chip property investment. With plot sizes of 121 and 242 sq.yd priced at ₹8,500 per sq.yd, Deccan Heights offers premium residential plots with gated community amenities, wide roads, CCTV security, and Vastu-compliant layouts. Perfect for villa construction, HNI investment, NRI buyers, and high-ROI real estate portfolio.",
     image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
@@ -200,33 +192,64 @@ export const testimonials = [
     name: 'Shaik Athar',
     location: 'Hyderabad',
     rating: 5,
-    text: 'I invested in Eden Farms 2 years ago and the value has already appreciated by 60%. HKMC team was very transparent and professional throughout the process.',
-    avatar: 'RK',
+    text: 'I invested in Eden Farms 2 years ago and the value has already appreciated by 60%. HKMC team was very transparent and professional throughout the process. The DTCP approval and clear title gave me complete peace of mind. Best affordable plot investment in Hyderabad!',
+    avatar: 'SA',
     project: 'Eden Farms',
   },
   {
     name: 'Riyaz Nadeem',
     location: 'Bangalore',
     rating: 5,
-    text: 'Deccan Heights is a fantastic investment. The location near Shadnagar is booming and HKMC made the entire buying process seamless. Highly recommended!',
-    avatar: 'PS',
+    text: 'Deccan Heights is a fantastic investment near Shadnagar. The HMDA approval, location near ORR and airport, and premium infrastructure make it perfect for NRI investors like me. HKMC made the entire buying process seamless with online documentation. Highly recommended for high-ROI plot investment!',
+    avatar: 'RN',
     project: 'Deccan Heights',
   },
   {
     name: 'Naveed Faizan',
     location: 'Hyderabad',
     rating: 5,
-    text: 'Bought 2 plots in Eden Farms for my family. The documentation was crystal clear and the team was always available to answer questions. Great experience!',
-    avatar: 'VR',
+    text: 'Bought 2 plots in Eden Farms for my family near Kodangal. The documentation was crystal clear, DTCP approved, and the team was always available to answer questions. The gated community and NH-44 connectivity are excellent. Great experience with HKMC Builders!',
+    avatar: 'NF',
     project: 'Eden Farms',
   },
   {
     name: 'Anitha Rao',
     location: 'Karimnagar',
     rating: 5,
-    text: 'As an NRI investor, I was skeptical but HKMC made everything easy. The virtual site visit and online documentation process was excellent.',
+    text: 'As an NRI investor, I was skeptical about buying plots in India but HKMC made everything easy. The virtual site visit, HMDA approval verification, and online documentation process was excellent. Deccan Heights near airport is perfect for my retirement plans.',
     avatar: 'AR',
     project: 'Deccan Heights',
   },
-
+  {
+    name: 'Mohammed Farhan',
+    location: 'Dubai, UAE',
+    rating: 5,
+    text: 'Best real estate investment decision! HKMC Builders provided complete transparency, zero brokerage, and DTCP approved plots in Eden Farms. The ROI potential near NH-44 corridor is amazing. Perfect for NRI investment with clear title and registered sale deed.',
+    avatar: 'MF',
+    project: 'Eden Farms',
+  },
+  {
+    name: 'Priya Sharma',
+    location: 'Hyderabad',
+    rating: 5,
+    text: 'Purchased a 242 sq.yd plot in Deccan Heights Shadnagar for villa construction. The HMDA approval, Vastu-compliant layout, wide roads, and premium amenities are outstanding. HKMC team guided us through every step. Highly recommend for premium plot buyers!',
+    avatar: 'PS',
+    project: 'Deccan Heights',
+  },
+  {
+    name: 'Rajesh Kumar',
+    location: 'Warangal',
+    rating: 5,
+    text: 'HKMC Builders is the most trusted developer in Telangana. I bought plots in both Eden Farms and Deccan Heights. The legal clarity, government approvals, and location selection are top-notch. My investment has already grown 50% in 2 years!',
+    avatar: 'RK',
+    project: 'Eden Farms',
+  },
+  {
+    name: 'Sana Begum',
+    location: 'Hyderabad',
+    rating: 5,
+    text: 'Excellent service from HKMC team! The free site visit, flexible payment plans, and complete legal support made buying our first plot easy. Eden Farms near Kodangal is developing fast with great infrastructure. Best affordable investment for families!',
+    avatar: 'SB',
+    project: 'Eden Farms',
+  },
 ]

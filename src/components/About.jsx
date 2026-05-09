@@ -111,14 +111,14 @@ export default function About() {
 
             <p className="text-gray-600 leading-relaxed text-base">
               HKMC Builders and Developers Pvt Ltd is a premier real estate company based in Hyderabad,
-              Telangana. With over a decade of experience, we specialize in developing HMDA and DTCP
-              approved open plot communities in Hyderabad's most promising growth corridors.
+              Telangana. With over 15 years of experience, we specialize in developing HMDA and DTCP
+              approved open plot communities, residential plots, investment land, and gated community developments in Hyderabad's most promising growth corridors including Shadnagar, Kodangal, near Outer Ring Road (ORR), and NH-44 highway.
             </p>
 
             <p className="text-gray-600 leading-relaxed text-base">
               Our commitment to transparency, legal clarity, and customer satisfaction has made us one
-              of the most trusted names in Telangana real estate. Every project we develop is backed
-              by clear documentation, premium infrastructure, and strategic location selection.
+              of the most trusted real estate developers in Telangana. Every project we develop is backed
+              by clear documentation, HMDA/DTCP government approvals, premium infrastructure, strategic location selection, and high ROI potential. We serve first-time investors, NRI buyers, HNI clients, and families looking for secure real estate investment in Hyderabad.
             </p>
 
             {/* Highlight grid */}

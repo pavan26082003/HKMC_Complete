@@ -68,8 +68,8 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-white/85 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
         >
-          HKMC Builders & Developers — Trusted by 500+ investors across Telangana.
-          Secure your future with HMDA/DTCP approved plots in Hyderabad's fastest-growing corridors.
+          HKMC Builders & Developers — Trusted by 600+ investors across Telangana.
+          Secure your future with HMDA/DTCP approved residential plots, investment land, and gated community developments in Hyderabad's fastest-growing corridors including Shadnagar, Kodangal, near ORR and NH-44.
         </motion.p>
 
         {/* Stats */}

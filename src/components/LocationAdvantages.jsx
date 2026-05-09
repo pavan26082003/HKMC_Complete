@@ -61,9 +61,9 @@ export default function LocationAdvantages() {
           <div className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Location
           </div>
-          <h2 className="section-title gold-underline">Strategic Locations</h2>
+          <h2 className="section-title gold-underline">Strategic Locations in Hyderabad</h2>
           <p className="section-subtitle">
-            Our projects are positioned in Hyderabad's fastest-growing corridors with excellent connectivity.
+            Our HMDA and DTCP approved projects are positioned in Hyderabad's fastest-growing real estate corridors with excellent connectivity to IT hubs, airport, ORR, NH-44 highway, schools, hospitals, and commercial centers. Perfect for residential investment, villa construction, and high-ROI land appreciation.
           </p>
         </motion.div>
 
@@ -122,7 +122,7 @@ export default function LocationAdvantages() {
             transition={{ duration: 0.5 }}
           >
             <h3 className="font-serif text-2xl font-bold text-primary mb-6">
-              Nearby Landmarks & Connectivity
+              Nearby Landmarks & Connectivity - {active}
             </h3>
             <div className="grid sm:grid-cols-2 gap-4">
               {locationData[active].map((item, i) => {
@@ -150,8 +150,8 @@ export default function LocationAdvantages() {
               </h4>
               <p className="text-gray-600 text-sm">
                 {active.includes('Kodangal')
-                  ? 'New industrial zone, proposed metro connectivity, and upcoming IT park are set to boost property values significantly in the Kodangal corridor.'
-                  : 'Shadnagar is earmarked for major infrastructure upgrades including a new township, expanded ORR access, and upcoming commercial hubs near the airport.'}
+                  ? 'New industrial zone, road widening projects, proposed metro connectivity, and upcoming IT park are set to boost property values significantly in the Kodangal-NH44 corridor. This DTCP approved area is witnessing rapid infrastructure development making it one of the best locations for affordable plot investment in Hyderabad.'
+                  : 'Shadnagar is earmarked for major infrastructure upgrades including new smart city township, expanded ORR access, upcoming commercial hubs near the airport, and IT/pharma corridor expansion. This HMDA approved zone offers premium plot investment opportunities with exceptional connectivity and high appreciation potential near Hyderabad.'}
               </p>
             </div>
           </motion.div>

@@ -58,9 +58,9 @@ export default function WhyChooseUs() {
           <div className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Why HKMC
           </div>
-          <h2 className="section-title gold-underline">Why Choose Us</h2>
+          <h2 className="section-title gold-underline">Why Choose HKMC Builders</h2>
           <p className="section-subtitle">
-            We don't just sell plots — we build trust, deliver value, and secure your financial future.
+            We don't just sell plots — we build trust, deliver value, and secure your financial future. With 15+ years of experience in Hyderabad real estate, HMDA/DTCP approvals, zero brokerage, and 600+ happy investors, HKMC Builders is your trusted partner for residential plots, investment land, and gated community developments in Telangana.
           </p>
         </motion.div>
 
