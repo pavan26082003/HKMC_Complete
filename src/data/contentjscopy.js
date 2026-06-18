@@ -4,117 +4,11 @@ export const EMAIL = 'hkmcbuilderanddevelopers@gmail.com'
 
 export const projects = [
   {
-    id: 'kodangal-grand-city',
-    name: 'Kodangal Grand City',
-    tagline: 'Gated Community Farmland — Future Growth Destination',
-    location: 'Kodangal, Telangana',
-    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.0!3d17.10!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKodangal%2C+Telangana!5e0!3m2!1sen!2sin!4v0000000000002',
-    mapDirectionsUrl: 'https://maps.google.com/?q=Kodangal,Telangana,509338',
-    layoutImage: '/Layout/Grand_City Layout.jpg',
-    badge: 'New Launch',
-    badgeColor: 'bg-orange-500',
-    accentColor: '#f97316',
-    pricePerSqYard: 3500,
-    plotSizes: [100, 200, 300, 605],
-    customPlotAvailable: true,
-    customPrices: { 605: 2117500 },
-    highlights: [
-      'Gated Community Layout',
-      '100 Feet Road Facing',
-      'Clear Title Property',
-      'Telangana Passbook Eligible',
-      'Rythu Bandhu Benefits',
-      'Future Growth Location',
-    ],
-    description:
-      'Kodangal Grand City is a premium gated community farmland project spread across 8 Acres 12 Guntas in the rapidly developing Kodangal constituency, Telangana. Located just 2–3 KM from Kodangal Town and near the Hyderabad–Kodangal Connectivity Route, this project offers clear title property, Telangana Passbook eligibility, and strong future appreciation potential at an affordable entry price.',
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
-      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
-    ],
-    roi: 'High Appreciation',
-    theme: 'orange',
-
-    locationAdvantages: [
-      { iconKey: 'highway',  title: '2–3 KM from Kodangal Town',        desc: 'Just 2–3 KM from Kodangal Town — close to all daily conveniences.' },
-      { iconKey: 'homes',    title: 'Near Residential Houses',           desc: 'Located near existing residential houses — established neighbourhood.' },
-      { iconKey: 'road',     title: 'Excellent Road Connectivity',       desc: 'Near Hyderabad–Kodangal Connectivity Route and close to Proposed Regional Ring Road (RRR).' },
-      { iconKey: 'construct','title': 'Fast Developing Area',            desc: 'Located in the rapidly developing Kodangal constituency — growing infrastructure all around.' },
-      { iconKey: 'industry', title: 'High-Priority Constituency',        desc: 'Kodangal is a High-Priority Development Constituency with increasing demand for farmland investments.' },
-      { iconKey: 'retail',   title: 'Strong Appreciation Potential',     desc: 'Growing infrastructure and government focus on area development deliver strong future appreciation.' },
-    ],
-    surroundingDevelopments: [
-      { iconKey: 'road',      title: 'Regional Ring Road (RRR)',          desc: 'Close to Proposed Regional Ring Road — once complete, travel times to Hyderabad will drop significantly.' },
-      { iconKey: 'construct', title: 'Hyderabad–Kodangal Corridor',       desc: 'Hyderabad–Kodangal Connectivity Route is driving rapid development across the entire belt.' },
-      { iconKey: 'homes',     title: 'Residential Growth',                desc: 'Multiple residential projects are coming up near Kodangal Town, validating the area\'s growth trajectory.' },
-      { iconKey: 'industry',  title: 'Government Infrastructure Focus',   desc: 'Kodangal constituency is receiving priority government attention with infrastructure and development projects.' },
-    ],
-    infrastructureDevelopments: [
-      { iconKey: 'road',    title: 'Internal Roads',          desc: 'Well-laid internal roads within the layout for smooth movement across the community.' },
-      { iconKey: 'shield',  title: 'Gated Entrance',          desc: 'Grand Entrance Arch with gated entry for a secure community environment.' },
-      { iconKey: 'tree',    title: 'Avenue Plantation',       desc: 'Tree-lined avenues and open green environment throughout the layout.' },
-      { iconKey: 'road',    title: 'Layout Demarcation',      desc: 'Clear plot number marking and boundary demarcation for every plot.' },
-      { iconKey: 'construct','title': 'Entrance Arch',        desc: 'Grand entrance arch creating a premium identity for Kodangal Grand City.' },
-      { iconKey: 'tree',    title: 'Plantation Development',  desc: 'Dedicated plantation development for a green and peaceful community.' },
-    ],
-    futureGrowth: {
-      summary: 'Kodangal is rapidly emerging as a key investment destination in Telangana. With a high-priority development constituency status, proximity to RRR, and the Hyderabad–Kodangal Connectivity Route, early investors at Kodangal Grand City stand to benefit from strong future appreciation.',
-      points: [
-        'Kodangal is a High-Priority Development Constituency in Telangana.',
-        'Proposed Regional Ring Road (RRR) will boost connectivity and land values.',
-        'Increasing demand for farmland investments in the Kodangal belt.',
-        'Government focus on area development ensures infrastructure growth.',
-        'Affordable entry at ₹3,500/sq.yd with strong appreciation potential.',
-      ],
-    },
-    projectFeatures: [
-      'Gated Community Layout with Grand Entrance Arch',
-      '100 Feet Road Facing Project',
-      'Clear Title Property',
-      'Telangana Passbook Eligible',
-      'Rythu Bandhu Benefits',
-      'Rythu Bima Benefits',
-      'Boundary Marking for every plot',
-      'Avenue Plantation & Open Green Environment',
-      'Internal Roads within layout',
-      'Plot Number Marking',
-      'Future Development Zone',
-      'Peaceful Investment Destination',
-    ],
-    investmentBenefits: [
-      { stat: '₹3,500', label: 'Outright price per sq.yd',  sub: 'Affordable entry investment' },
-      { stat: '8 Ac',   label: 'Total project area',         sub: '8 Acres 12 Guntas' },
-      { stat: 'EMI',    label: '₹4,000/sq.yd on EMI',       sub: '12-month EMI facility' },
-      { stat: '100%',   label: 'Clear Documentation',        sub: 'Passbook eligible, clear title' },
-    ],
-    salesTalkingPoints: [
-      'Located just 2–3 KM from Kodangal Town — convenience at your doorstep.',
-      'Close to Proposed Regional Ring Road — future connectivity will multiply value.',
-      'Telangana Passbook eligible — secure government-backed documentation.',
-      'Rythu Bandhu & Rythu Bima benefits — extra security for your investment.',
-      'Affordable booking starts from ₹50,000 only — limited plots available.',
-      'Kodangal is a High-Priority Development Constituency — government investment is coming.',
-    ],
-    closingLine: "Kodangal Grand City is your opportunity to invest in a fast-developing, government-priority zone at an affordable entry point. The land is clear, the growth is real — reserve your plot today.",
-
-    // Pricing details for display
-    pricingDetails: {
-      outright: 3500,
-      emi: 4000,
-      bookingAmount: 50000,
-      downPayment: 200000,
-      emiDuration: '12 Months',
-    },
-  },
-
-  {
     id: 'eden-farms',
     name: 'Eden Farms',
     tagline: 'Nature Meets Investment',
     location: 'Near Kodangal, Hyderabad',
-    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.3!3d17.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKodangal%2C+Hyderabad!5e0!3m2!1sen!2sin!4v0000000000000',
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.3!3d17.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKodangal%2C+Hyderabad!5e0!3m2!1s[...]
     mapDirectionsUrl: 'https://maps.google.com/?q=Kodangal,Hyderabad,Telangana',
     layoutImage: '/Layout/Eden Layout.webp',
     badge: 'Affordable',
@@ -131,7 +25,7 @@ export const projects = [
       'High Growth Corridor',
     ],
     description:
-      'Eden Farms offers affordable open plots for sale in the rapidly developing Kodangal corridor near NH-163 highway, Hyderabad. This farm project features approved residential plot development, clear documentation, gated security, and strong investment potential.',
+      'Eden Farms offers affordable open plots for sale in the rapidly developing Kodangal corridor near NH-163 highway, Hyderabad. This Farm Project approved residential plot development features[...]
     image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
@@ -151,7 +45,7 @@ export const projects = [
       { iconKey: 'industry', title: 'Industrial Zone',    desc: 'Upcoming industrial corridor driving employment & demand.' },
     ],
     surroundingDevelopments: [
-      { iconKey: 'construct', title: 'New Industrial Corridor',  desc: 'A major industrial zone is being developed within 15 km, expected to bring thousands of jobs and drive residential demand.' },
+      { iconKey: 'construct', title: 'New Industrial Corridor',  desc: 'A major industrial zone is being developed within 15 km, expected to bring thousands of jobs and drive residential demand.' [...]
       { iconKey: 'road',      title: 'Road Widening Project',    desc: 'NH-163 expansion and new service roads are under construction, cutting travel time to Hyderabad city by 30%.' },
       { iconKey: 'homes',     title: 'Residential Townships',   desc: "Multiple gated communities and townships are coming up in the Kodangal belt, validating the area's growth trajectory." },
       { iconKey: 'retail',    title: 'Commercial Hubs',         desc: "Retail parks and commercial complexes are planned near the highway junction, boosting the area's livability." },
@@ -165,7 +59,7 @@ export const projects = [
       { iconKey: 'drain',    title: 'Drainage System',         desc: 'Proper stormwater drainage to prevent waterlogging.' },
     ],
     futureGrowth: {
-      summary: "The Kodangal–NH44 corridor is one of Telangana's most watched investment zones. With industrial, residential, and infrastructure projects converging, early investors stand to gain from fast appreciation and strong demand.",
+      summary: "The Kodangal–NH44 corridor is one of Telangana's most watched investment zones. With industrial, residential, and infrastructure projects converging, early investors stand to gai[...]
       points: [
         'Land prices in this corridor have grown 40–60% in the last 3 years alone.',
         'Proposed metro extension toward this belt will multiply connectivity.',
@@ -206,7 +100,7 @@ export const projects = [
     name: 'Deccan Heights',
     tagline: 'Premium Living, Premium Returns',
     location: 'Shadnagar, Hyderabad',
-    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.2!3d17.06!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sShadnagar%2C+Hyderabad!5e0!3m2!1sen!2sin!4v0000000000001',
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.2!3d17.06!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sShadnagar%2C+Hyderabad!5e0!3m2![...]
     mapDirectionsUrl: 'https://maps.google.com/?q=Shadnagar,Hyderabad,Telangana',
     layoutImage: '/Layout/Deccan Layout.webp',
     badge: 'Premium',
@@ -223,7 +117,7 @@ export const projects = [
       'High Demand Zone',
     ],
     description:
-      "Deccan Heights is a premium EMR Scheme plotted development in Shadnagar — one of Hyderabad's fastest-growing real estate investment destinations. Strategically located near the Outer Ring Road, it offers premium infrastructure, strong connectivity, and attractive investment returns.",
+      "Deccan Heights is a premium EMR Scheme plotted development in Shadnagar — one of Hyderabad's fastest-growing real estate investment destinations. Strategically located near the Outer Rin[...]
     image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
@@ -242,8 +136,8 @@ export const projects = [
       { iconKey: 'city',     title: 'Hyderabad City Center',    desc: 'Accessible in 45 mins via ORR — best of both worlds.' },
     ],
     surroundingDevelopments: [
-      { iconKey: 'city',     title: 'Shadnagar Smart City',    desc: 'Shadnagar is being developed as a satellite city with world-class infrastructure, commercial zones, and residential townships.' },
-      { iconKey: 'it',       title: 'IT & SEZ Expansion',      desc: 'Multiple IT parks and Special Economic Zones are being set up near the ORR, creating massive employment and housing demand.' },
+      { iconKey: 'city',     title: 'Shadnagar Smart City',    desc: 'Shadnagar is being developed as a satellite city with world-class infrastructure, commercial zones, and residential townships[...]
+      { iconKey: 'it',       title: 'IT & SEZ Expansion',      desc: 'Multiple IT parks and Special Economic Zones are being set up near the ORR, creating massive employment and housing demand.' [...]
       { iconKey: 'retail',   title: 'Retail & Hospitality',    desc: 'Large-format malls, hotels, and entertainment zones are under development along the ORR corridor near Shadnagar.' },
       { iconKey: 'industry', title: 'Pharma & Biotech Clusters',desc: "Hyderabad's pharma corridor extends toward Shadnagar, bringing high-income professionals to the area." },
     ],
@@ -256,7 +150,7 @@ export const projects = [
       { iconKey: 'club',    title: 'Club House (Planned)',       desc: 'Proposed community clubhouse with amenities for residents.' },
     ],
     futureGrowth: {
-      summary: "Shadnagar is Hyderabad's next big real estate destination. With ORR access, airport proximity, and a booming IT ecosystem, Deccan Heights sits at the epicenter of the city's growth.",
+      summary: "Shadnagar is Hyderabad's next big real estate destination. With ORR access, airport proximity, and a booming IT ecosystem, Deccan Heights sits at the epicenter of the city's growt[...]
       points: [
         'Shadnagar land prices have doubled in the last 4 years.',
         'ORR-adjacent plots command a 30–40% premium over non-ORR locations.',
@@ -289,7 +183,7 @@ export const projects = [
       'IT sector expansion is driving massive residential demand in this belt.',
       'Limited inventory — only 121 and 242 sq.yd plots available. Act fast.',
     ],
-    closingLine: 'Deccan Heights is where premium location meets premium returns. In a city growing as fast as Hyderabad, owning land near the ORR and airport is not just smart — it\'s essential for long-term growth.',
+    closingLine: 'Deccan Heights is where premium location meets premium returns. In a city growing as fast as Hyderabad, owning land near the ORR and airport is not just smart — it\'s essentia[...]
   },
 ]
 
@@ -298,7 +192,7 @@ export const testimonials = [
     name: 'Shaik Athar',
     location: 'Hyderabad',
     rating: 5,
-    text: 'I invested in Eden Farms 2 years ago and the value has already appreciated by 60%. HKMC team was very transparent and professional throughout the process. The DTCP approval and clear title made the purchase easy.',
+    text: 'I invested in Eden Farms 2 years ago and the value has already appreciated by 60%. HKMC team was very transparent and professional throughout the process. The DTCP approval and clear t[...]
     avatar: 'SA',
     project: 'Eden Farms',
   },
@@ -306,7 +200,7 @@ export const testimonials = [
     name: 'Riyaz Nadeem',
     location: 'Bangalore',
     rating: 5,
-    text: 'Deccan Heights is a fantastic investment near Shadnagar. The HMDA approval, location near ORR and airport, and premium infrastructure make it perfect for NRI investors like me. HKMC made the process smooth and reliable.',
+    text: 'Deccan Heights is a fantastic investment near Shadnagar. The HMDA approval, location near ORR and airport, and premium infrastructure make it perfect for NRI investors like me. HKMC ma[...]
     avatar: 'RN',
     project: 'Deccan Heights',
   },
@@ -314,7 +208,7 @@ export const testimonials = [
     name: 'Naveed Faizan',
     location: 'Hyderabad',
     rating: 5,
-    text: 'Bought 2 plots in Eden Farms for my family near Kodangal. The documentation was crystal clear, DTCP approved, and the gated community offers peace of mind.',
+    text: 'Bought 2 plots in Eden Farms for my family near Kodangal. The documentation was crystal clear, DTCP approved, and the team was always available to answer questions. The gated community[...]
     avatar: 'NF',
     project: 'Eden Farms',
   },
@@ -322,7 +216,7 @@ export const testimonials = [
     name: 'Anitha Rao',
     location: 'Karimnagar',
     rating: 5,
-    text: 'As an NRI investor, I was skeptical about buying plots in India but HKMC made everything easy. The virtual site visit, HMDA approval verification, and online documentation process was seamless.',
+    text: 'As an NRI investor, I was skeptical about buying plots in India but HKMC made everything easy. The virtual site visit, HMDA approval verification, and online documentation process was [...]
     avatar: 'AR',
     project: 'Deccan Heights',
   },
@@ -330,7 +224,7 @@ export const testimonials = [
     name: 'Mohammed Farhan',
     location: 'Dubai, UAE',
     rating: 5,
-    text: 'Best real estate investment decision! HKMC Builders provided complete transparency, zero brokerage, and DTCP approved plots in Eden Farms. The ROI potential near NH-163 corridor is amazing.',
+    text: 'Best real estate investment decision! HKMC Builders provided complete transparency, zero brokerage, and DTCP approved plots in Eden Farms. The ROI potential near NH-163 corridor is ama[...]
     avatar: 'MF',
     project: 'Eden Farms',
   },
@@ -338,7 +232,7 @@ export const testimonials = [
     name: 'Priya Sharma',
     location: 'Hyderabad',
     rating: 5,
-    text: 'Purchased a 242 sq.yd plot in Deccan Heights Shadnagar for villa construction. The HMDA approval, Vastu-compliant layout, wide roads, and premium amenities are outstanding. HKMC team guided us every step of the way.',
+    text: 'Purchased a 242 sq.yd plot in Deccan Heights Shadnagar for villa construction. The HMDA approval, Vastu-compliant layout, wide roads, and premium amenities are outstanding. HKMC team g[...]
     avatar: 'PS',
     project: 'Deccan Heights',
   },
@@ -346,7 +240,7 @@ export const testimonials = [
     name: 'Rajesh Kumar',
     location: 'Warangal',
     rating: 5,
-    text: 'HKMC Builders is the most trusted developer in Telangana. I bought plots in both Eden Farms and Deccan Heights. The legal clarity, government approvals, and location selection are top-quality.',
+    text: 'HKMC Builders is the most trusted developer in Telangana. I bought plots in both Eden Farms and Deccan Heights. The legal clarity, government approvals, and location selection are top-[...]
     avatar: 'RK',
     project: 'Eden Farms',
   },
@@ -354,7 +248,7 @@ export const testimonials = [
     name: 'Sana Begum',
     location: 'Hyderabad',
     rating: 5,
-    text: 'Excellent service from HKMC team! The free site visit, flexible payment plans, and complete legal support made buying our first plot easy. Eden Farms near Kodangal is developing fast with strong demand.',
+    text: 'Excellent service from HKMC team! The free site visit, flexible payment plans, and complete legal support made buying our first plot easy. Eden Farms near Kodangal is developing fast w[...]
     avatar: 'SB',
     project: 'Eden Farms',
   },

@@ -169,7 +169,8 @@ function LayoutViewer({ project, PHONE_CALL }) {
             </div>
           </div>
           <span className={`${project.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full shrink-0`}>
-            {project.badge === 'Premium' ? 'HMDA Approved' : 'DTCP Approved'}
+            {project.badge === 'Premium' ? 'PREMIUM FARM Project' : project.badge === 'New Launch' ? 'NEW LAUNCH' : 'FARM Project'}
+            {/*                             DECCAN               :   KODANGAL GRAND CITY      :     EDEN FARMS */}
           </span>
         </div>
 
@@ -293,7 +294,7 @@ export default function ProjectDetails() {
 
     const desc = document.querySelector('meta[name="description"]')
     if (desc) desc.setAttribute('content',
-      `${project.name} in ${project.location}. ${project.badge} open plots starting ₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd. ${project.badge === 'Premium' ? 'HMDA' : 'DTCP'} approved. Expected ROI: ${project.roi}. Book a free site visit today!`
+      `${project.name} in ${project.location}. ${project.badge} open plots starting ₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd. ${project.badge === 'Premium' ? 'HMDA' : project.badge === 'New Launch' ? 'Clear Title' : 'DTCP'} approved. Expected ROI: ${project.roi}. Book a free site visit today!`
     )
 
     const ogTitle = document.querySelector('meta[property="og:title"]')
@@ -471,9 +472,11 @@ export default function ProjectDetails() {
 
       {/* ── Body ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+
+        {/* ── Top section: Overview + Pricing alongside sticky sidebar ── */}
         <div className="grid lg:grid-cols-3 gap-10">
 
-          {/* ── Left: detail sections ── */}
+          {/* ── Left: Overview & Pricing ── */}
           <div className="lg:col-span-2 space-y-16">
 
             {/* Overview */}
@@ -496,7 +499,7 @@ export default function ProjectDetails() {
               <SectionHeading label="Pricing" title="Plot Sizes & Pricing" />
               <div className="grid sm:grid-cols-2 gap-4">
                 {project.plotSizes.map((size) => {
-                  const total = size * project.pricePerSqYard
+                  const total = project.customPrices?.[size] ?? size * project.pricePerSqYard
                   return (
                     <div key={size} className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:border-primary/30 hover:shadow-md transition-all">
                       <div className="flex items-center justify-between mb-3">
@@ -509,97 +512,49 @@ export default function ProjectDetails() {
                     </div>
                   )
                 })}
-              </div>
-            </motion.div>
-
-            {/* Layout Plan — Zoom & Pan Viewer */}
-            <LayoutViewer project={project} PHONE_CALL={PHONE_CALL} />
-
-            {/* Location Advantages */}
-             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <SectionHeading label="Location" title="Location Advantages" />
-              <div className="grid sm:grid-cols-2 gap-4">
-                {project.locationAdvantages.map((item) => (
-                  <InfoCard key={item.title} iconKey={item.iconKey} title={item.title} desc={item.desc} />
-                ))}
-              </div>
-            </motion.div> 
-
-            {/* Surrounding Developments */}
-            {/* <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <SectionHeading label="Growth" title="Surrounding Developments" />
-              <div className="grid sm:grid-cols-2 gap-4">
-                {project.surroundingDevelopments.map((item) => (
-                  <InfoCard key={item.title} iconKey={item.iconKey} title={item.title} desc={item.desc} />
-                ))}
-              </div>
-            </motion.div> */}
-
-            {/* Infrastructure */}
-            {/* <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <SectionHeading label="Infrastructure" title="Infrastructure Developments" />
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {project.infrastructureDevelopments.map((item) => (
-                  <InfoCard key={item.title} iconKey={item.iconKey} title={item.title} desc={item.desc} />
-                ))}
-              </div>
-            </motion.div> */}
-
-            {/* Future Growth */}
-            {/* <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <SectionHeading label="Investment" title="Future Growth Potential" />
-              <div className="bg-gradient-to-br from-primary to-blue-900 rounded-2xl p-6 md:p-8 text-white">
-                <p className="text-white/90 leading-relaxed mb-6">{project.futureGrowth.summary}</p>
-                <div className="space-y-3">
-                  {project.futureGrowth.points.map((pt, i) => (
-                    <motion.div key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.08 }}
-                      className="flex items-start gap-3">
-                      <FiChevronRight className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-                      <span className="text-white/85 text-sm">{pt}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div> */}
-
-            {/* Project Features */}
-            {/* <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <SectionHeading label="Features" title="Project Features" />
-              <div className="grid sm:grid-cols-2 gap-3">
-                {project.projectFeatures.map((f) => (
-                  <div key={f} className="flex items-center gap-3 bg-[#F5F5F5] rounded-xl px-4 py-3">
-                    <HiCheckCircle className="w-5 h-5 text-green-500 shrink-0" />
-                    <span className="text-dark text-sm font-medium">{f}</span>
+                {/* Custom plot size card */}
+                {project.customPlotAvailable && (
+                  <div className="bg-amber-50 border border-amber-300 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-center items-center text-center gap-2">
+                    <span className="font-serif text-2xl font-bold text-amber-600">Custom Size</span>
+                    <div className="text-gray-500 text-sm">Need a different plot size?</div>
+                    <div className="text-amber-700 text-sm font-medium">Custom plot sizes are available on request. Contact us to discuss your requirement.</div>
                   </div>
-                ))}
+                )}
               </div>
-            </motion.div> */}
 
-            {/* Talking Points, key investment */} 
-            {/* <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <SectionHeading label="Why Invest" title="Key Investment Reasons" />
-              <div className="space-y-3">
-                {project.salesTalkingPoints.map((pt, i) => (
-                  <TalkingPoint key={i} text={pt} index={i} />
-                ))}
-              </div>
-            </motion.div> */}
-
-            {/* Closing line */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-accent/10 border border-accent/30 rounded-2xl p-6 text-center"
-            >
-              <p className="font-serif text-lg md:text-xl font-semibold text-dark italic leading-relaxed">
-                "{project.closingLine}"
-              </p>
+              {/* EMI / Payment Plan block — only shown if project has pricingDetails */}
+              {project.pricingDetails && (
+                <div className="mt-6 bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-2xl p-5">
+                  <h4 className="font-semibold text-dark text-sm mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-orange-500 rounded-full inline-block" />
+                    Payment Plan Options
+                  </h4>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+                    <div className="bg-white rounded-xl p-3 text-center shadow-sm">
+                      <div className="font-bold text-primary text-base">₹{project.pricingDetails.outright.toLocaleString('en-IN')}</div>
+                      <div className="text-gray-500 text-xs mt-0.5">per sq.yd (Outright)</div>
+                    </div>
+                    <div className="bg-white rounded-xl p-3 text-center shadow-sm">
+                      <div className="font-bold text-primary text-base">₹{project.pricingDetails.emi.toLocaleString('en-IN')}</div>
+                      <div className="text-gray-500 text-xs mt-0.5">per sq.yd (EMI Plan)</div>
+                    </div>
+                    <div className="bg-white rounded-xl p-3 text-center shadow-sm">
+                      <div className="font-bold text-primary text-base">₹{project.pricingDetails.bookingAmount.toLocaleString('en-IN')}</div>
+                      <div className="text-gray-500 text-xs mt-0.5">Booking Amount</div>
+                    </div>
+                    <div className="bg-white rounded-xl p-3 text-center shadow-sm">
+                      <div className="font-bold text-primary text-base">₹{project.pricingDetails.downPayment.toLocaleString('en-IN')}</div>
+                      <div className="text-gray-500 text-xs mt-0.5">Down Payment</div>
+                    </div>
+                    <div className="bg-white rounded-xl p-3 text-center shadow-sm col-span-2 sm:col-span-1">
+                      <div className="font-bold text-primary text-base">{project.pricingDetails.emiDuration}</div>
+                      <div className="text-gray-500 text-xs mt-0.5">EMI Duration</div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </motion.div>
+
           </div>
 
           {/* ── Right: sticky sidebar ── */}
@@ -619,8 +574,6 @@ export default function ProjectDetails() {
                     <p className="text-gray-500 text-sm">We'll call you within 2 hours.</p>
                   </div>
                 ) : (
-
-                  
                   <form onSubmit={handleSubmit} className="space-y-3">
                     <input type="hidden" name="_subject" value={`New Site Visit Request - ${project.name}`} />
                     <input type="hidden" name="_template" value="table" />
@@ -679,7 +632,7 @@ export default function ProjectDetails() {
                     >
                       <option value="">Select Plot Size</option>
                       {project.plotSizes.map((s) => (
-                        <option key={s} value={s}>{s} sq.yd — ₹{(s * project.pricePerSqYard).toLocaleString('en-IN')}</option>
+                        <option key={s} value={s}>{s} sq.yd — ₹{(project.customPrices?.[s] ?? s * project.pricePerSqYard).toLocaleString('en-IN')}</option>
                       ))}
                     </select>
 
@@ -734,7 +687,7 @@ export default function ProjectDetails() {
                     { label: 'Price',        value: `₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd` },
                     { label: 'Plot Sizes',   value: project.plotSizes.map(s => `${s} sq.yd`).join(', ') },
                     { label: 'Expected ROI', value: project.roi },
-                    { label: 'Approval',     value: project.badge === 'Premium' ? 'HMDA Approved' : 'DTCP Approved' },
+                    { label: 'Approval',     value: project.badge === 'Premium' ? 'HMDA Approved' : project.badge === 'New Launch' ? 'Clear Title' : 'DTCP Approved' },
                   ].map((row) => (
                     <div key={row.label} className="flex justify-between gap-2">
                       <span className="text-gray-500">{row.label}</span>
@@ -760,9 +713,38 @@ export default function ProjectDetails() {
                 </div>
               ))}
 
-              
             </div>     
           </div>
+        </div>
+
+        {/* ── Full-width sections below the sidebar grid ── */}
+        <div className="space-y-16 mt-16">
+
+          {/* Layout Plan — Zoom & Pan Viewer */}
+          <LayoutViewer project={project} PHONE_CALL={PHONE_CALL} />
+
+          {/* Location Advantages */}
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <SectionHeading label="Location" title="Location Advantages" />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {project.locationAdvantages.map((item) => (
+                <InfoCard key={item.title} iconKey={item.iconKey} title={item.title} desc={item.desc} />
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Closing line */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-accent/10 border border-accent/30 rounded-2xl p-6 text-center"
+          >
+            <p className="font-serif text-lg md:text-xl font-semibold text-dark italic leading-relaxed">
+              "{project.closingLine}"
+            </p>
+          </motion.div>
+
         </div>
       </div>
     </div>

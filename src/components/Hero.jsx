@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background with lazy loading */}
       <div className="absolute inset-0">
@@ -37,13 +37,13 @@ export default function Hero() {
       
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 sm:pt-20">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6"
+          className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-4 sm:mb-6"
         >
           <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
           <span className="text-white/90 text-sm font-medium">HMDA & DTCP Approved Projects</span>
@@ -54,19 +54,19 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-serif text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 sm:mb-6 px-2"
+          className="font-serif text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-3 sm:mb-6 px-2"
         >
           Premium Open Plots
           <br />
           <span className="text-accent">for Smart Investment</span>
         </motion.h1>
 
-        {/* Subtext */}
+        {/* Subtext — hidden on mobile to save space */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-white/85 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
+          className="hidden sm:block text-white/85 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
         >
           HKMC Builders & Developers — Trusted by 600+ investors across Telangana.
           Secure your future with farm Plots, residential plots, investment land, and gated community developments in Hyderabad's fastest-growing corridors including Shadnagar, Kodangal, near ORR and NH-163.
@@ -77,16 +77,16 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4 sm:gap-6 md:gap-10 mb-8 sm:mb-10 max-w-lg sm:max-w-none mx-auto"
+          className="grid grid-cols-4 sm:flex sm:flex-wrap justify-center gap-3 sm:gap-6 md:gap-10 mb-6 sm:mb-10 max-w-lg sm:max-w-none mx-auto"
         >
           {[
-            { value: '15+', label: 'Years Experience' },
-            { value: '600+', label: 'Happy Investors' },
-            { value: '2', label: 'Premium Projects' },
-            { value: '100%', label: 'Legal Clarity' },
+            { value: '15+', label: 'Years' },
+            { value: '600+', label: 'Investors' },
+            { value: '3', label: 'Projects' },
+            { value: '100%', label: 'Legal' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-accent font-bold text-xl sm:text-2xl md:text-3xl font-serif">{stat.value}</div>
+              <div className="text-accent font-bold text-lg sm:text-2xl md:text-3xl font-serif">{stat.value}</div>
               <div className="text-white/70 text-xs sm:text-sm">{stat.label}</div>
             </div>
           ))}

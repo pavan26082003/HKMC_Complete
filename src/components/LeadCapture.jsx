@@ -73,7 +73,7 @@ export default function LeadCapture() {
 
 
   return (
-    <section id="contact" className="py-20 bg-light">
+    <section id="contact" className="py-10 sm:py-20 bg-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -82,7 +82,7 @@ export default function LeadCapture() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-8 sm:mb-14"
         >
           <div className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Get In Touch
@@ -96,12 +96,12 @@ export default function LeadCapture() {
         {/* ── 3-column grid: contact | form | map ── */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 items-start">
 
-          {/* ── Col 1: Contact details + Why Act Now ── */}
+          {/* ── Col 1: Contact details + Why Act Now — hidden on mobile ── */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="flex flex-col gap-4 sm:gap-5"
+            className="hidden lg:flex flex-col gap-4 sm:gap-5"
           >
             {/* Contact buttons */}
             <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm">
@@ -161,6 +161,7 @@ export default function LeadCapture() {
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
+            className="lg:col-start-2"
           >
             <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm h-full">
               {submitted ? (
@@ -273,12 +274,25 @@ export default function LeadCapture() {
             </div>
           </motion.div>
 
-          {/* ── Col 3: Map + Address + Hours ── */}
+          {/* ── Mobile-only: quick contact strip below the form ── */}
+          <div className="lg:hidden flex gap-3 col-span-1">
+            <a href={`tel:${PHONE_CALL}`}
+              className="flex-1 flex items-center justify-center gap-2 bg-primary text-white text-sm font-semibold py-3 rounded-xl">
+              <FiPhone className="w-4 h-4" /> Call Us
+            </a>
+            <a href={`https://wa.me/91${PHONE_WHATSAPP}?text=Hi, I'm interested in your plots.`}
+              target="_blank" rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 bg-green-500 text-white text-sm font-semibold py-3 rounded-xl">
+              <RiWhatsappLine className="w-4 h-4" /> WhatsApp
+            </a>
+          </div>
+
+          {/* ── Col 3: Map + Address + Hours — hidden on mobile ── */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col gap-5"
+            className="hidden lg:flex flex-col gap-5"
           >
             {/* Map card */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-sm">

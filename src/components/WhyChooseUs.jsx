@@ -46,14 +46,14 @@ export default function WhyChooseUs() {
   const [ref, inView] = useInView()
 
   return (
-    <section id="why-us" className="py-20 bg-white">
+    <section id="why-us" className="py-10 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-8 sm:mb-14"
         >
           <div className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Why HKMC
@@ -64,22 +64,22 @@ export default function WhyChooseUs() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {whyChooseUs.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group bg-white border border-gray-100 rounded-2xl p-6 hover:border-primary/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="group bg-white border border-gray-100 rounded-2xl p-4 sm:p-6 hover:border-primary/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary transition-all duration-300">
-                <item.Icon className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300" />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary transition-all duration-300">
+                <item.Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary group-hover:text-white transition-colors duration-300" />
               </div>
-              <h3 className="font-semibold text-dark text-lg mb-2 group-hover:text-primary transition-colors">
+              <h3 className="font-semibold text-dark text-sm sm:text-lg mb-1 sm:mb-2 group-hover:text-primary transition-colors leading-snug">
                 {item.title}
               </h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
+              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed hidden sm:block">{item.description}</p>
             </motion.div>
           ))}
         </div>

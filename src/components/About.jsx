@@ -21,7 +21,7 @@ export default function About() {
   const [ref, inView] = useInView()
 
   return (
-    <section id="about" className="py-24 bg-white overflow-hidden" ref={ref}>
+    <section id="about" className="py-10 sm:py-24 bg-white overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section label */}
@@ -29,7 +29,7 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-8 sm:mb-14"
         >
           <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full">
             About Us
@@ -38,12 +38,12 @@ export default function About() {
 
         <div className="grid lg:grid-cols-2 gap-14 items-center">
 
-          {/* ── LEFT: Image panel ── */}
+          {/* ── LEFT: Image panel — hidden on mobile ── */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="relative flex justify-center mb-8 lg:mb-0"
+            className="relative hidden lg:flex justify-center mb-8 lg:mb-0"
           >
             {/* Glow blob behind image */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

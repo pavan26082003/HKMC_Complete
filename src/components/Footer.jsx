@@ -1,19 +1,42 @@
 import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi'
-import { RiWhatsappLine } from 'react-icons/ri'
+import { RiWhatsappLine, RiInstagramLine, RiLinkedinBoxFill, RiFacebookBoxFill } from 'react-icons/ri'
 import { PHONE_CALL, PHONE_WHATSAPP, EMAIL } from '../data/content'
+
+const SOCIAL = [
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/hkmcbuildersanddevelopers/',
+    Icon: RiInstagramLine,
+    bg: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400',
+    shadow: 'hover:shadow-pink-500/40',
+  },
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/profile.php?id=61584484567086',
+    Icon: RiFacebookBoxFill,
+    bg: 'bg-[#1877F2]',
+    shadow: 'hover:shadow-blue-500/40',
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/80370214/',
+    Icon: RiLinkedinBoxFill,
+    bg: 'bg-[#0A66C2]',
+    shadow: 'hover:shadow-sky-500/40',
+  },
+]
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
     <footer className="bg-dark text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10">
 
-          {/* Brand */}
-          <div className="lg:col-span-1">
+          {/* Brand — full width on mobile */}
+          <div className="col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              {/* Force white text in dark footer */}
               <img
                 src="/favicon_io/apple-touch-icon.png"
                 alt="HKMC Builders Logo"
@@ -24,10 +47,27 @@ export default function Footer() {
                 <div className="text-white/60 text-xs">Builders &amp; Developers</div>
               </div>
             </div>
-            <p className="text-white/60 text-xs sm:text-sm leading-relaxed">
-            Unit No. 220, 2nd Floor, Downtown Mall, Flat No. 6-2-27, 24A & 28, Lakdikapul, Hyderabad, Telangana 500004
-              {/* Premium open plots in Hyderabad's fastest-growing corridors. HMDA & DTCP approved. Trusted by 500+ investors. */}
+            <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-4">
+              Unit No. 220, 2nd Floor, Downtown Mall, Flat No. 6-2-27, 24A &amp; 28, Lakdikapul, Hyderabad, Telangana 500004
             </p>
+            {/* Social icons */}
+            <div className="flex items-center gap-3 mt-1">
+              <span className="text-white/40 text-xs uppercase tracking-wider">Follow us</span>
+              <div className="flex gap-2">
+                {SOCIAL.map(({ label, href, Icon, bg, shadow }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className={`w-9 h-9 rounded-xl ${bg} flex items-center justify-center text-white shadow-lg ${shadow} hover:shadow-xl hover:scale-110 transition-all duration-200`}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -54,21 +94,23 @@ export default function Footer() {
           {/* Projects */}
           <div>
             <h4 className="font-semibold text-white mb-3 sm:mb-4 text-xs sm:text-sm uppercase tracking-wider">Our Projects</h4>
-            <div className="space-y-3 sm:space-y-4">
+            <div className="space-y-2 sm:space-y-4">
               <div>
-                <div className="text-accent font-medium text-xs sm:text-sm mb-1">Eden Farms</div>
-                <div className="text-white/60 text-xs">Near Kodangal · ₹2000/sq.yd</div>
-                <div className="text-white/60 text-xs">100–800 sq. yards</div>
+                <div className="text-accent font-medium text-xs sm:text-sm mb-0.5">Kodangal Grand City</div>
+                <div className="text-white/60 text-xs">Kodangal · ₹3,500/sq.yd</div>
               </div>
               <div>
-                <div className="text-accent font-medium text-xs sm:text-sm mb-1">Deccan Heights</div>
-                <div className="text-white/60 text-xs">Shadnagar · ₹8500/sq.yd</div>
-                <div className="text-white/60 text-xs">121–242 sq. yards</div>
+                <div className="text-accent font-medium text-xs sm:text-sm mb-0.5">Eden Farms</div>
+                <div className="text-white/60 text-xs">Near Kodangal · ₹2,200/sq.yd</div>
+              </div>
+              <div>
+                <div className="text-accent font-medium text-xs sm:text-sm mb-0.5">Deccan Heights</div>
+                <div className="text-white/60 text-xs">Shadnagar · ₹8,500/sq.yd</div>
               </div>
             </div>
-            <div className="mt-4 sm:mt-6">
-              <h4 className="font-semibold text-white mb-2 sm:mb-3 text-xs sm:text-sm uppercase tracking-wider">Approvals</h4>
-              <div className="flex flex-wrap gap-2">
+            <div className="mt-3 sm:mt-6">
+              <h4 className="font-semibold text-white mb-2 text-xs uppercase tracking-wider">Approvals</h4>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {['HMDA', 'DTCP', 'RERA'].map((badge) => (
                   <span key={badge} className="bg-primary/30 text-white/80 text-xs px-2.5 py-1 rounded-full border border-primary/40">
                     {badge}
@@ -108,14 +150,27 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-5 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-3">
           <p className="text-white/40 text-xs text-center sm:text-left">
             © {year} HKMC Builders and Developers Pvt Ltd. All rights reserved.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+          {/* Social + legal links */}
+          <div className="flex items-center gap-3">
+            {SOCIAL.map(({ label, href, Icon, bg, shadow }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className={`w-8 h-8 rounded-lg ${bg} flex items-center justify-center text-white shadow-md ${shadow} hover:shadow-lg hover:scale-110 transition-all duration-200`}
+              >
+                <Icon className="w-4 h-4" />
+              </a>
+            ))}
+            <span className="text-white/20 text-xs">|</span>
             <a href="#" className="text-white/40 hover:text-white/70 text-xs transition-colors">Privacy Policy</a>
-            <a href="#" className="text-white/40 hover:text-white/70 text-xs transition-colors">Terms of Service</a>
-            <a href="#" className="text-white/40 hover:text-white/70 text-xs transition-colors">Sitemap</a>
+            <a href="#" className="text-white/40 hover:text-white/70 text-xs transition-colors">Terms</a>
           </div>
         </div>
       </div>

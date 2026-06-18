@@ -42,7 +42,7 @@ export default function Calculator() {
   }, [result.investedAmount, selectedProject.annualGrowth, years])
 
   return (
-    <section id="calculator" className="py-20 bg-gradient-to-br from-primary via-blue-900 to-primary relative overflow-hidden">
+    <section id="calculator" className="py-10 sm:py-20 bg-gradient-to-br from-primary via-blue-900 to-primary relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
@@ -55,7 +55,7 @@ export default function Calculator() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
           <div className="inline-flex items-center gap-2 bg-accent/20 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             <TrendingUp className="w-4 h-4" />
@@ -68,8 +68,8 @@ export default function Calculator() {
             Based on actual market trends and historical data. Calculate your potential returns with complete transparency.
           </p>
           
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap justify-center gap-6 mt-8 text-white/90">
+          {/* Trust Indicators — hidden on mobile */}
+          <div className="hidden sm:flex flex-wrap justify-center gap-6 mt-8 text-white/90">
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-accent" />
               <span className="text-sm">RERA Approved</span>
