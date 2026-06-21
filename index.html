@@ -6,7 +6,11 @@
     <!-- DNS Prefetch for external resources -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+    <!-- Preload first 3 gallery images for fast paint -->
+    <link rel="preload" as="image" href="/slider-images/DSC07972.webp" fetchpriority="low" />
+    <link rel="preload" as="image" href="/slider-images/DSC07977.webp" fetchpriority="low" />
+    <link rel="preload" as="image" href="/slider-images/DSC07979.webp" fetchpriority="low" />
     
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico" />

@@ -294,7 +294,7 @@ export default function ProjectDetails() {
 
     const desc = document.querySelector('meta[name="description"]')
     if (desc) desc.setAttribute('content',
-      `${project.name} in ${project.location}. ${project.badge} open plots starting ₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd. ${project.badge === 'Premium' ? 'HMDA' : project.badge === 'New Launch' ? 'Clear Title' : 'DTCP'} approved. Expected ROI: ${project.roi}. Book a free site visit today!`
+      `${project.name} in ${project.location}. ${project.badge} open plots starting ₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd. Government approved. Expected ROI: ${project.roi}. Book a free site visit today!`
     )
 
     const ogTitle = document.querySelector('meta[property="og:title"]')
@@ -687,7 +687,7 @@ export default function ProjectDetails() {
                     { label: 'Price',        value: `₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd` },
                     { label: 'Plot Sizes',   value: project.plotSizes.map(s => `${s} sq.yd`).join(', ') },
                     { label: 'Expected ROI', value: project.roi },
-                    { label: 'Approval',     value: project.badge === 'Premium' ? 'HMDA Approved' : project.badge === 'New Launch' ? 'Clear Title' : 'DTCP Approved' },
+                    { label: 'Approval',     value: 'Clear Title & Govt. Approved' },
                   ].map((row) => (
                     <div key={row.label} className="flex justify-between gap-2">
                       <span className="text-gray-500">{row.label}</span>

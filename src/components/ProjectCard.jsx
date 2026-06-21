@@ -37,11 +37,15 @@ export default function ProjectCard({ project, index = 0 }) {
           <motion.img
             key={activeImg}
             src={project.gallery[activeImg]}
-            alt={`${project.name} - ${project.location} open plots HMDA DTCP approved by HKMC Builders`}
+            alt={`${project.name} - ${project.location} open plots by HKMC Builders`}
             initial={{ opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
+            loading="lazy"
+            decoding="async"
+            width="800"
+            height="600"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
         </AnimatePresence>

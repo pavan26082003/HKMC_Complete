@@ -63,7 +63,7 @@ export default function LocationAdvantages() {
           </div>
           <h2 className="section-title gold-underline">Strategic Locations in Hyderabad</h2>
           <p className="section-subtitle">
-            Our HMDA and DTCP approved projects are positioned in Hyderabad's fastest-growing real estate corridors with excellent connectivity to IT hubs, airport, ORR, NH-163 highway, schools, hospitals, and commercial centers. Perfect for residential investment, villa construction, and high-ROI land appreciation.
+            Our government approved projects are positioned in Hyderabad's fastest-growing real estate corridors with excellent connectivity to IT hubs, airport, ORR, NH-163 highway, schools, hospitals, and commercial centers. Perfect for residential investment, villa construction, and high-ROI land appreciation.
           </p>
         </motion.div>
 
@@ -150,8 +150,8 @@ export default function LocationAdvantages() {
               </h4>
               <p className="text-gray-600 text-sm">
                 {active.includes('Kodangal')
-                  ? 'New industrial zone, road widening projects, proposed metro connectivity, and upcoming IT park are set to boost property values significantly in the Kodangal-NH44 corridor. This DTCP approved area is witnessing rapid infrastructure development making it one of the best locations for affordable plot investment in Hyderabad.'
-                  : 'Shadnagar is earmarked for major infrastructure upgrades including new smart city township, expanded ORR access, upcoming commercial hubs near the airport, and IT/pharma corridor expansion. This HMDA approved zone offers premium plot investment opportunities with exceptional connectivity and high appreciation potential near Hyderabad.'}
+                  ? 'New industrial zone, road widening projects, proposed metro connectivity, and upcoming IT park are set to boost property values significantly in the Kodangal-NH44 corridor. This government approved area is witnessing rapid infrastructure development making it one of the best locations for affordable plot investment in Hyderabad.'
+                  : 'Shadnagar is earmarked for major infrastructure upgrades including new smart city township, expanded ORR access, upcoming commercial hubs near the airport, and IT/pharma corridor expansion. This government approved zone offers premium plot investment opportunities with exceptional connectivity and high appreciation potential near Hyderabad.'}
               </p>
             </div>
           </motion.div>

@@ -10,8 +10,8 @@ import {
 import { useInView } from '../hooks/useInView'
 
 const trustBadges = [
-  { Icon: HiOutlineOfficeBuilding, label: 'HMDA Approved' },
-  { Icon: HiOutlineDocumentText,   label: 'DTCP Certified' },
+  { Icon: HiOutlineOfficeBuilding, label: 'Govt. Approved' },
+  { Icon: HiOutlineDocumentText,   label: 'Clear Title' },
   { Icon: HiStar,                  label: '4.9/5 Rating' },
   { Icon: HiOutlineShieldCheck,    label: 'Secure Transactions' },
   { Icon: HiOutlineUserGroup,      label: '600+ Investors' },

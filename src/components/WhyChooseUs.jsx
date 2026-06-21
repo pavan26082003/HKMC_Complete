@@ -135,13 +135,13 @@ export default function WhyChooseUs() {
             <div className="grid sm:grid-cols-2 gap-6 mb-8">
               {[
                 {
-                  title: 'HMDA Approval',
-                  desc: 'Hyderabad Metropolitan Development Authority approval for Deccan Heights.',
+                  title: 'Government Approval',
+                  desc: 'EMR Scheme government approval for Deccan Heights — legally compliant development.',
                   img: 'https://images.unsplash.com/photo-1589829545856-d10d555cf536?w=400&q=80',
                 },
                 {
-                  title: 'DTCP Approval',
-                  desc: 'Directorate of Town & Country Planning approval for Eden Farms.',
+                  title: 'Approved Layout',
+                  desc: 'Government approved layout with registered sale deeds for Eden Farms.',
                   img: 'https://images.unsplash.com/photo-1589829545856-d10d555cf536?w=400&q=80',
                 },
                 {

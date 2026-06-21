@@ -121,6 +121,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Fast image rendering — prevent layout shift and enable GPU compositing */
+img {
+  content-visibility: auto;
+}
+
+/* Cards with images — isolate compositing layer */
+.card-img-container {
+  contain: layout style;
+  will-change: transform;
+}
+
+/* Gallery animation runs entirely on GPU */
+.gs-track,
+.gs-item,
+.gs-img {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 /* Reduce motion for accessibility and performance */
 @media (prefers-reduced-motion: reduce) {
   *,
