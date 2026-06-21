@@ -4,17 +4,17 @@ import { useInView } from '../hooks/useInView'
 
 const milestones = [
   { year: '2014', event: 'HKMC Builders Founded' },
-  { year: '2017', event: 'First HMDA Approved Project' },
+  { year: '2017', event: 'First Government Approved Project' },
   { year: '2020', event: '200+ Plots Sold' },
   { year: '2023', event: 'Launched Deccan Heights' },
   { year: '2024', event: '500+ Happy Investors' },
 ]
 
 const highlights = [
-  { Icon: FiAward,     label: 'HMDA & DTCP Approved',    sub: 'All projects legally certified' },
-  { Icon: FiMapPin,    label: 'Prime Locations',          sub: 'Hyderabad growth corridors' },
-  { Icon: FiUsers,     label: '500+ Happy Investors',     sub: 'Trusted across Telangana' },
-  { Icon: FiCheckCircle, label: 'Zero Hidden Charges',   sub: 'Full transparency guaranteed' },
+  { Icon: FiAward,     label: 'Government Approved',       sub: 'All projects legally certified' },
+  { Icon: FiMapPin,    label: 'Prime Locations',           sub: 'Hyderabad growth corridors' },
+  { Icon: FiUsers,     label: '500+ Happy Investors',      sub: 'Trusted across Telangana' },
+  { Icon: FiCheckCircle, label: 'Zero Hidden Charges',     sub: 'Full transparency guaranteed' },
 ]
 
 export default function About() {
@@ -111,14 +111,14 @@ export default function About() {
 
             <p className="text-gray-600 leading-relaxed text-base">
               HKMC Builders and Developers Pvt Ltd is a premier real estate company based in Hyderabad,
-              Telangana. With over 15 years of experience, we specialize in developing HMDA and DTCP
-              approved open plot communities, residential plots, investment land, and gated community developments in Hyderabad's most promising growth corridors including Shadnagar, Kodangal, near Outer Ring Road (ORR), and NH-163 highway.
+              Telangana. With over 15 years of experience, we specialize in developing government-approved
+              open plot communities, residential plots, investment land, and gated community developments in Hyderabad's most promising growth corridors including Shadnagar, Kodangal, near Outer Ring Road (ORR), and NH-163 highway.
             </p>
 
             <p className="text-gray-600 leading-relaxed text-base">
               Our commitment to transparency, legal clarity, and customer satisfaction has made us one
               of the most trusted real estate developers in Telangana. Every project we develop is backed
-              by clear documentation, HMDA/DTCP government approvals, premium infrastructure, strategic location selection, and high ROI potential. We serve first-time investors, NRI buyers, HNI clients, and families looking for secure real estate investment in Hyderabad.
+              by clear documentation, government approvals, premium infrastructure, strategic location selection, and high ROI potential. We serve first-time investors, NRI buyers, HNI clients, and families looking for secure real estate investment in Hyderabad.
             </p>
 
             {/* Highlight grid */}

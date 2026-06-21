@@ -12,7 +12,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80&auto=format"
-          alt="Premium open plots in Hyderabad by HKMC Builders and Developers - HMDA DTCP approved investment land"
+          alt="Premium open plots in Hyderabad by HKMC Builders and Developers - Government approved investment land"
           className="w-full h-full object-cover"
           loading="eager"
           fetchPriority="high"
@@ -46,7 +46,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-4 sm:mb-6"
         >
           <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-          <span className="text-white/90 text-sm font-medium">HMDA & DTCP Approved Projects</span>
+          <span className="text-white/90 text-sm font-medium">Govt. Approved Projects — Telangana</span>
         </motion.div>
 
         {/* Headline */}

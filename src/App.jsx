@@ -8,6 +8,7 @@ import ScrollToTop from './components/ScrollToTop'
 const NewYearOfferBanner = lazy(() => import('./components/NewYearOfferBanner'))
 const About = lazy(() => import('./components/About'))
 const Projects = lazy(() => import('./components/Projects'))
+const GallerySlider = lazy(() => import('./components/GallerySlider'))
 const WhyChooseUs = lazy(() => import('./components/WhyChooseUs'))
 const MDMessage = lazy(() => import('./components/MDMessage'))
 const Calculator = lazy(() => import('./components/Calculator'))
@@ -42,9 +43,10 @@ const HomePage = memo(() => {
           <About />
           <WhyChooseUs />
           <Projects />
+          <GallerySlider />
           <Testimonials />
           <MDMessage />
-          <Calculator />
+          {/* <Calculator /> */}
           <LeadCapture />
           <Footer />
           <FloatingButtons />

@@ -111,7 +111,7 @@ export default function Footer() {
             <div className="mt-3 sm:mt-6">
               <h4 className="font-semibold text-white mb-2 text-xs uppercase tracking-wider">Approvals</h4>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                {['HMDA', 'DTCP', 'RERA'].map((badge) => (
+                {['RERA', 'Clear Title', 'Govt. Approved'].map((badge) => (
                   <span key={badge} className="bg-primary/30 text-white/80 text-xs px-2.5 py-1 rounded-full border border-primary/40">
                     {badge}
                   </span>

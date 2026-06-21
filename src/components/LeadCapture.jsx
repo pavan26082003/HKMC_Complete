@@ -9,8 +9,8 @@ import { HiOutlineHome } from 'react-icons/hi'
 import { useInView } from '../hooks/useInView'
 import { PHONE_CALL, PHONE_WHATSAPP, EMAIL } from '../data/content'
 
-const projectOptions = ['Eden Farms (Kodangal)', 'Deccan Heights (Shadnagar)', 'Both Projects']
-const plotSizeOptions = ['100 sq.yd', '121 sq.yd', '200 sq.yd', '242 sq.yd', '400 sq.yd', '800 sq.yd', 'Other']
+const projectOptions = ['Kodangal Grand City (Kodangal)', 'Eden Farms (Kodangal)', 'Deccan Heights (Shadnagar)', 'All Projects']
+const plotSizeOptions = ['100 sq.yd', '121 sq.yd', '200 sq.yd', '242 sq.yd', '300 sq.yd', '400 sq.yd', '605 sq.yd', '800 sq.yd', 'Other']
 
 const whyActNow = [
   { Icon: FiAlertCircle,  text: 'Limited plots available' },
