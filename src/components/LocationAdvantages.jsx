@@ -92,9 +92,13 @@ export default function LocationAdvantages() {
           >
             <img
               src={active.includes('Kodangal')
-                ? 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80'
-                : 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80'}
+                ? '/edenFarms/C5312T01.JPG.webp'
+                : '/deccanFarms/C5303T01.webp'}
               alt={`${active} - open plot location near Hyderabad by HKMC Builders`}
+              loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/70 to-transparent" />

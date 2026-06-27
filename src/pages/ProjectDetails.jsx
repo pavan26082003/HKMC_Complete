@@ -279,10 +279,36 @@ export default function ProjectDetails() {
   const project = projects.find((p) => p.id === id)
 
   const [activeImg, setActiveImg] = useState(0)
+  const [loadedImgs, setLoadedImgs] = useState({ 0: true })
   const [formData, setFormData] = useState({ name: '', phone: '', plotSize: '' })
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors] = useState({ name: '', phone: '' })
   const [loading, setLoading] = useState(false)
+  const heroPausedRef = useRef(false)
+
+  // Preload all gallery images up front
+  useEffect(() => {
+    if (!project) return
+    project.gallery.forEach((src, i) => {
+      if (i === 0) return
+      const img = new Image()
+      img.src = src
+      img.onload = () => setLoadedImgs(prev => ({ ...prev, [i]: true }))
+    })
+  }, [project])
+
+  // Auto-rotate hero banner every 5s — only when next image is loaded
+  useEffect(() => {
+    if (!project || project.gallery.length <= 1) return
+    const timer = setInterval(() => {
+      if (heroPausedRef.current) return
+      setActiveImg(prev => {
+        const next = (prev + 1) % project.gallery.length
+        return loadedImgs[next] ? next : prev
+      })
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [project, loadedImgs])
 
   // Dynamic meta tags per project page
   useEffect(() => {
@@ -425,7 +451,11 @@ export default function ProjectDetails() {
       </div>
 
       {/* ── Hero banner ── */}
-      <div className="relative h-[50vh] sm:h-[55vh] min-h-[300px] sm:min-h-[340px] overflow-hidden">
+      <div
+        className="relative h-[50vh] sm:h-[55vh] min-h-[300px] sm:min-h-[340px] overflow-hidden"
+        onMouseEnter={() => { heroPausedRef.current = true }}
+        onMouseLeave={() => { heroPausedRef.current = false }}
+      >
         <AnimatePresence mode="wait">
           <motion.img
             key={activeImg}
@@ -460,11 +490,11 @@ export default function ProjectDetails() {
         {/* Thumbnail strip */}
         <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 md:right-10 flex gap-1.5 sm:gap-2">
           {project.gallery.map((img, i) => (
-            <button key={i} onClick={() => setActiveImg(i)}
+            <button key={i} onClick={() => { setActiveImg(i); heroPausedRef.current = true; setTimeout(() => { heroPausedRef.current = false }, 6000) }}
               className={`w-10 sm:w-12 md:w-14 h-7 sm:h-8 md:h-10 rounded-lg overflow-hidden border-2 transition-all ${
                 i === activeImg ? 'border-accent scale-110' : 'border-white/40 opacity-70'
               }`}>
-              <img src={img} alt={`${project.name} open plot - ${project.location} by HKMC Builders`} className="w-full h-full object-cover" />
+              <img src={img} alt={`${project.name} open plot - ${project.location} by HKMC Builders`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
             </button>
           ))}
         </div>

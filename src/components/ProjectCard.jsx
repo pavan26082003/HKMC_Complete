@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { FiMapPin } from 'react-icons/fi'
@@ -9,7 +9,33 @@ import { PHONE_WHATSAPP } from '../data/content'
 
 export default function ProjectCard({ project, index = 0 }) {
   const [activeImg, setActiveImg] = useState(0)
+  const [loadedImgs, setLoadedImgs] = useState({ 0: true }) // first image considered loaded
+  const isHoveredRef = useRef(false)
   const navigate = useNavigate()
+
+  // Preload ALL gallery images up front so switching is instant
+  useEffect(() => {
+    project.gallery.forEach((src, i) => {
+      if (i === 0) return // first already shown
+      const img = new Image()
+      img.src = src
+      img.onload = () => setLoadedImgs(prev => ({ ...prev, [i]: true }))
+    })
+  }, [project.gallery])
+
+  // Auto-rotate every 5s — only switch when next image is already loaded
+  useEffect(() => {
+    if (project.gallery.length <= 1) return
+    const timer = setInterval(() => {
+      if (isHoveredRef.current) return
+      setActiveImg(prev => {
+        const next = (prev + 1) % project.gallery.length
+        // Only advance if next image is loaded
+        return loadedImgs[next] ? next : prev
+      })
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [project.gallery.length, loadedImgs])
 
   // Use customPrices if available for specific sizes, otherwise calculate
   const totalPrice = (size) => {
@@ -26,6 +52,8 @@ export default function ProjectCard({ project, index = 0 }) {
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6, delay: index * 0.15 }}
       whileHover={{ y: -6, transition: { duration: 0.25 } }}
+      onMouseEnter={() => { isHoveredRef.current = true }}
+      onMouseLeave={() => { isHoveredRef.current = false }}
       className="relative rounded-2xl overflow-hidden flex flex-col transition-shadow duration-300 bg-white shadow-lg hover:shadow-2xl"
     >
       {/* ── Image gallery ── */}
@@ -65,6 +93,7 @@ export default function ProjectCard({ project, index = 0 }) {
             <button
               key={i}
               onClick={(e) => { e.stopPropagation(); setActiveImg(i) }}
+              aria-label={`View image ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === activeImg ? 'bg-white w-5' : 'bg-white/50 w-1.5'
               }`}

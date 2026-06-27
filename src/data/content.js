@@ -1,6 +1,6 @@
 export const PHONE_CALL = '7801052288'
 export const PHONE_WHATSAPP = '7801052299'
-export const EMAIL = 'hkmcbuilderanddevelopers@gmail.com'
+export const EMAIL = 'hkmcbuildersanddevelopers@gmail.com'
 
 export const projects = [
   {
@@ -34,6 +34,7 @@ export const projects = [
       '/gradnd-city/DSC07979.webp',
       '/gradnd-city/DSC07988.webp',
     ],
+    roi: 'High Appreciation',
     theme: 'orange',
 
     locationAdvantages: [
@@ -131,11 +132,11 @@ export const projects = [
     ],
     description:
       'Eden Farms offers affordable open plots for sale in the rapidly developing Kodangal corridor near NH-163 highway, Hyderabad. This farm project features approved residential plot development, clear documentation, gated security, and strong investment potential.',
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
+    image: '/edenFarms/C5307T01.JPG.webp',
     gallery: [
-      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+      '/edenFarms/C5307T01.JPG.webp',
+      '/edenFarms/C5312T01.JPG.webp',
+      '/edenFarms/C5328T01.JPG.webp',
     ],
 
     roi: '75% in 3 years',
@@ -223,11 +224,11 @@ export const projects = [
     ],
     description:
       "Deccan Heights is a premium EMR Scheme plotted development in Shadnagar — one of Hyderabad's fastest-growing real estate investment destinations. Strategically located near the Outer Ring Road, it offers premium infrastructure, strong connectivity, and attractive investment returns.",
-    image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+    image: '/deccanFarms/C5303T01.webp',
     gallery: [
-      'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
-      'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80',
+      '/deccanFarms/C5303T01.webp',
+      '/deccanFarms/C5303T01.webp',
+      '/deccanFarms/C5303T01.webp',
     ],
     roi: '120% in 3 years',
     theme: 'blue',

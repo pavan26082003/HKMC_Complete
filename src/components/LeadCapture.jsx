@@ -52,9 +52,9 @@ export default function LeadCapture() {
     setLoading(true)
     const formData = new FormData(e.target)
     try {
-      // await fetch('https://formsubmit.co/hkmcbuilderanddevelopers@gmail.com', { method: 'POST', body: formData })
+      await fetch('https://formsubmit.co/hkmcbuildersanddevelopers@gmail.com', { method: 'POST', body: formData })
       // await fetch('https://formsubmit.co/pavankiran26082003@gmail.com', { method: 'POST', body: formData })
-      await fetch('https://formsubmit.co/hkmc.developer@gmail.com', { method: 'POST', body: formData })
+      // await fetch('https://formsubmit.co/hkmc.developer@gmail.com', { method: 'POST', body: formData })
       setLoading(false)
       setSubmitted(true)
     } catch (error) {

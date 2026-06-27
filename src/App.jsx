@@ -11,20 +11,14 @@ const Projects = lazy(() => import('./components/Projects'))
 const GallerySlider = lazy(() => import('./components/GallerySlider'))
 const WhyChooseUs = lazy(() => import('./components/WhyChooseUs'))
 const MDMessage = lazy(() => import('./components/MDMessage'))
-const Calculator = lazy(() => import('./components/Calculator'))
 const Testimonials = lazy(() => import('./components/Testimonials'))
 const LeadCapture = lazy(() => import('./components/LeadCapture'))
 const Footer = lazy(() => import('./components/Footer'))
 const FloatingButtons = lazy(() => import('./components/FloatingButtons'))
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'))
 
-// Minimal loading fallback
-const LoadingFallback = memo(() => (
-  <div className="flex items-center justify-center py-12">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-  </div>
-))
-
+// Minimal loading fallback — null to avoid layout shift
+const LoadingFallback = memo(() => null)
 LoadingFallback.displayName = 'LoadingFallback'
 
 // Memoized HomePage to prevent unnecessary re-renders
@@ -46,7 +40,6 @@ const HomePage = memo(() => {
           <GallerySlider />
           <Testimonials />
           <MDMessage />
-          {/* <Calculator /> */}
           <LeadCapture />
           <Footer />
           <FloatingButtons />
