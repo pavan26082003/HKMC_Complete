@@ -5,8 +5,8 @@
  *   size      – 'sm' | 'md' (default 'md')
  */
 export default function Logo({ scrolled = false, size = 'md' }) {
-  const imgSize = size === 'sm' ? 'w-8 h-8' : 'w-10 h-10'
-  const titleSize = size === 'sm' ? 'text-base' : 'text-lg'
+  const imgSize = size === 'sm' ? 'w-10 h-10' : 'w-14 h-14'
+  const titleSize = size === 'sm' ? 'text-base' : 'text-xl'
 
   return (
     <div className="flex items-center gap-2.5">

@@ -54,7 +54,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-serif text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-3 sm:mb-6 px-2"
+          className="font-serif text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-3 sm:mb-6 px-2"
         >
           Premium Open Plots
           <br />
@@ -66,7 +66,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="hidden sm:block text-white/85 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
+          className="hidden sm:block text-white/85 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
         >
           HKMC Builders & Developers — Trusted by 600+ investors across Telangana.
           Secure your future with farm Plots, residential plots, investment land, and gated community developments in Hyderabad's fastest-growing corridors including Shadnagar, Kodangal, near ORR and NH-163.
@@ -86,7 +86,7 @@ export default function Hero() {
             { value: '100%', label: 'Legal' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-accent font-bold text-lg sm:text-2xl md:text-3xl font-serif">{stat.value}</div>
+              <div className="text-accent font-bold text-base sm:text-xl md:text-2xl font-serif">{stat.value}</div>
               <div className="text-white/70 text-xs sm:text-sm">{stat.label}</div>
             </div>
           ))}
