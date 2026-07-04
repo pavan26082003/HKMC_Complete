@@ -6,20 +6,28 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[100svh] sm:min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background with lazy loading */}
+      {/* Background — responsive hero image */}
       <div className="absolute inset-0">
-        <img
-          src="/hero.webp"
-          alt="Premium open plots in Hyderabad by HKMC Builders and Developers - Government approved investment land"
-          className="w-full h-full object-cover"
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
-          width="1920"
-          height="1080"
-        />
+        <picture>
+          {/* Mobile — portrait crop, loads fast */}
+          <source media="(max-width: 639px)"  srcSet="/hero-mobile.webp" type="image/webp" />
+          {/* Tablet */}
+          <source media="(max-width: 1023px)" srcSet="/hero-tablet.webp" type="image/webp" />
+          {/* Desktop */}
+          <source srcSet="/hero.webp" type="image/webp" />
+          <img
+            src="/hero.webp"
+            alt="Premium open plots in Hyderabad by HKMC Builders and Developers - Government approved investment land"
+            className="w-full h-full object-cover object-center"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            width="1920"
+            height="1080"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/75 to-blue-900/80" />
       </div>
 
