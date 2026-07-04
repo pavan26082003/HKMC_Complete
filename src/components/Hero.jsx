@@ -11,7 +11,8 @@ export default function Hero() {
       {/* Background with lazy loading */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80&auto=format"
+        src='./public/herod.png'
+          // src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80&auto=format"
           alt="Premium open plots in Hyderabad by HKMC Builders and Developers - Government approved investment land"
           className="w-full h-full object-cover"
           loading="eager"
