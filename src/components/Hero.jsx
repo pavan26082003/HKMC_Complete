@@ -11,13 +11,14 @@ export default function Hero() {
       {/* Background with lazy loading */}
       <div className="absolute inset-0">
         <img
-        src='./public/herod.png'
-          // src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80&auto=format"
+          src="/hero.webp"
           alt="Premium open plots in Hyderabad by HKMC Builders and Developers - Government approved investment land"
           className="w-full h-full object-cover"
           loading="eager"
           fetchPriority="high"
           decoding="async"
+          width="1920"
+          height="1080"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/75 to-blue-900/80" />
       </div>
