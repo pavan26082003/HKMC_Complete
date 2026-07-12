@@ -11,11 +11,9 @@ export default function Hero() {
       {/* Background — responsive hero image */}
       <div className="absolute inset-0">
         <picture>
-          {/* Mobile — portrait crop, loads fast */}
-          <source media="(max-width: 639px)"  srcSet="/hero-mobile.webp" type="image/webp" />
-          {/* Tablet */}
-          <source media="(max-width: 1023px)" srcSet="/hero-tablet.webp" type="image/webp" />
-          {/* Desktop */}
+          {/* Mobile — use PNG image for mobile view */}
+          <source media="(max-width: 639px)" srcSet="/mobile-hero.png" type="image/png" />
+          {/* Tablet and Desktop — use hero.webp for larger screens */}
           <source srcSet="/hero.webp" type="image/webp" />
           <img
             src="/hero.webp"

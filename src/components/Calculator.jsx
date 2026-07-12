@@ -120,6 +120,8 @@ export default function Calculator() {
                           ? 'border-primary bg-primary/5 shadow-md'
                           : 'border-gray-200 hover:border-primary/40 hover:shadow-sm'
                       }`}
+                      aria-label={`Select ${p.name} project at ₹${p.pricePerSqYd.toLocaleString('en-IN')} per square yard with ${(p.annualGrowth * 100).toFixed(0)}% annual growth and ${p.investors} investors`}
+                      aria-pressed={selectedProject.name === p.name}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div className="font-semibold text-dark">{p.name}</div>
@@ -153,6 +155,8 @@ export default function Calculator() {
                           ? 'border-accent bg-accent text-dark shadow-md'
                           : 'border-gray-200 text-gray-600 hover:border-accent/40 hover:shadow-sm'
                       }`}
+                      aria-label={`Select ${size} square yard plot size`}
+                      aria-pressed={plotSize === size}
                     >
                       {size} sq.yd
                     </button>
@@ -172,6 +176,11 @@ export default function Calculator() {
                   value={years}
                   onChange={(e) => setYears(Number(e.target.value))}
                   className="w-full h-2 accent-primary cursor-pointer"
+                  aria-label="Investment horizon in years"
+                  aria-valuemin={1}
+                  aria-valuemax={10}
+                  aria-valuenow={years}
+                  aria-valuetext={`${years} year${years > 1 ? 's' : ''}`}
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-2">
                   <span>1 Year</span>

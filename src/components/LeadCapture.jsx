@@ -196,28 +196,34 @@ export default function LeadCapture() {
                     <input type="hidden" name="_captcha" value="false" />
 
                     <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-medium text-gray-600 mb-1.5">Full Name *</label>
-                        <input type="text" name="name" required value={form.name} onChange={handleChange}
+                          <div>
+                        <label htmlFor="name" className="block text-xs font-medium text-gray-600 mb-1.5">Full Name *</label>
+                        <input id="name" type="text" name="name" required value={form.name} onChange={handleChange}
                           placeholder="Your name"
-                          className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 transition-all ${errors.name ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-primary focus:ring-primary/20'}`} />
-                        {errors.name && <p className="text-red-500 text-xs mt-1 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.name}</p>}
+                          className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 transition-all ${errors.name ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-primary focus:ring-primary/20'}`} 
+                          aria-invalid={errors.name ? 'true' : 'false'}
+                          aria-describedby={errors.name ? 'name-error' : undefined} />
+                        {errors.name && <p id="name-error" className="text-red-500 text-xs mt-1 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.name}</p>}
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-gray-600 mb-1.5">Phone *</label>
-                        <input type="tel" name="phone" required value={form.phone} onChange={handleChange}
+                        <label htmlFor="phone" className="block text-xs font-medium text-gray-600 mb-1.5">Phone *</label>
+                        <input id="phone" type="tel" name="phone" required value={form.phone} onChange={handleChange}
                           placeholder="10-digit number" maxLength="10"
-                          className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 transition-all ${errors.phone ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-primary focus:ring-primary/20'}`} />
-                        {errors.phone && <p className="text-red-500 text-xs mt-1 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.phone}</p>}
+                          className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 transition-all ${errors.phone ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-primary focus:ring-primary/20'}`} 
+                          aria-invalid={errors.phone ? 'true' : 'false'}
+                          aria-describedby={errors.phone ? 'phone-error' : undefined} />
+                        {errors.phone && <p id="phone-error" className="text-red-500 text-xs mt-1 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.phone}</p>}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1.5">Email Address</label>
-                      <input type="email" name="email" value={form.email} onChange={handleChange}
+                      <label htmlFor="email" className="block text-xs font-medium text-gray-600 mb-1.5">Email Address</label>
+                      <input id="email" type="email" name="email" value={form.email} onChange={handleChange}
                         placeholder="your@email.com"
-                        className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 transition-all ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-primary focus:ring-primary/20'}`} />
-                      {errors.email && <p className="text-red-500 text-xs mt-1 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.email}</p>}
+                        className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 transition-all ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-gray-200 focus:border-primary focus:ring-primary/20'}`} 
+                        aria-invalid={errors.email ? 'true' : 'false'}
+                        aria-describedby={errors.email ? 'email-error' : undefined} />
+                      {errors.email && <p id="email-error" className="text-red-500 text-xs mt-1 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.email}</p>}
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
