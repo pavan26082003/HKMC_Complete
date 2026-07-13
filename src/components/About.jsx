@@ -6,7 +6,7 @@ const milestones = [
   { year: '2014', event: 'HKMC Builders Founded' },
   { year: '2017', event: 'First Government Approved Project' },
   { year: '2020', event: '200+ Plots Sold' },
-  { year: '2023', event: 'Launched Deccan Heights' },
+  { year: '2023', event: 'Launched Shadnagar Grand City' },
   { year: '2024', event: '500+ Happy Investors' },
 ]
 
@@ -38,12 +38,12 @@ export default function About() {
 
         <div className="grid lg:grid-cols-2 gap-14 items-center">
 
-          {/* ── LEFT: Image panel — hidden on mobile ── */}
+          {/* ── LEFT: Image panel — visible on all screens ── */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="relative hidden lg:flex justify-center mb-8 lg:mb-0"
+            className="relative flex justify-center mb-8 lg:mb-0"
           >
             {/* Glow blob behind image */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -64,9 +64,8 @@ export default function About() {
                 <motion.img
                   src="/HKMC-logo.webp"
                   alt="HKMC Builders and Developers Pvt Ltd - trusted real estate developer in Hyderabad Telangana"
-                  className="relative z-10 w-full object-contain rounded-2xl transition-all duration-500
+                  className="relative z-10 w-full h-auto max-h-[180px] sm:max-h-[220px] lg:max-h-[280px] object-contain rounded-2xl transition-all duration-500
                              group-hover:scale-105 group-hover:drop-shadow-2xl"
-                  style={{ maxHeight: '280px', height: 'auto' }}
                   whileHover={{ scale: 1.04 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                 />

@@ -6,13 +6,13 @@ import { TrendingUp, Shield, CheckCircle, Users, Award, Phone } from 'lucide-rea
 const projectOptions = [
   { name: 'Kodangal Grand City (Kodangal)', pricePerSqYd: 3500, annualGrowth: 0.22, investors: '200+' },
   { name: 'Eden Farms (Kodangal)', pricePerSqYd: 2000, annualGrowth: 0.20, investors: '500+' },
-  { name: 'Deccan Heights (Shadnagar)', pricePerSqYd: 8500, annualGrowth: 0.28, investors: '300+' },
+  { name: 'Shadnagar Grand City (Shadnagar)', pricePerSqYd: 8500, annualGrowth: 0.28, investors: '300+' },
 ]
 
 const plotSizeOptions = {
   'Kodangal Grand City (Kodangal)': [100, 200, 300, 605],
   'Eden Farms (Kodangal)': [100, 200, 400, 800],
-  'Deccan Heights (Shadnagar)': [121, 242],
+  'Shadnagar Grand City (Shadnagar)': [121, 242],
 }
 
 function formatINR(val) {

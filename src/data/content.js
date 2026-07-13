@@ -202,8 +202,8 @@ export const projects = [
   },
 
   {
-    id: 'deccan-heights',
-    name: 'Deccan Heights',
+    id: 'shadnagar-grand-city',
+    name: 'Shadnagar Grand City',
     tagline: 'Premium Living, Premium Returns',
     location: 'Shadnagar, Hyderabad',
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.2!3d17.06!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sShadnagar%2C+Hyderabad!5e0!3m2!1sen!2sin!4v0000000000001',
@@ -223,7 +223,7 @@ export const projects = [
       'High Demand Zone',
     ],
     description:
-      "Deccan Heights is a premium EMR Scheme plotted development in Shadnagar — one of Hyderabad's fastest-growing real estate investment destinations. Strategically located near the Outer Ring Road, it offers premium infrastructure, strong connectivity, and attractive investment returns.",
+      "Shadnagar Grand City is a premium EMR Scheme plotted development in Shadnagar — one of Hyderabad's fastest-growing real estate investment destinations. Strategically located near the Outer Ring Road, it offers premium infrastructure, strong connectivity, and attractive investment returns.",
     image: '/deccanFarms/C5303T01.webp',
     gallery: [
       '/deccanFarms/C5303T01.webp',
@@ -256,7 +256,7 @@ export const projects = [
       { iconKey: 'club',    title: 'Club House (Planned)',       desc: 'Proposed community clubhouse with amenities for residents.' },
     ],
     futureGrowth: {
-      summary: "Shadnagar is Hyderabad's next big real estate destination. With ORR access, airport proximity, and a booming IT ecosystem, Deccan Heights sits at the epicenter of the city's growth.",
+      summary: "Shadnagar is Hyderabad's next big real estate destination. With ORR access, airport proximity, and a booming IT ecosystem, Shadnagar Grand City sits at the epicenter of the city's growth.",
       points: [
         'Shadnagar land prices have doubled in the last 4 years.',
         'ORR-adjacent plots command a 30–40% premium over non-ORR locations.',
@@ -289,7 +289,7 @@ export const projects = [
       'IT sector expansion is driving massive residential demand in this belt.',
       'Limited inventory — only 121 and 242 sq.yd plots available. Act fast.',
     ],
-    closingLine: 'Deccan Heights is where premium location meets premium returns. In a city growing as fast as Hyderabad, owning land near the ORR and airport is not just smart — it\'s essential for long-term growth.',
+    closingLine: 'Shadnagar Grand City is where premium location meets premium returns. In a city growing as fast as Hyderabad, owning land near the ORR and airport is not just smart — it\'s essential for long-term growth.',
   },
 ]
 
@@ -306,9 +306,9 @@ export const testimonials = [
     name: 'Riyaz Nadeem',
     location: 'Bangalore',
     rating: 5,
-    text: 'Deccan Heights is a fantastic investment near Shadnagar. The government approval, location near ORR and airport, and premium infrastructure make it perfect for NRI investors like me. HKMC made the process smooth and reliable.',
+    text: 'Shadnagar Grand City is a fantastic investment near Shadnagar. The government approval, location near ORR and airport, and premium infrastructure make it perfect for NRI investors like me. HKMC made the process smooth and reliable.',
     avatar: 'RN',
-    project: 'Deccan Heights',
+    project: 'Shadnagar Grand City',
   },
   {
     name: 'Naveed Faizan',
@@ -324,7 +324,7 @@ export const testimonials = [
     rating: 5,
     text: 'As an NRI investor, I was skeptical about buying plots in India but HKMC made everything easy. The virtual site visit, clear legal documentation, and online process was seamless.',
     avatar: 'AR',
-    project: 'Deccan Heights',
+    project: 'Shadnagar Grand City',
   },
   {
     name: 'Mohammed Farhan',
@@ -338,15 +338,15 @@ export const testimonials = [
     name: 'Priya Sharma',
     location: 'Hyderabad',
     rating: 5,
-    text: 'Purchased a 242 sq.yd plot in Deccan Heights Shadnagar for villa construction. The government approval, Vastu-compliant layout, wide roads, and premium amenities are outstanding. HKMC team guided us every step of the way.',
+    text: 'Purchased a 242 sq.yd plot in Shadnagar Grand City for villa construction. The government approval, Vastu-compliant layout, wide roads, and premium amenities are outstanding. HKMC team guided us every step of the way.',
     avatar: 'PS',
-    project: 'Deccan Heights',
+    project: 'Shadnagar Grand City',
   },
   {
     name: 'Rajesh Kumar',
     location: 'Warangal',
     rating: 5,
-    text: 'HKMC Builders is the most trusted developer in Telangana. I bought plots in both Eden Farms and Deccan Heights. The legal clarity, government approvals, and location selection are top-quality.',
+    text: 'HKMC Builders is the most trusted developer in Telangana. I bought plots in both Eden Farms and Shadnagar Grand City. The legal clarity, government approvals, and location selection are top-quality.',
     avatar: 'RK',
     project: 'Eden Farms',
   },
