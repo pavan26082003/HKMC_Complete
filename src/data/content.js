@@ -226,9 +226,10 @@ export const projects = [
       "Shadnagar Grand City is a premium EMR Scheme plotted development in Shadnagar — one of Hyderabad's fastest-growing real estate investment destinations. Strategically located near the Outer Ring Road, it offers premium infrastructure, strong connectivity, and attractive investment returns.",
     image: '/deccanFarms/C5303T01.webp',
     gallery: [
-      '/deccanFarms/C5303T01.webp',
-      '/deccanFarms/C5303T01.webp',
-      '/deccanFarms/C5303T01.webp',
+      '/shad-grandcity/image3.webp',
+      '/shad-grandcity/img1.webp',
+      '/shad-grandcity/img2.webp',
+     
     ],
     roi: '120% in 3 years',
     theme: 'blue',
