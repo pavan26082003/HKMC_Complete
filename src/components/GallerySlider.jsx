@@ -22,6 +22,10 @@ const sliderImages = [
   { src: '/slider-images/DSC08045.webp', label: 'Kodangal Grand City' },
   { src: '/slider-images/DSC08050.webp', label: 'Kodangal Grand City' },
   { src: '/slider-images/DSC08057.webp', label: 'Kodangal Grand City' },
+  // Shadnagar Grand City images
+  { src: '/shad-grandcity/img1.webp', label: 'Shadnagar Grand City' },
+  { src: '/shad-grandcity/img2.webp', label: 'Shadnagar Grand City' },
+  { src: '/shad-grandcity/image3.webp', label: 'Shadnagar Grand City' },
 ]
 
 // Triple for seamless infinite loop
@@ -59,7 +63,7 @@ export default function GallerySlider() {
             A Glimpse of Our Projects
           </h2>
           <p className="text-gray-500 text-sm sm:text-base mt-4 max-w-xl mx-auto">
-            Real site photos from Kodangal Grand City and our premium projects across Telangana.
+            Real site photos from Kodangal Grand City, Shadnagar Grand City and our premium projects across Telangana.
           </p>
         </motion.div>
       </div>

@@ -8,6 +8,7 @@ import {
   HiOutlineUserGroup,
 } from 'react-icons/hi'
 import { useInView } from '../hooks/useInView'
+import { testimonials } from '../data/content'
 
 const trustBadges = [
   { Icon: HiOutlineOfficeBuilding, label: 'Govt. Approved' },
@@ -56,34 +57,62 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Google Reviews via Elfsight with fallback */}
+        {/* Testimonials - Elfsight widget with local fallback */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.3 }}
           className="min-h-[200px] sm:min-h-[300px]"
         >
-          {scriptError ? (
-            <div className="bg-gray-50 rounded-2xl p-8 text-center border border-gray-200">
-              <div className="text-gray-400 mb-4">
-                <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                </svg>
+          {scriptError || !scriptLoaded ? (
+            // Local testimonials fallback when Elfsight fails
+            <div className="bg-white rounded-2xl p-4 sm:p-6">
+              <h3 className="text-lg font-semibold text-dark mb-6 text-center">What Our Investors Say</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {testimonials.slice(0, 6).map((testimonial, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.1 * index }}
+                    className="bg-light rounded-xl p-4 sm:p-5 border border-gray-100 hover:border-primary/30 transition-all"
+                  >
+                    {/* Stars */}
+                    <div className="flex items-center gap-0.5 mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <HiStar key={i} className={`w-4 h-4 ${i < testimonial.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} />
+                      ))}
+                    </div>
+                    
+                    {/* Testimonial text */}
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-4">{testimonial.text}</p>
+                    
+                    {/* Author info */}
+                    <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center font-semibold text-primary text-sm">
+                        {testimonial.avatar}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-dark text-sm">{testimonial.name}</p>
+                        <p className="text-gray-400 text-xs">{testimonial.location}</p>
+                        {testimonial.project && (
+                          <p className="text-primary text-xs font-medium mt-0.5">Invested in: {testimonial.project}</p>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-              <h3 className="text-lg font-semibold text-gray-700 mb-2">Testimonials Loading</h3>
-              <p className="text-gray-500 mb-4">Our customer reviews are currently loading. Please check back shortly or <a href="#contact" className="text-primary hover:underline">contact us directly</a> to hear from our happy investors.</p>
-              <a href="#contact" className="btn-primary inline-flex items-center gap-2">
-                Contact Us
-              </a>
-            </div>
-          ) : !scriptLoaded ? (
-            <div className="flex items-center justify-center h-64">
-              <div className="text-center">
-                <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
-                <p className="text-gray-600">Loading testimonials...</p>
+              
+              {/* View more button */}
+              <div className="text-center mt-8">
+                <a href="#contact" className="btn-primary inline-flex items-center gap-2">
+                  Share Your Experience
+                </a>
               </div>
             </div>
           ) : (
+            // Elfsight widget when it loads successfully
             <div
               className="elfsight-app-781e03b8-c535-4394-9181-e6f82b135e5f"
               data-elfsight-app-lazy
