@@ -54,7 +54,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-4 sm:mb-6"
         >
           <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-          <span className="text-white/90 text-sm font-medium">Govt. Approved Projects — Telangana</span>
+          {/* <span className="text-white/90 text-sm font-medium">Govt. Approved Projects — Telangan</span> */}
         </motion.div>
 
         {/* Headline */}
