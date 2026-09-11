@@ -1,6 +1,16 @@
-import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi'
+import { useEffect, useState } from 'react'
+import { FiPhone, FiMail, FiMapPin, FiX } from 'react-icons/fi'
 import { RiWhatsappLine, RiInstagramLine, RiLinkedinBoxFill, RiFacebookBoxFill } from 'react-icons/ri'
 import { PHONE_CALL, PHONE_WHATSAPP, EMAIL } from '../data/content'
+
+const LEGAL_LINKS = [
+  { label: 'Privacy Policy', file: 'HKMC_Privacy_Policies.pdf' },
+  { label: 'Terms & Conditions', file: 'HKMC_TERMS_AND_CONDITIONS.pdf' },
+  { label: 'Disclaimer', file: 'HKMC_DISCLAIMER.pdf' },
+  { label: 'Cookie Policy', file: 'HKMC_COOKIE POLICY.pdf' },
+  { label: 'Refund Policy', file: 'HKMC_Cancellation.pdf' },
+  { label: 'Third-Party Policies', file: 'HKMC_THIRD-PARTY SERVICES.pdf' },
+]
 
 const SOCIAL = [
   {
@@ -28,6 +38,19 @@ const SOCIAL = [
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const [openPolicy, setOpenPolicy] = useState(null)
+
+  useEffect(() => {
+    if (!openPolicy) return
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => { if (e.key === 'Escape') setOpenPolicy(null) }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [openPolicy])
 
   return (
     <footer className="bg-dark text-white">
@@ -70,22 +93,19 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Legal & Policies */}
           <div>
-            <h4 className="font-semibold text-white mb-3 sm:mb-4 text-xs sm:text-sm uppercase tracking-wider">Quick Links</h4>
+            <h4 className="font-semibold text-white mb-3 sm:mb-4 text-xs sm:text-sm uppercase tracking-wider">Legal &amp; Policies</h4>
             <ul className="space-y-2 sm:space-y-2.5">
-              {[
-                { label: 'Home', href: '#home' },
-                { label: 'About Us', href: '#about' },
-                { label: 'Our Projects', href: '#projects' },
-                { label: 'Why Choose Us', href: '#why-us' },
-                { label: 'Investment Calculator', href: '#calculator' },
-                { label: 'Contact Us', href: '#contact' },
-              ].map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className="text-white/60 hover:text-accent text-xs sm:text-sm transition-colors">
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.file}>
+                  <button
+                    type="button"
+                    onClick={() => setOpenPolicy(link)}
+                    className="text-white/60 hover:text-accent text-xs sm:text-sm transition-colors text-left"
+                  >
                     → {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -174,6 +194,41 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {openPolicy && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/70"
+          onClick={() => setOpenPolicy(null)}
+          onContextMenu={(e) => e.preventDefault()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="policy-viewer-title"
+        >
+          <div
+            className="relative w-full max-w-5xl h-[85vh] bg-dark rounded-xl overflow-hidden shadow-2xl flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10">
+              <h3 id="policy-viewer-title" className="text-white text-sm font-semibold truncate">
+                {openPolicy.label}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setOpenPolicy(null)}
+                className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                aria-label="Close policy viewer"
+              >
+                <FiX className="w-5 h-5" />
+              </button>
+            </div>
+            <iframe
+              title={openPolicy.label}
+              src={`/hkmc_policy_doc/${encodeURIComponent(openPolicy.file)}#toolbar=0&navpanes=0`}
+              className="flex-1 w-full bg-white"
+            />
+          </div>
+        </div>
+      )}
     </footer>
   )
 }

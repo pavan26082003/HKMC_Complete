@@ -6,6 +6,8 @@
     <!-- DNS Prefetch for external resources -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://elfsightcdn.com" />
+    <link rel="dns-prefetch" href="https://static.elfsight.com" />
 
     <!-- Preload hero image — highest priority, above the fold -->
     <link rel="preload" as="image" href="/mobile-hero.png"  media="(max-width: 639px)"  fetchpriority="high" />
@@ -375,6 +377,8 @@
       <p>Office: Lakdikapul, Hyderabad, Telangana 500004. Phone: +91 7801052288. WhatsApp: +91 7801052299. Email: hmcbuilderanddevelopers@gmail.com. Open Monday-Saturday 9 AM-7 PM, Sunday 10 AM-5 PM.</p>
     </noscript>
     <div id="root"></div>
+    <!-- Load before React so Elfsight can find the widget on first paint (SPA) -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
