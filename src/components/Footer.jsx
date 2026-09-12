@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FiPhone, FiMail, FiMapPin, FiX } from 'react-icons/fi'
 import { RiWhatsappLine, RiInstagramLine, RiLinkedinBoxFill, RiFacebookBoxFill } from 'react-icons/ri'
 import { PHONE_CALL, PHONE_WHATSAPP, EMAIL } from '../data/content'
@@ -109,6 +110,12 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+            <Link
+              to="/policies"
+              className="mt-4 inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-dark text-xs sm:text-sm font-semibold px-3 py-2 rounded-lg transition-colors"
+            >
+              View All Policies
+            </Link>
           </div>
 
           {/* Projects */}

@@ -16,6 +16,7 @@ const LeadCapture = lazy(() => import('./components/LeadCapture'))
 const Footer = lazy(() => import('./components/Footer'))
 const FloatingButtons = lazy(() => import('./components/FloatingButtons'))
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails'))
+const Policies = lazy(() => import('./pages/Policies'))
 
 // Minimal loading fallback — null to avoid layout shift
 const LoadingFallback = memo(() => null)
@@ -59,6 +60,7 @@ export default function App() {
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/policies" element={<Policies />} />
           <Route path="/project/:id" element={<ProjectDetails />} />
         </Routes>
       </Suspense>
