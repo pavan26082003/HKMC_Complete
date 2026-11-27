@@ -74,7 +74,7 @@ export default function ProjectCard({ project, index = 0 }) {
             decoding="async"
             width="800"
             height="600"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            className={`w-full h-full ${project.galleryFit === 'contain' ? 'object-contain bg-[#f4f6f8]' : 'object-cover group-hover:scale-105'} transition-transform duration-700`}
           />
         </AnimatePresence>
 

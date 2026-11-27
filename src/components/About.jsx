@@ -6,7 +6,7 @@ const milestones = [
   { year: '2014', event: 'HKMC Builders Founded' },
   { year: '2017', event: 'First Government Approved Project' },
   { year: '2020', event: '200+ Plots Sold' },
-  { year: '2023', event: 'Launched Shadnagar Grand City' },
+  { year: '2023', event: 'Launched Shadnagar Premium Avenue' },
   { year: '2024', event: '500+ Happy Investors' },
 ]
 

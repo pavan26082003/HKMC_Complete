@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { FiImage } from 'react-icons/fi'
+import { shadnagarAssets } from '../data/shadnagarAssets'
 
 // Optimized site photos — all compressed to <130 KB each
 const sliderImages = [
@@ -22,10 +23,7 @@ const sliderImages = [
   { src: '/slider-images/DSC08045.webp', label: 'Kodangal Grand City' },
   { src: '/slider-images/DSC08050.webp', label: 'Kodangal Grand City' },
   { src: '/slider-images/DSC08057.webp', label: 'Kodangal Grand City' },
-  // Shadnagar Grand City images
-  { src: '/shad-grandcity/img1.webp', label: 'Shadnagar Grand City' },
-  { src: '/shad-grandcity/img2.webp', label: 'Shadnagar Grand City' },
-  { src: '/shad-grandcity/image3.webp', label: 'Shadnagar Grand City' },
+  ...shadnagarAssets.slider.map((src) => ({ src, label: 'Shadnagar Premium Avenue' })),
 ]
 
 // Triple for seamless infinite loop
@@ -63,7 +61,7 @@ export default function GallerySlider() {
             A Glimpse of Our Projects
           </h2>
           <p className="text-gray-500 text-sm sm:text-base mt-4 max-w-xl mx-auto">
-            Real site photos from Kodangal Grand City, Shadnagar Grand City and our premium projects across Telangana.
+            Project photos from Kodangal Grand City, Shadnagar Premium Avenue and our developments across Telangana.
           </p>
         </motion.div>
       </div>

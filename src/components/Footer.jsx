@@ -131,7 +131,7 @@ export default function Footer() {
                 <div className="text-white/60 text-xs">Near Kodangal · ₹2,200/sq.yd</div>
               </div>
               <div>
-                <div className="text-accent font-medium text-xs sm:text-sm mb-0.5">Shadnagar Grand City</div>
+                <div className="text-accent font-medium text-xs sm:text-sm mb-0.5">Shadnagar Premium Avenue</div>
                 <div className="text-white/60 text-xs">Shadnagar · ₹8,500/sq.yd</div>
               </div>
             </div>

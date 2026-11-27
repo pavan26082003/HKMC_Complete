@@ -136,7 +136,7 @@ export default function WhyChooseUs() {
               {[
                 {
                   title: 'Government Approval',
-                  desc: 'EMR Scheme government approval for Deccan Heights — legally compliant development.',
+                  desc: 'Shadnagar Premium Avenue is presented with the HMDA mark on the official project brochure.',
                   img: 'https://images.unsplash.com/photo-1589829545856-d10d555cf536?w=400&q=80',
                 },
                 {
