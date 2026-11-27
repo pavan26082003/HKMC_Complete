@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate, Link, Navigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   FiPhone, FiMapPin, FiArrowLeft, FiChevronRight, FiAlertCircle,
@@ -55,6 +55,214 @@ function SectionHeading({ label, title }) {
   )
 }
 
+function ImageLightbox({ title, images, startIndex = 0, onClose }) {
+  const [index, setIndex] = useState(startIndex)
+  const [zoom, setZoom] = useState(1)
+  const [natural, setNatural] = useState({ w: 0, h: 0 })
+  const [stageSize, setStageSize] = useState({ w: 0, h: 0 })
+  const stageRef = useRef(null)
+  const dragRef = useRef(null)
+  const pinchRef = useRef(null)
+  const onCloseRef = useRef(onClose)
+  onCloseRef.current = onClose
+
+  const MIN_ZOOM = 1
+  const MAX_ZOOM = 4
+
+  const goTo = (next) => {
+    setIndex((next + images.length) % images.length)
+  }
+
+  useEffect(() => {
+    setZoom(1)
+    stageRef.current?.scrollTo(0, 0)
+  }, [index])
+
+  const setZoomClamped = (value) => {
+    setZoom(Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Math.round(value * 100) / 100)))
+  }
+
+  useEffect(() => {
+    const el = stageRef.current
+    if (!el) return
+    const measure = () => setStageSize({ w: el.clientWidth, h: el.clientHeight })
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const el = stageRef.current
+    if (!el) return
+    const onWheel = (e) => {
+      e.preventDefault()
+      setZoomClamped(zoom + (e.deltaY < 0 ? 0.25 : -0.25))
+    }
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => el.removeEventListener('wheel', onWheel)
+  }, [zoom])
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onCloseRef.current()
+      if (e.key === 'ArrowRight') setIndex((i) => (i + 1) % images.length)
+      if (e.key === 'ArrowLeft') setIndex((i) => (i - 1 + images.length) % images.length)
+      if (e.key === '+' || e.key === '=') setZoomClamped(zoom + 0.5)
+      if (e.key === '-' || e.key === '_') setZoomClamped(zoom - 0.5)
+    }
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [images.length, zoom])
+
+  const fit = natural.w && stageSize.w
+    ? Math.min((stageSize.w - 24) / natural.w, (stageSize.h - 24) / natural.h)
+    : 0
+  const imgW = fit ? Math.round(natural.w * fit * zoom) : 0
+  const imgH = fit ? Math.round(natural.h * fit * zoom) : 0
+
+  const onMouseDown = (e) => {
+    if (zoom <= 1 || !stageRef.current) return
+    dragRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      left: stageRef.current.scrollLeft,
+      top: stageRef.current.scrollTop,
+    }
+  }
+  const onMouseMove = (e) => {
+    if (!dragRef.current || !stageRef.current) return
+    stageRef.current.scrollLeft = dragRef.current.left - (e.clientX - dragRef.current.x)
+    stageRef.current.scrollTop = dragRef.current.top - (e.clientY - dragRef.current.y)
+  }
+  const endDrag = () => { dragRef.current = null }
+
+  const onTouchStart = (e) => {
+    if (e.touches.length === 2) {
+      pinchRef.current = {
+        dist: Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY),
+        zoom,
+      }
+    } else if (e.touches.length === 1 && zoom > 1 && stageRef.current) {
+      dragRef.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        left: stageRef.current.scrollLeft,
+        top: stageRef.current.scrollTop,
+      }
+    }
+  }
+  const onTouchMove = (e) => {
+    if (e.touches.length === 2 && pinchRef.current) {
+      const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY)
+      setZoomClamped(pinchRef.current.zoom * (dist / pinchRef.current.dist))
+    } else if (e.touches.length === 1 && dragRef.current && stageRef.current) {
+      stageRef.current.scrollLeft = dragRef.current.left - (e.touches[0].clientX - dragRef.current.x)
+      stageRef.current.scrollTop = dragRef.current.top - (e.touches[0].clientY - dragRef.current.y)
+    }
+  }
+  const onTouchEnd = () => { pinchRef.current = null; dragRef.current = null }
+
+  return (
+    <div
+      className="fixed inset-0 z-[80] bg-primary/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      onClick={() => onCloseRef.current()}
+    >
+      <div
+        className="bg-white w-full sm:max-w-5xl h-[100dvh] sm:h-auto sm:max-h-[92vh] sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="bg-gradient-to-r from-primary to-blue-900 px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3 shrink-0">
+          <div className="min-w-0">
+            <p className="text-white font-semibold text-sm sm:text-base truncate">{title}</p>
+            <p className="text-white/60 text-xs mt-0.5">Page {index + 1} of {images.length}</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => onCloseRef.current()}
+            className="w-10 h-10 rounded-xl bg-white text-primary text-xl leading-none font-bold shrink-0 cursor-pointer shadow-sm transition-all duration-200 hover:bg-accent hover:text-dark hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+
+        <div className="bg-white border-b border-gray-100 px-3 sm:px-5 py-2.5 flex items-center justify-between gap-2 shrink-0">
+          <span className="text-xs text-gray-400 hidden sm:block">Scroll to move · Scroll wheel or pinch to zoom</span>
+          <span className="text-xs text-gray-400 sm:hidden">Pinch or use + to zoom</span>
+          <div className="flex items-center gap-2">
+            <button type="button" onClick={() => setZoomClamped(zoom - 0.5)} disabled={zoom <= MIN_ZOOM}
+              className="w-10 h-10 rounded-lg border border-gray-200 bg-white text-primary text-lg font-bold shadow-sm cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-primary disabled:hover:border-gray-200 disabled:hover:shadow-sm disabled:hover:translate-y-0" aria-label="Zoom out">−</button>
+            <span className="text-xs font-semibold text-primary w-12 text-center">{Math.round(zoom * 100)}%</span>
+            <button type="button" onClick={() => setZoomClamped(zoom + 0.5)} disabled={zoom >= MAX_ZOOM}
+              className="w-10 h-10 rounded-lg border border-gray-200 bg-white text-primary text-lg font-bold shadow-sm cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-primary disabled:hover:border-gray-200 disabled:hover:shadow-sm disabled:hover:translate-y-0" aria-label="Zoom in">+</button>
+            <button type="button" onClick={() => { setZoom(1); stageRef.current?.scrollTo(0, 0) }} disabled={zoom === 1}
+              className="h-10 px-3 rounded-lg border border-gray-200 bg-white text-xs font-semibold text-primary shadow-sm cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-primary disabled:hover:border-gray-200 disabled:hover:shadow-sm disabled:hover:translate-y-0">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div
+          ref={stageRef}
+          className="bg-[#f4f6f8] overflow-auto overscroll-contain h-[62vh] sm:h-[68vh]"
+          style={{ cursor: zoom > 1 ? (dragRef.current ? 'grabbing' : 'grab') : 'default', touchAction: zoom > 1 ? 'none' : 'pan-y' }}
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={endDrag}
+          onMouseLeave={endDrag}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onDoubleClick={() => setZoomClamped(zoom === 1 ? 2 : 1)}
+        >
+          <div
+            className="flex items-center justify-center"
+            style={{ minWidth: '100%', minHeight: '100%', width: imgW ? Math.max(stageSize.w, imgW) : '100%', height: imgH ? Math.max(stageSize.h, imgH) : '100%' }}
+          >
+            <img
+              key={images[index]}
+              src={images[index]}
+              alt={`${title}, page ${index + 1}`}
+              draggable={false}
+              onLoad={(e) => setNatural({ w: e.target.naturalWidth, h: e.target.naturalHeight })}
+              className={imgW ? '' : 'max-w-full max-h-[60vh] object-contain'}
+              style={imgW ? { width: imgW, height: imgH, maxWidth: 'none', contentVisibility: 'visible' } : { contentVisibility: 'visible' }}
+            />
+          </div>
+        </div>
+
+        {images.length > 1 && (
+          <div className="flex items-center justify-between gap-2 px-3 sm:px-5 py-3 border-t border-gray-100 bg-white shrink-0">
+            <button type="button" onClick={() => goTo(index - 1)}
+              className="h-10 px-3 sm:px-4 rounded-xl border border-gray-200 bg-white text-primary text-sm font-semibold shadow-sm cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
+              Previous
+            </button>
+            <div className="flex items-center gap-1.5">
+              {images.map((_, i) => (
+                <button key={i} type="button" onClick={() => goTo(i)} aria-label={`Page ${i + 1}`}
+                  className={`h-2.5 rounded-full transition-all ${i === index ? 'w-6 bg-primary' : 'w-2.5 bg-gray-300'}`} />
+              ))}
+            </div>
+            <button type="button" onClick={() => goTo(index + 1)}
+              className="h-10 px-3 sm:px-4 rounded-xl bg-primary text-white text-sm font-semibold shadow-md cursor-pointer transition-all duration-200 hover:bg-blue-900 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
+              Next
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function InfoCard({ iconKey, title, desc }) {
   const Icon = resolveIcon(iconKey)
   return (
@@ -76,13 +284,81 @@ function InfoCard({ iconKey, title, desc }) {
   )
 }
 
+function useMinWidth(px) {
+  const [match, setMatch] = useState(() => typeof window !== 'undefined' && window.matchMedia(`(min-width: ${px}px)`).matches)
+  useEffect(() => {
+    const mq = window.matchMedia(`(min-width: ${px}px)`)
+    const onChange = () => setMatch(mq.matches)
+    onChange()
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [px])
+  return match
+}
+
+// Portrait pages fill the width on their side on a laptop, and stay upright on a phone or tablet.
+function FittingPlan({ src, alt }) {
+  const wide = useMinWidth(1280)
+  const frameRef = useRef(null)
+  const [natural, setNatural] = useState({ w: 0, h: 0 })
+  const [box, setBox] = useState({ w: 0, h: 0 })
+  const portrait = natural.w > 0 && natural.h > natural.w
+  const turn = portrait && wide
+
+  useEffect(() => {
+    const el = frameRef.current
+    if (!el) return
+    const measure = () => setBox({ w: el.clientWidth, h: el.clientHeight })
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [turn, natural.w, natural.h])
+
+  return (
+    <div
+      ref={frameRef}
+      className={`relative w-full overflow-hidden bg-[#f0f2f5] ${portrait ? '' : 'h-[42vh] min-h-[220px] sm:h-[460px]'}`}
+      style={portrait ? { aspectRatio: turn ? `${natural.h} / ${natural.w}` : `${natural.w} / ${natural.h}` } : undefined}
+    >
+      <img
+        src={src}
+        alt={alt}
+        draggable={false}
+        onLoad={(e) => setNatural({ w: e.target.naturalWidth, h: e.target.naturalHeight })}
+        style={{
+          contentVisibility: 'visible',
+          objectFit: 'contain',
+          position: 'absolute',
+          ...(turn && box.w && box.h
+            ? {
+                width: box.h,
+                height: box.w,
+                maxWidth: 'none',
+                maxHeight: 'none',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%) rotate(-90deg)',
+              }
+            : { inset: 0, width: '100%', height: '100%' }),
+        }}
+      />
+    </div>
+  )
+}
+
 // ── Layout Zoom/Pan Viewer ────────────────────────────────────────────────────
 function LayoutViewer({ project, PHONE_CALL }) {
   const [scale, setScale] = useState(1)
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const [dragging, setDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+  const [natural, setNatural] = useState({ w: 0, h: 0 })
+  const [box, setBox] = useState({ w: 0, h: 0 })
   const containerRef = useRef(null)
+  const wide = useMinWidth(1280)
+  const portrait = natural.w > 0 && natural.h > natural.w
+  const turn = portrait && wide
 
   const MIN_SCALE = 1
   const MAX_SCALE = 5
@@ -150,44 +426,60 @@ function LayoutViewer({ project, PHONE_CALL }) {
     return () => el.removeEventListener('wheel', onWheel)
   }, [scale])
 
+  useEffect(() => {
+    setScale(1)
+    setPos({ x: 0, y: 0 })
+  }, [turn])
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const measure = () => setBox({ w: el.clientWidth, h: el.clientHeight })
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [turn, portrait])
+
   return (
     <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
       <SectionHeading label="Layout" title="Project Layout Plan" />
       <div className="rounded-3xl overflow-hidden border border-gray-100 shadow-xl">
 
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary to-blue-900 px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="bg-gradient-to-r from-primary to-blue-900 px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
             </div>
-            <div>
-              <p className="text-white font-semibold text-sm">{project.name} — Layout Plan</p>
+            <div className="min-w-0">
+              <p className="text-white font-semibold text-sm truncate">{project.name} — Layout Plan</p>
               <p className="text-white/60 text-xs">{project.location}</p>
             </div>
           </div>
           <span className={`${project.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full shrink-0`}>
-            {project.badge === 'Premium' ? 'PREMIUM FARM Project' : project.badge === 'New Launch' ? 'NEW LAUNCH' : 'FARM Project'}
-            {/*                             DECCAN               :   KODANGAL GRAND CITY      :     EDEN FARMS */}
+            {project.layoutBadge || (project.badge === 'Premium' ? 'PREMIUM FARM Project' : project.badge === 'New Launch' ? 'NEW LAUNCH' : 'FARM Project')}
           </span>
         </div>
 
         {project.layoutImage ? (
           <>
             {/* Zoom controls */}
-            <div className="bg-white border-b border-gray-100 px-5 py-2.5 flex items-center justify-between gap-3">
-              <span className="text-xs text-gray-400 flex items-center gap-1.5">
+            <div className="bg-white border-b border-gray-100 px-3 sm:px-5 py-2.5 flex items-center justify-between gap-3">
+              <span className="text-xs text-gray-400 hidden sm:flex items-center gap-1.5">
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l5 5m-5-5a7 7 0 10-14 0 7 7 0 0014 0z" />
                 </svg>
                 Scroll or pinch to zoom · Drag to pan
               </span>
+              <span className="text-xs text-gray-400 sm:hidden">Pinch or use + to zoom</span>
               <div className="flex items-center gap-2">
                 {/* Zoom out */}
                 <button onClick={zoomOut} disabled={scale <= MIN_SCALE}
-                  className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+                  className="w-10 h-10 rounded-lg border border-gray-200 bg-white shadow-sm flex items-center justify-center text-primary cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-primary disabled:hover:border-gray-200 disabled:hover:shadow-sm disabled:hover:translate-y-0"
+                  aria-label="Zoom out">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                   </svg>
@@ -196,24 +488,29 @@ function LayoutViewer({ project, PHONE_CALL }) {
                 <span className="text-xs font-semibold text-primary w-10 text-center">{Math.round(scale * 100)}%</span>
                 {/* Zoom in */}
                 <button onClick={zoomIn} disabled={scale >= MAX_SCALE}
-                  className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+                  className="w-10 h-10 rounded-lg border border-gray-200 bg-white shadow-sm flex items-center justify-center text-primary cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-primary disabled:hover:border-gray-200 disabled:hover:shadow-sm disabled:hover:translate-y-0"
+                  aria-label="Zoom in">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
                 </button>
                 {/* Reset */}
                 <button onClick={reset} disabled={scale === 1}
-                  className="text-xs font-semibold text-gray-400 hover:text-primary px-3 py-1.5 rounded-lg border border-gray-200 hover:border-primary transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+                  className="h-10 px-3 rounded-lg border border-gray-200 bg-white text-xs font-semibold text-primary shadow-sm cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-primary disabled:hover:border-gray-200 disabled:hover:shadow-sm disabled:hover:translate-y-0">
                   Reset
                 </button>
               </div>
             </div>
 
-            {/* Image viewport */}
+            {/* Portrait plans fill the card. Landscape plans keep the shared frame. */}
             <div
               ref={containerRef}
-              className="relative bg-[#f0f2f5] overflow-hidden select-none"
-              style={{ height: '520px', cursor: scale > 1 ? (dragging ? 'grabbing' : 'grab') : 'default' }}
+              className={`relative bg-[#f0f2f5] overflow-hidden select-none ${portrait ? 'w-full' : 'h-[48vh] min-h-[240px] sm:h-[520px]'}`}
+              style={{
+                cursor: scale > 1 ? (dragging ? 'grabbing' : 'grab') : 'default',
+                touchAction: scale > 1 ? 'none' : 'pan-y',
+                ...(portrait ? { aspectRatio: turn ? `${natural.h} / ${natural.w}` : `${natural.w} / ${natural.h}` } : null),
+              }}
               onMouseDown={onMouseDown}
               onMouseMove={onMouseMove}
               onMouseUp={onMouseUp}
@@ -230,17 +527,31 @@ function LayoutViewer({ project, PHONE_CALL }) {
                 src={project.layoutImage}
                 alt={`${project.name} layout plan - ${project.location} open plots by HKMC Builders`}
                 draggable={false}
+                onLoad={(e) => setNatural({ w: e.target.naturalWidth, h: e.target.naturalHeight })}
                 style={{
-                  transform: `translate(${pos.x}px, ${pos.y}px) scale(${scale})`,
-                  transformOrigin: 'center center',
-                  transition: dragging ? 'none' : 'transform 0.2s ease',
-                  maxWidth: '100%',
-                  maxHeight: '100%',
-                  width: '100%',
-                  height: '100%',
+                  contentVisibility: 'visible',
                   objectFit: 'contain',
                   position: 'absolute',
-                  inset: 0,
+                  transformOrigin: 'center center',
+                  transition: dragging ? 'none' : 'transform 0.2s ease',
+                  ...(turn && box.w && box.h
+                    ? {
+                        width: box.h,
+                        height: box.w,
+                        maxWidth: 'none',
+                        maxHeight: 'none',
+                        top: '50%',
+                        left: '50%',
+                        transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) rotate(-90deg) scale(${scale})`,
+                      }
+                    : {
+                        inset: 0,
+                        width: '100%',
+                        height: '100%',
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        transform: `translate(${pos.x}px, ${pos.y}px) scale(${scale})`,
+                      }),
                 }}
               />
 
@@ -279,6 +590,7 @@ export default function ProjectDetails() {
   const project = projects.find((p) => p.id === id)
 
   const [activeImg, setActiveImg] = useState(0)
+  const [viewer, setViewer] = useState(null)
   const [loadedImgs, setLoadedImgs] = useState({ 0: true })
   const [formData, setFormData] = useState({ name: '', phone: '', plotSize: '' })
   const [submitted, setSubmitted] = useState(false)
@@ -319,8 +631,10 @@ export default function ProjectDetails() {
     document.title = `${project.name} – ${project.location} | HKMC Builders`
 
     const desc = document.querySelector('meta[name="description"]')
+    const priceBit = `starting ₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd`
+    const extraBit = project.roi ? ` Expected ROI: ${project.roi}.` : ' View the brochure, layout plan, and rate card on this page.'
     if (desc) desc.setAttribute('content',
-      `${project.name} in ${project.location}. ${project.badge} open plots starting ₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd. Government approved. Expected ROI: ${project.roi}. Book a free site visit today!`
+      `${project.name} in ${project.location}. ${project.badge} open plots ${priceBit}.${extraBit} Book a free site visit today!`
     )
 
     const ogTitle = document.querySelector('meta[property="og:title"]')
@@ -328,7 +642,7 @@ export default function ProjectDetails() {
 
     const ogDesc = document.querySelector('meta[property="og:description"]')
     if (ogDesc) ogDesc.setAttribute('content',
-      `${project.name} in ${project.location}. Starting ₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd. ROI: ${project.roi}. Book free site visit!`
+      `${project.name} in ${project.location}. Starting ₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd.${project.roi ? ` ROI: ${project.roi}.` : ''} Book free site visit!`
     )
 
     const canonical = document.querySelector('link[rel="canonical"]')
@@ -340,6 +654,10 @@ export default function ProjectDetails() {
       if (canonical) canonical.setAttribute('href', 'https://hkmcbuilders.com')
     }
   }, [project])
+
+  if (id === 'shadnagar-grand-city') {
+    return <Navigate to="/project/shadnagar-premium-avenue" replace />
+  }
 
   if (!project) {
     return (
@@ -423,7 +741,7 @@ export default function ProjectDetails() {
       <div className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <button onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-primary font-medium text-sm hover:text-blue-900 transition-colors">
+            className="flex items-center gap-2 text-primary font-semibold text-sm bg-white border border-gray-200 shadow-sm rounded-lg px-3 py-2 cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
             <FiArrowLeft className="w-4 h-4" /> Back to Projects
           </button>
           <div className="hidden sm:flex items-center gap-2 text-sm">
@@ -444,9 +762,20 @@ export default function ProjectDetails() {
             <FiChevronRight className="w-3 h-3 text-gray-300" />
             <span className="text-primary font-semibold">{project.name}</span>
           </div>
-          <a href={`tel:${PHONE_CALL}`} className="btn-accent text-xs py-2 px-4 flex items-center gap-1.5">
-            <FiPhone className="w-3.5 h-3.5" /> Call Now
-          </a>
+          <div className="flex items-center gap-2">
+            {project.brochureImages?.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setViewer({ title: `${project.name} Brochure`, images: project.brochureImages })}
+                className="btn-accent text-xs py-2 px-3 sm:px-4"
+              >
+                Brochure
+              </button>
+            )}
+            <a href={`tel:${PHONE_CALL}`} className="btn-accent text-xs py-2 px-3 sm:px-4 flex items-center gap-1.5">
+              <FiPhone className="w-3.5 h-3.5" /> Call Now
+            </a>
+          </div>
         </div>
       </div>
 
@@ -465,7 +794,7 @@ export default function ProjectDetails() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="w-full h-full object-cover absolute inset-0"
+            className={`w-full h-full absolute inset-0 ${project.galleryFit === 'contain' ? 'object-contain bg-[#10284f]' : 'object-cover'}`}
           />
         </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent" />
@@ -481,7 +810,9 @@ export default function ProjectDetails() {
               <div className="flex flex-wrap items-center gap-3 sm:gap-5 text-white/80 text-xs sm:text-sm">
                 <span className="flex items-center gap-1 sm:gap-1.5"><FiMapPin className="w-3.5 sm:w-4 h-3.5 sm:h-4" />{project.location}</span>
                 <span className="flex items-center gap-1 sm:gap-1.5"><HiOutlineHome className="w-3.5 sm:w-4 h-3.5 sm:h-4" />₹{project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd</span>
-                <span className="flex items-center gap-1 sm:gap-1.5"><HiOutlineTrendingUp className="w-3.5 sm:w-4 h-3.5 sm:h-4" />ROI: {project.roi}</span>
+                {project.roi && (
+                  <span className="flex items-center gap-1 sm:gap-1.5"><HiOutlineTrendingUp className="w-3.5 sm:w-4 h-3.5 sm:h-4" />ROI: {project.roi}</span>
+                )}
               </div>
             </motion.div>
           </div>
@@ -491,10 +822,10 @@ export default function ProjectDetails() {
         <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 md:right-10 flex gap-1.5 sm:gap-2">
           {project.gallery.map((img, i) => (
             <button key={i} onClick={() => { setActiveImg(i); heroPausedRef.current = true; setTimeout(() => { heroPausedRef.current = false }, 6000) }}
-              className={`w-10 sm:w-12 md:w-14 h-7 sm:h-8 md:h-10 rounded-lg overflow-hidden border-2 transition-all ${
-                i === activeImg ? 'border-accent scale-110' : 'border-white/40 opacity-70'
+              className={`w-10 sm:w-12 md:w-14 h-7 sm:h-8 md:h-10 rounded-lg overflow-hidden border-2 cursor-pointer transition-all duration-200 hover:opacity-100 hover:-translate-y-0.5 ${
+                i === activeImg ? 'border-accent scale-110 shadow-md' : 'border-white/50 opacity-70 hover:border-white'
               }`}>
-              <img src={img} alt={`${project.name} open plot - ${project.location} by HKMC Builders`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+              <img src={img} alt={`${project.name} open plot - ${project.location} by HKMC Builders`} className={`w-full h-full ${project.galleryFit === 'contain' ? 'object-contain bg-white' : 'object-cover'}`} loading="lazy" decoding="async" />
             </button>
           ))}
         </div>
@@ -513,6 +844,20 @@ export default function ProjectDetails() {
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <SectionHeading label="Overview" title="About This Project" />
               <p className="text-gray-600 leading-relaxed text-base">{project.description}</p>
+              {project.brochureImages?.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-6">
+                  <button type="button" onClick={() => setViewer({ title: `${project.name} Brochure`, images: project.brochureImages })}
+                    className="h-11 px-4 rounded-xl bg-primary text-white text-sm font-semibold shadow-md cursor-pointer transition-all duration-200 hover:bg-blue-900 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
+                    View Brochure
+                  </button>
+                  {project.rateCardImage && (
+                    <button type="button" onClick={() => setViewer({ title: `${project.name} Rate Card`, images: [project.rateCardImage] })}
+                      className="h-11 px-4 rounded-xl border border-primary bg-white text-primary text-sm font-semibold shadow-sm cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
+                      Rate Card
+                    </button>
+                  )}
+                </div>
+              )}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
                 {project.investmentBenefits.map((b) => (
                   <div key={b.label} className="bg-[#F5F5F5] rounded-2xl p-4 text-center">
@@ -536,7 +881,7 @@ export default function ProjectDetails() {
                         <span className="font-serif text-2xl font-bold text-primary">{size} sq.yd</span>
                         <span className={`${project.badgeColor} text-white text-xs font-bold px-2.5 py-1 rounded-full`}>{project.badge}</span>
                       </div>
-                      <div className="text-gray-500 text-sm mb-1">Total Investment</div>
+                      <div className="text-gray-500 text-sm mb-1">{project.paymentSchemes ? 'Outright total' : 'Total Investment'}</div>
                       <div className="text-2xl font-bold text-dark">₹{total.toLocaleString('en-IN')}</div>
                       <div className="text-gray-400 text-xs mt-1">@ ₹{project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd</div>
                     </div>
@@ -551,6 +896,36 @@ export default function ProjectDetails() {
                   </div>
                 )}
               </div>
+
+              {project.paymentSchemes?.length > 0 && (
+                <div className="mt-6 bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-2xl p-5">
+                  <h4 className="font-semibold text-dark text-sm mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-orange-500 rounded-full inline-block" />
+                    Payment Plan Options · 121 sq.yd
+                  </h4>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    {project.paymentSchemes.map((scheme) => (
+                      <div key={scheme.name} className="bg-white rounded-xl p-3 text-center shadow-sm">
+                        <div className="font-bold text-primary text-sm sm:text-base">₹{scheme.total.toLocaleString('en-IN')}</div>
+                        <div className="text-gray-500 text-xs mt-0.5">{scheme.name}</div>
+                      </div>
+                    ))}
+                  </div>
+                  {project.rateCardNotes?.length > 0 && (
+                    <ul className="mt-4 space-y-1.5">
+                      {project.rateCardNotes.map((note) => (
+                        <li key={note} className="text-xs text-gray-600 leading-relaxed">• {note}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {project.rateCardImage && (
+                    <button type="button" onClick={() => setViewer({ title: `${project.name} Rate Card`, images: [project.rateCardImage] })}
+                      className="mt-4 w-full bg-primary text-white text-sm font-semibold py-2.5 rounded-xl shadow-md cursor-pointer transition-all duration-200 hover:bg-blue-900 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
+                      View Rate Card
+                    </button>
+                  )}
+                </div>
+              )}
 
               {/* EMI / Payment Plan block — only shown if project has pricingDetails */}
               {project.pricingDetails && (
@@ -676,7 +1051,7 @@ export default function ProjectDetails() {
                     <button 
                       type="submit"
                       disabled={loading}
-                      className="w-full bg-primary hover:bg-blue-900 text-white font-semibold py-3 rounded-xl transition-colors text-sm flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="w-full bg-primary text-white font-semibold py-3 rounded-xl shadow-md cursor-pointer transition-all duration-200 text-sm flex items-center justify-center gap-2 hover:bg-blue-900 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-md"
                     >
                       {loading ? (
                         <>
@@ -716,7 +1091,7 @@ export default function ProjectDetails() {
                     { label: 'Location',     value: project.location },
                     { label: 'Price',        value: `₹${project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd` },
                     { label: 'Plot Sizes',   value: project.plotSizes.map(s => `${s} sq.yd`).join(', ') },
-                    { label: 'Expected ROI', value: project.roi },
+                    ...(project.roi ? [{ label: 'Expected ROI', value: project.roi }] : []),
                     { label: 'Approval',     value: 'Clear Title & Govt. Approved' },
                   ].map((row) => (
                     <div key={row.label} className="flex justify-between gap-2">
@@ -750,17 +1125,56 @@ export default function ProjectDetails() {
         {/* ── Full-width sections below the sidebar grid ── */}
         <div className="space-y-16 mt-16">
 
-          {/* Layout Plan — Zoom & Pan Viewer */}
           <LayoutViewer project={project} PHONE_CALL={PHONE_CALL} />
+
+          {project.amenities?.length > 0 && (
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <SectionHeading label="Amenities" title="Key Features" />
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {project.amenities.map((item) => (
+                  <InfoCard key={item.title} iconKey={item.iconKey} title={item.title} desc={item.desc} />
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           {/* Location Advantages */}
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <SectionHeading label="Location" title="Location Advantages" />
+            {project.locationNote && (
+              <p className="text-gray-600 text-sm leading-relaxed mb-6 max-w-3xl">{project.locationNote}</p>
+            )}
+            {project.locationMapImage && (
+              <div className="rounded-3xl overflow-hidden border border-gray-100 shadow-xl mb-8">
+                <div className="bg-gradient-to-r from-primary to-blue-900 px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-white font-semibold text-sm truncate">{project.name} — Location Plan</p>
+                    <p className="text-white/60 text-xs">{project.location}</p>
+                  </div>
+                  <button type="button" onClick={() => setViewer({ title: `${project.name} Location Plan`, images: [project.locationMapImage] })}
+                    className="shrink-0 bg-white text-primary text-xs font-bold px-4 py-2 rounded-lg shadow-sm cursor-pointer transition-all duration-200 hover:bg-accent hover:text-dark hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
+                    View
+                  </button>
+                </div>
+                <button type="button" onClick={() => setViewer({ title: `${project.name} Location Plan`, images: [project.locationMapImage] })}
+                  className="group relative block w-full bg-[#f0f2f5] cursor-pointer">
+                  <FittingPlan src={project.locationMapImage} alt={`${project.name} location plan`} />
+                  <span className="pointer-events-none absolute inset-0 bg-primary/0 transition-colors duration-200 group-hover:bg-primary/10" />
+                </button>
+              </div>
+            )}
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {project.locationAdvantages.map((item) => (
                 <InfoCard key={item.title} iconKey={item.iconKey} title={item.title} desc={item.desc} />
               ))}
             </div>
+            {project.nearbyLandmarks?.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {project.nearbyLandmarks.map((place) => (
+                  <span key={place} className="bg-[#F5F5F5] text-gray-600 text-xs sm:text-sm px-3 py-1.5 rounded-full">{place}</span>
+                ))}
+              </div>
+            )}
           </motion.div>
 
           {/* Closing line */}
@@ -777,6 +1191,15 @@ export default function ProjectDetails() {
 
         </div>
       </div>
+      {viewer && (
+        <ImageLightbox
+          key={`${viewer.title}-${viewer.startIndex || 0}`}
+          title={viewer.title}
+          images={viewer.images}
+          startIndex={viewer.startIndex || 0}
+          onClose={() => setViewer(null)}
+        />
+      )}
     </div>
   )
 }

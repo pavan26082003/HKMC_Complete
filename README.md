@@ -10,7 +10,7 @@ HKMC Builders and Developers is a premium real estate company specializing in op
 
 - **Modern UI/UX**: Clean, professional design with glassmorphism effects and smooth animations
 - **Responsive Design**: Fully optimized for desktop, tablet, and mobile devices
-- **Project Showcase**: Detailed information about Eden Farms and Shadnagar Grand City projects
+- **Project Showcase**: Detailed information about Eden Farms and Shadnagar Premium Avenue projects
 - **Investment Calculator**: Interactive tool to estimate future property value
 - **Lead Generation**: Multiple contact forms and CTAs for capturing leads
 - **Floating Action Buttons**: Quick access to Call and WhatsApp
@@ -25,11 +25,11 @@ HKMC Builders and Developers is a premium real estate company specializing in op
 - **Pricing**: ₹2,000 per sq yard
 - **Highlights**: Affordable investment with high growth potential
 
-### Shadnagar Grand City
-- **Location**: Shadnagar
-- **Plot Sizes**: 121, 242 sq yards
-- **Pricing**: ₹8,500 per sq yard
-- **Highlights**: Premium location with excellent ROI
+### Shadnagar Premium Avenue
+- **Location**: Shadnagar, on the way to the proposed 160-ft Pargi Road
+- **Plot Size**: 121 sq yards
+- **Pricing**: ₹8,500 per sq yard outright (₹10,28,500). 6, 12, and 18 month schemes are on the rate card
+- **Highlights**: Gated layout, 30 ft and 25 ft blacktop roads, Vaastu-compliant plan
 
 ## 🛠️ Tech Stack
 

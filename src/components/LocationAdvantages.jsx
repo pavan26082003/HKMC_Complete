@@ -9,6 +9,7 @@ import {
 } from 'react-icons/hi'
 import { MdOutlineTrain, MdOutlineFlight, MdOutlineFactory } from 'react-icons/md'
 import { useInView } from '../hooks/useInView'
+import { shadnagarAssets } from '../data/shadnagarAssets'
 
 // Icon map — keys match the `iconKey` field in content.js
 const ICON_MAP = {
@@ -33,13 +34,13 @@ const locationData = {
     { iconKey: 'train',    text: 'Railway Station — 20 mins' },
     { iconKey: 'industry', text: 'Industrial Zone — 15 mins' },
   ],
-  'Deccan Heights (Shadnagar)': [
-    { iconKey: 'orr',      text: 'Outer Ring Road — 5 mins' },
-    { iconKey: 'it',       text: 'IT Hubs — 30 mins' },
-    { iconKey: 'airport',  text: 'Rajiv Gandhi Airport — 25 mins' },
-    { iconKey: 'school',   text: 'International Schools — 10 mins' },
-    { iconKey: 'hospital', text: 'Multi-specialty Hospitals — 15 mins' },
-    { iconKey: 'city',     text: 'Hyderabad City Center — 45 mins' },
+  'Shadnagar Premium Avenue': [
+    { iconKey: 'highway',  text: 'Proposed 160-ft Pargi Road' },
+    { iconKey: 'orr',      text: 'Regional Ring Road & ORR' },
+    { iconKey: 'city',     text: 'Shadnagar & Kothur' },
+    { iconKey: 'train',    text: 'Shadnagar Railway / MMTS' },
+    { iconKey: 'airport',  text: 'Rajiv Gandhi International Airport' },
+    { iconKey: 'it',       text: 'Gachibowli & Financial District' },
   ],
 }
 
@@ -88,18 +89,18 @@ export default function LocationAdvantages() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="relative rounded-2xl overflow-hidden shadow-xl h-80 md:h-96"
+            className="relative rounded-2xl overflow-hidden shadow-xl h-80 md:h-96 bg-white"
           >
             <img
               src={active.includes('Kodangal')
                 ? '/edenFarms/C5312T01.JPG.webp'
-                : '/deccanFarms/C5303T01.webp'}
-              alt={`${active} - open plot location near Hyderabad by HKMC Builders`}
+                : shadnagarAssets.locationAdvantage}
+              alt={`${active} - location by HKMC Builders`}
               loading="lazy"
               decoding="async"
               width="800"
               height="600"
-              className="w-full h-full object-cover"
+              className={`w-full h-full ${active.includes('Kodangal') ? 'object-cover' : 'object-contain'}`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/70 to-transparent" />
             <div className="absolute bottom-6 left-6">
