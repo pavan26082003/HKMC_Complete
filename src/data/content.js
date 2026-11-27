@@ -235,6 +235,7 @@ export const projects = [
       'Shadnagar Premium Avenue is a residential plotted development by HKMC Builders & Developers in Shadnagar, Telangana. Plots are 121 sq. yards, with a grand entrance arch, gated community, 30 ft and 25 ft blacktop roads, avenue plantation, kerb stones, electricity with transformer and street lights, rainwater harvesting pits, and a Vaastu-compliant layout. The project is on the way to the proposed 160-ft Pargi Road (State Highway), near Shadnagar and the Regional Ring Road.',
     image: shadnagarAssets.slider[0] || '',
     gallery: shadnagarAssets.slider,
+    roi: 'High Growth',
     theme: 'blue',
     locationNote: 'On the way to the proposed 160-ft Pargi Road (State Highway). The location plan is not to scale. Confirm travel time and development status with HKMC before booking.',
     locationAdvantages: [
