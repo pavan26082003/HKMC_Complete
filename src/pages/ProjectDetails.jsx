@@ -62,6 +62,7 @@ function ImageLightbox({ title, images, startIndex = 0, onClose }) {
   const [stageSize, setStageSize] = useState({ w: 0, h: 0 })
   const stageRef = useRef(null)
   const dragRef = useRef(null)
+  const swipeRef = useRef(null)
   const pinchRef = useRef(null)
   const onCloseRef = useRef(onClose)
   onCloseRef.current = onClose
@@ -112,10 +113,21 @@ function ImageLightbox({ title, images, startIndex = 0, onClose }) {
       if (e.key === '-' || e.key === '_') setZoomClamped(zoom - 0.5)
     }
     const prevOverflow = document.body.style.overflow
+    const prevPosition = document.body.style.position
+    const prevTop = document.body.style.top
+    const prevWidth = document.body.style.width
+    const scrollY = window.scrollY
     document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = '100%'
     window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = prevOverflow
+      document.body.style.position = prevPosition
+      document.body.style.top = prevTop
+      document.body.style.width = prevWidth
+      window.scrollTo(0, scrollY)
       window.removeEventListener('keydown', onKey)
     }
   }, [images.length, zoom])
@@ -148,12 +160,16 @@ function ImageLightbox({ title, images, startIndex = 0, onClose }) {
         dist: Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY),
         zoom,
       }
-    } else if (e.touches.length === 1 && zoom > 1 && stageRef.current) {
-      dragRef.current = {
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
-        left: stageRef.current.scrollLeft,
-        top: stageRef.current.scrollTop,
+      swipeRef.current = null
+    } else if (e.touches.length === 1) {
+      swipeRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+      if (zoom > 1 && stageRef.current) {
+        dragRef.current = {
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY,
+          left: stageRef.current.scrollLeft,
+          top: stageRef.current.scrollTop,
+        }
       }
     }
   }
@@ -166,7 +182,19 @@ function ImageLightbox({ title, images, startIndex = 0, onClose }) {
       stageRef.current.scrollTop = dragRef.current.top - (e.touches[0].clientY - dragRef.current.y)
     }
   }
-  const onTouchEnd = () => { pinchRef.current = null; dragRef.current = null }
+  const onTouchEnd = (e) => {
+    const start = swipeRef.current
+    const point = e.changedTouches?.[0]
+    pinchRef.current = null
+    dragRef.current = null
+    swipeRef.current = null
+    if (!start || !point || zoom > 1 || images.length < 2) return
+    const dx = point.clientX - start.x
+    const dy = point.clientY - start.y
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+      goTo(index + (dx < 0 ? 1 : -1))
+    }
+  }
 
   return (
     <div
@@ -197,7 +225,7 @@ function ImageLightbox({ title, images, startIndex = 0, onClose }) {
 
         <div className="bg-white border-b border-gray-100 px-3 sm:px-5 py-2.5 flex items-center justify-between gap-2 shrink-0">
           <span className="text-xs text-gray-400 hidden sm:block">Scroll to move · Scroll wheel or pinch to zoom</span>
-          <span className="text-xs text-gray-400 sm:hidden">Pinch or use + to zoom</span>
+          <span className="text-xs text-gray-400 sm:hidden">Swipe for next page · Pinch to zoom</span>
           <div className="flex items-center gap-2">
             <button type="button" onClick={() => setZoomClamped(zoom - 0.5)} disabled={zoom <= MIN_ZOOM}
               className="w-10 h-10 rounded-lg border border-gray-200 bg-white text-primary text-lg font-bold shadow-sm cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-primary disabled:hover:border-gray-200 disabled:hover:shadow-sm disabled:hover:translate-y-0" aria-label="Zoom out">−</button>
@@ -213,7 +241,7 @@ function ImageLightbox({ title, images, startIndex = 0, onClose }) {
 
         <div
           ref={stageRef}
-          className="bg-[#f4f6f8] overflow-auto overscroll-contain h-[62vh] sm:h-[68vh]"
+          className="relative min-h-0 flex-1 bg-[#f4f6f8] overflow-auto overscroll-contain sm:h-[68vh] sm:flex-none"
           style={{ cursor: zoom > 1 ? (dragRef.current ? 'grabbing' : 'grab') : 'default', touchAction: zoom > 1 ? 'none' : 'pan-y' }}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
@@ -597,6 +625,7 @@ export default function ProjectDetails() {
   const [errors, setErrors] = useState({ name: '', phone: '' })
   const [loading, setLoading] = useState(false)
   const heroPausedRef = useRef(false)
+  const heroSwipeRef = useRef(null)
 
   // Preload all gallery images up front
   useEffect(() => {
@@ -781,9 +810,25 @@ export default function ProjectDetails() {
 
       {/* ── Hero banner ── */}
       <div
-        className="relative h-[50vh] sm:h-[55vh] min-h-[300px] sm:min-h-[340px] overflow-hidden"
+        className="relative h-[50vh] sm:h-[55vh] min-h-[300px] sm:min-h-[340px] overflow-hidden touch-pan-y"
         onMouseEnter={() => { heroPausedRef.current = true }}
         onMouseLeave={() => { heroPausedRef.current = false }}
+        onTouchStart={(e) => {
+          if (e.touches.length !== 1) return
+          heroSwipeRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+        }}
+        onTouchEnd={(e) => {
+          const start = heroSwipeRef.current
+          heroSwipeRef.current = null
+          const point = e.changedTouches?.[0]
+          if (!start || !point || project.gallery.length < 2) return
+          const dx = point.clientX - start.x
+          const dy = point.clientY - start.y
+          if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.2) return
+          setActiveImg((i) => (i + (dx < 0 ? 1 : -1) + project.gallery.length) % project.gallery.length)
+          heroPausedRef.current = true
+          setTimeout(() => { heroPausedRef.current = false }, 6000)
+        }}
       >
         <AnimatePresence mode="wait">
           <motion.img
@@ -799,35 +844,34 @@ export default function ProjectDetails() {
         </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent" />
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-10">
-          <div className="max-w-7xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-10">
+          <div className="max-w-7xl mx-auto flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="min-w-0">
               <span className={`inline-block ${project.badgeColor} text-white text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full mb-2 sm:mb-3`}>
                 {project.badge}
               </span>
               <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">{project.name}</h1>
               <p className="text-accent font-semibold text-base sm:text-lg mb-2 sm:mb-3">{project.tagline}</p>
-              <div className="flex flex-wrap items-center gap-3 sm:gap-5 text-white/80 text-xs sm:text-sm">
-                <span className="flex items-center gap-1 sm:gap-1.5"><FiMapPin className="w-3.5 sm:w-4 h-3.5 sm:h-4" />{project.location}</span>
-                <span className="flex items-center gap-1 sm:gap-1.5"><HiOutlineHome className="w-3.5 sm:w-4 h-3.5 sm:h-4" />₹{project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd</span>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-white/80 text-xs sm:text-sm">
+                <span className="flex items-center gap-1 sm:gap-1.5"><FiMapPin className="w-3.5 sm:w-4 h-3.5 sm:h-4 shrink-0" />{project.location}</span>
+                <span className="flex items-center gap-1 sm:gap-1.5"><HiOutlineHome className="w-3.5 sm:w-4 h-3.5 sm:h-4 shrink-0" />₹{project.pricePerSqYard.toLocaleString('en-IN')}/sq.yd</span>
                 {project.roi && (
-                  <span className="flex items-center gap-1 sm:gap-1.5"><HiOutlineTrendingUp className="w-3.5 sm:w-4 h-3.5 sm:h-4" />ROI: {project.roi}</span>
+                  <span className="flex items-center gap-1 sm:gap-1.5"><HiOutlineTrendingUp className="w-3.5 sm:w-4 h-3.5 sm:h-4 shrink-0" />ROI: {project.roi}</span>
                 )}
               </div>
             </motion.div>
-          </div>
-        </div>
 
-        {/* Thumbnail strip */}
-        <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 md:right-10 flex gap-1.5 sm:gap-2">
-          {project.gallery.map((img, i) => (
-            <button key={i} onClick={() => { setActiveImg(i); heroPausedRef.current = true; setTimeout(() => { heroPausedRef.current = false }, 6000) }}
-              className={`w-10 sm:w-12 md:w-14 h-7 sm:h-8 md:h-10 rounded-lg overflow-hidden border-2 cursor-pointer transition-all duration-200 hover:opacity-100 hover:-translate-y-0.5 ${
-                i === activeImg ? 'border-accent scale-110 shadow-md' : 'border-white/50 opacity-70 hover:border-white'
-              }`}>
-              <img src={img} alt={`${project.name} open plot - ${project.location} by HKMC Builders`} className={`w-full h-full ${project.galleryFit === 'contain' ? 'object-contain bg-white' : 'object-cover'}`} loading="lazy" decoding="async" />
-            </button>
-          ))}
+            <div className="flex gap-1.5 sm:gap-2 shrink-0">
+              {project.gallery.map((img, i) => (
+                <button key={i} onClick={() => { setActiveImg(i); heroPausedRef.current = true; setTimeout(() => { heroPausedRef.current = false }, 6000) }}
+                  className={`w-10 sm:w-12 md:w-14 h-7 sm:h-8 md:h-10 rounded-lg overflow-hidden border-2 cursor-pointer transition-all duration-200 hover:opacity-100 hover:-translate-y-0.5 ${
+                    i === activeImg ? 'border-accent shadow-md' : 'border-white/50 opacity-70 hover:border-white'
+                  }`}>
+                  <img src={img} alt={`${project.name} open plot - ${project.location} by HKMC Builders`} className={`w-full h-full ${project.galleryFit === 'contain' ? 'object-contain bg-white' : 'object-cover'}`} loading="lazy" decoding="async" />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 

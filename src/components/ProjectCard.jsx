@@ -11,6 +11,8 @@ export default function ProjectCard({ project, index = 0 }) {
   const [activeImg, setActiveImg] = useState(0)
   const [loadedImgs, setLoadedImgs] = useState({ 0: true }) // first image considered loaded
   const isHoveredRef = useRef(false)
+  const swipeStart = useRef(null)
+  const swiped = useRef(false)
   const navigate = useNavigate()
 
   // Preload ALL gallery images up front so switching is instant
@@ -58,8 +60,28 @@ export default function ProjectCard({ project, index = 0 }) {
     >
       {/* ── Image gallery ── */}
       <div
-        className="relative overflow-hidden cursor-pointer group h-60"
-        onClick={() => navigate(`/project/${project.id}`)}
+        className="relative overflow-hidden cursor-pointer group h-44 sm:h-60 touch-pan-y"
+        onClick={() => {
+          if (swiped.current) { swiped.current = false; return }
+          navigate(`/project/${project.id}`)
+        }}
+        onTouchStart={(e) => {
+          if (e.touches.length !== 1) return
+          swipeStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+        }}
+        onTouchEnd={(e) => {
+          const start = swipeStart.current
+          swipeStart.current = null
+          const point = e.changedTouches?.[0]
+          if (!start || !point || project.gallery.length < 2) return
+          const dx = point.clientX - start.x
+          const dy = point.clientY - start.y
+          if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.2) return
+          swiped.current = true
+          isHoveredRef.current = true
+          setActiveImg((i) => (i + (dx < 0 ? 1 : -1) + project.gallery.length) % project.gallery.length)
+          setTimeout(() => { isHoveredRef.current = false }, 6000)
+        }}
       >
         <AnimatePresence mode="wait">
           <motion.img
@@ -84,9 +106,11 @@ export default function ProjectCard({ project, index = 0 }) {
         <span className={`absolute top-3 left-3 ${project.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full shadow`}>
           {project.badge}
         </span>
-        <span className="absolute top-3 right-3 bg-accent text-dark text-xs font-bold px-3 py-1 rounded-full shadow">
-          ROI: {project.roi}
-        </span>
+        {project.roi && (
+          <span className="absolute top-3 right-3 max-w-[calc(100%-7.5rem)] bg-accent text-dark text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow leading-tight">
+            ROI: {project.roi}
+          </span>
+        )}
 
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
           {project.gallery.map((_, i) => (
@@ -103,13 +127,13 @@ export default function ProjectCard({ project, index = 0 }) {
       </div>
 
       {/* ── Content ── */}
-      <div className="p-5 flex flex-col flex-1">
-        <div className="flex items-start justify-between mb-2">
-          <div>
-            <h3 className="font-serif text-xl font-bold leading-tight text-primary">
+      <div className="p-4 sm:p-5 flex flex-col flex-1">
+        <div className="flex items-start justify-between mb-2 gap-2">
+          <div className="min-w-0">
+            <h3 className="font-serif text-lg sm:text-xl font-bold leading-tight text-primary">
               {project.name}
             </h3>
-            <p className="text-accent text-xs font-semibold mt-0.5">{project.tagline}</p>
+            <p className="text-accent text-xs font-semibold mt-0.5 line-clamp-1">{project.tagline}</p>
           </div>
           <div className="text-right shrink-0 ml-3">
             <div className="text-xl font-bold text-primary">
@@ -124,37 +148,36 @@ export default function ProjectCard({ project, index = 0 }) {
           <span>{project.location}</span>
         </div>
 
-        <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2">{project.description}</p>
+        <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2">{project.description}</p>
 
-        {/* Plot sizes */}
-        <div className="mb-4">
+        {/* Plot sizes — two per row so the card stays short on a phone */}
+        <div className="mb-3">
           <p className="text-xs font-semibold text-dark mb-2 uppercase tracking-wide">Available Sizes</p>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-2 gap-2">
             {project.plotSizes.map((size) => (
               <div
                 key={size}
-                className="rounded-lg px-3 py-1.5 text-center bg-[#F5F5F5]"
+                className={`rounded-lg px-2 py-1.5 text-center bg-[#F5F5F5] min-w-0 ${project.plotSizes.length === 1 && !project.customPlotAvailable ? 'col-span-2' : ''}`}
               >
-                <span className="font-bold text-xs text-primary">{size} sq.yd</span>
-                <span className="text-gray-400 text-xs ml-1">· ₹{totalPrice(size)}</span>
+                <div className="font-bold text-xs text-primary leading-tight">{size} sq.yd</div>
+                <div className="text-gray-500 text-[11px] leading-tight mt-0.5">₹{totalPrice(size)}</div>
               </div>
             ))}
-            {/* Custom plot size tag */}
             {project.customPlotAvailable && (
-              <div className="rounded-lg px-3 py-1.5 text-center bg-amber-50 border border-amber-300">
-                <span className="font-bold text-xs text-amber-600">Custom Size</span>
-                <span className="text-gray-400 text-xs ml-1">· Available</span>
+              <div className="rounded-lg px-2 py-1.5 text-center bg-amber-50 border border-amber-300 min-w-0">
+                <div className="font-bold text-xs text-amber-600 leading-tight">Custom Size</div>
+                <div className="text-gray-500 text-[11px] leading-tight mt-0.5">Available</div>
               </div>
             )}
           </div>
         </div>
 
         {/* Highlights — top 4 */}
-        <div className="grid grid-cols-2 gap-1 mb-5">
+        <div className="grid grid-cols-2 gap-x-2 gap-y-1 mb-4">
           {project.highlights.slice(0, 4).map((h) => (
-            <div key={h} className="flex items-center gap-1.5 text-xs text-gray-600">
-              <HiCheckCircle className="w-3.5 h-3.5 shrink-0 text-green-500" />
-              <span>{h}</span>
+            <div key={h} className="flex items-start gap-1.5 text-xs text-gray-600 min-w-0">
+              <HiCheckCircle className="w-3.5 h-3.5 shrink-0 text-green-500 mt-0.5" />
+              <span className="min-w-0 leading-snug">{h}</span>
             </div>
           ))}
         </div>
