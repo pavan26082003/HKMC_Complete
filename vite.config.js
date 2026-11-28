@@ -5,7 +5,7 @@ import fs from 'fs'
 import path from 'path'
 
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif'])
-const shadnagarFolders = ['slider', 'project-plan', 'location-advantage', 'rate-card', 'brochure']
+const shadnagarFolders = ['slider', 'project-plan', 'location-advantage', 'rate-card', 'brochure', 'Project Highlights']
 
 function readShadnagarFolders() {
   const base = path.resolve('public/shadnagar-premium-avenue')
