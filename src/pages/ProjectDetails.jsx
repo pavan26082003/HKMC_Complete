@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate, Link, Navigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  FiPhone, FiMapPin, FiArrowLeft, FiChevronRight, FiAlertCircle,
+  FiPhone, FiMapPin, FiArrowLeft, FiChevronRight, FiAlertCircle, FiGrid,
 } from 'react-icons/fi'
 import {
   HiOutlineAcademicCap, HiOutlineHeart, HiOutlineShoppingCart,
@@ -10,7 +10,7 @@ import {
   HiOutlineShieldCheck, HiOutlineHome, HiCheckCircle,
   HiOutlineDocumentText, HiOutlineUserGroup, HiOutlineTrendingUp,
 } from 'react-icons/hi'
-import { MdOutlineTrain, MdOutlineFlight, MdOutlineFactory, MdOutlineConstruction } from 'react-icons/md'
+import { MdOutlineTrain, MdOutlineFlight, MdOutlineFactory, MdOutlineConstruction, MdOutlineAddRoad } from 'react-icons/md'
 import { RiWhatsappLine, RiPlantLine, RiDropLine, RiBuilding2Line } from 'react-icons/ri'
 import { projects, PHONE_CALL, PHONE_WHATSAPP } from '../data/content'
 
@@ -36,6 +36,8 @@ const ICON_MAP = {
   shield:    HiOutlineShieldCheck,
   drain:     RiDropLine,
   club:      RiBuilding2Line,
+  vaastu:    FiGrid,
+  blacktop:  MdOutlineAddRoad,
 }
 
 function resolveIcon(iconKey) {
@@ -308,6 +310,74 @@ function InfoCard({ iconKey, title, desc }) {
         <h4 className="font-semibold text-dark text-sm mb-1">{title}</h4>
         <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
       </div>
+    </motion.div>
+  )
+}
+
+const HIGHLIGHT_TONE = {
+  construct: 'bg-amber-100 text-amber-700',
+  shield: 'bg-blue-100 text-blue-700',
+  road: 'bg-slate-100 text-slate-600',
+  blacktop: 'bg-slate-100 text-slate-600',
+  power: 'bg-yellow-100 text-yellow-600',
+  homes: 'bg-rose-100 text-rose-500',
+  tree: 'bg-green-100 text-green-600',
+  water: 'bg-cyan-100 text-cyan-700',
+  vaastu: 'bg-purple-100 text-purple-600',
+}
+
+function HighlightShowcase({ project, onOpen }) {
+  const impressions = (project.highlightGallery || []).filter((item) => item.group === 'impression' && item.src)
+  const locations = (project.highlightGallery || []).filter((item) => item.group === 'location' && item.src)
+  const open = (item) => onOpen({ title: item.caption || item.title, images: [item.src] })
+
+  return (
+    <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+      <SectionHeading label="Highlights" title="Project highlights" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-8">
+        {project.amenities.map((item) => {
+          const Icon = resolveIcon(item.iconKey)
+          return (
+            <div key={item.title} className="flex items-center gap-3 min-w-0">
+              <span className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${HIGHLIGHT_TONE[item.iconKey] || 'bg-primary/10 text-primary'}`}>
+                <Icon className="w-5 h-5" />
+              </span>
+              <span className="text-sm sm:text-base font-medium text-dark leading-snug">{item.title}</span>
+            </div>
+          )
+        })}
+      </div>
+
+      {impressions.length > 0 && (
+        <div className="grid sm:grid-cols-2 gap-4 mb-10">
+          {impressions.map((item) => (
+            <button key={item.src} type="button" onClick={() => open(item)} className="text-left cursor-pointer group">
+              <img src={item.src} alt={item.caption} className="w-full aspect-[16/9] object-cover rounded-2xl border border-gray-100 shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5" />
+              <p className="text-xs text-gray-500 mt-2">{item.caption}</p>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {locations.length > 0 && (
+        <>
+          <h3 className="font-serif text-2xl md:text-3xl font-bold text-primary mb-6">Location features</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {locations.map((item) => (
+              <button key={item.src} type="button" onClick={() => open(item)} className="text-left bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm cursor-pointer transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+                <img src={item.src} alt={item.title} className="w-full aspect-[16/10] object-cover" />
+                <div className="px-4 py-3">
+                  <p className="font-semibold text-primary text-sm">{item.title}</p>
+                  <p className="text-gray-500 text-xs mt-0.5">{item.subtitle}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-gray-500 leading-relaxed mt-4 max-w-3xl">
+            Artist's impressions and regional illustrations. Ask HKMC to confirm current development status, zoning, and travel distances before booking.
+          </p>
+        </>
+      )}
     </motion.div>
   )
 }
@@ -1146,22 +1216,6 @@ export default function ProjectDetails() {
                 </div>
               </div>
 
-              {/* Cross-sell */}
-              {projects.filter(p => p.id !== project.id).map(other => (
-                <div key={other.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                  <img src={other.image} alt={`${other.name} - ${other.location} open plots by HKMC Builders`} className="w-full h-28 object-cover" />
-                  <div className="p-4">
-                    <p className="text-xs text-gray-400 mb-1">Also explore</p>
-                    <h5 className="font-serif font-bold text-primary">{other.name}</h5>
-                    <p className="text-gray-500 text-xs mb-3">{other.location}</p>
-                    <Link to={`/project/${other.id}`}
-                      className="block text-center bg-primary/10 hover:bg-primary hover:text-white text-primary text-xs font-semibold py-2 rounded-lg transition-all">
-                      View Project →
-                    </Link>
-                  </div>
-                </div>
-              ))}
-
             </div>     
           </div>
         </div>
@@ -1171,7 +1225,9 @@ export default function ProjectDetails() {
 
           <LayoutViewer project={project} PHONE_CALL={PHONE_CALL} />
 
-          {project.amenities?.length > 0 && (
+          {project.highlightGallery?.some((item) => item.src) ? (
+            <HighlightShowcase project={project} onOpen={setViewer} />
+          ) : project.amenities?.length > 0 && (
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <SectionHeading label="Amenities" title="Key Features" />
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
